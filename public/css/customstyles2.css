@@ -1,0 +1,170 @@
+.mac-jumbotron {
+	margin-bottom: 0.5rem;
+	margin-top: 0.35rem;
+	padding: 0.25rem 0.25rem;
+	background-color: rgb(186, 202, 211);
+	min-width: 99.5%;
+	top: 2.4rem;
+	left: 0.25rem;
+	position: fixed;
+	top: 2.3rem;
+	right: 4px;
+	margin-right: 4px;
+	z-index: 1;
+}
+
+.mac-button-container {
+	padding: 0 0.3rem;
+	margin: 1rem 0 1rem 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.mac-table {
+	font-size: 0.7rem;
+	text-align: center;
+	border-radius: 0.3rem;
+	width: 100%;
+}
+.mac-table thead {
+	width: 98.5%;
+}
+.mac-table tbody {
+  height: 70vh;
+  overflow-y: auto;
+  width: 100%;
+}
+.mac-table thead, .mac-table tbody, .mac-table tr, .mac-table td, .mac-table th {
+  display: block;
+}
+.mac-table tbody td, .mac-table thead > tr> th {
+  float: left;
+  border-bottom-width: 0;
+}
+.mac-td {
+	border: none;
+	padding: 0;
+	vertical-align: middle;
+}
+
+/*.mac-card .eagle-card-header {
+	width: 98.5%;
+}*/
+.mac-card-body {
+	padding: 0;
+	height: 70vh;
+  	overflow-y: auto;
+  	width: 100%;
+}
+
+
+.sidebar-container {
+	background-color: rgb(165, 172, 175);
+	padding: 0.5rem;
+	border-radius: 0.3rem;
+}
+
+.table-container {
+	padding: 0 0.5rem 0 0.5rem;
+	border-radius: 0.3rem;
+}
+
+.mac-label {
+	padding: 0 4px 0 0;
+	margin: 0;
+	font-size: 0.7rem;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	font-weight: bold;
+}
+.mac-label-left {
+	padding: 0 4px 0 0;
+	margin: 0;
+	font-size: 0.7rem;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	font-weight: bold;
+}
+.mac-label-center {
+	padding: 0 4px 0 0;
+	margin: 0;
+	font-size: 0.7rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: bold;
+}
+
+.mac-form-control {
+	font-size: 0.7rem;	
+	padding: 0 0.25rem;
+	margin: 3px 0;
+	height: 1.5rem;
+	max-height: 1.5rem;
+ 	border: solid 1px rgb(186, 202, 211);
+  background-color: white;
+  display: flex; 
+  align-items: center;
+  justify-content: flex-end;
+  border-radius: 0.25rem;
+  color: rgb(95, 96, 98);
+}
+.mac-form-control-no-height {
+	font-size: 0.7rem;	
+	padding: 0 0.25rem;
+	margin: 3px 0;
+ 	border: solid 1px rgb(186, 202, 211);
+  background-color: white;
+  display: flex; 
+  align-items: center;
+  justify-content: flex-end;
+  border-radius: 0.25rem;
+  color: rgb(95, 96, 98);
+}
+.mac-form-control-right {
+	font-size: 0.7rem;	
+	padding: 0 0.25rem;
+	margin: 3px 0;
+	height: 1.5rem;
+	max-height: 1.5rem;
+ 	border: solid 1px rgb(186, 202, 211);
+	background-color: white;
+	display: flex; 
+	justify-content: flex-end;
+	text-align: right;
+  border-radius: 0.25rem;
+  color: rgb(95, 96, 98);
+}
+
+.mac-hr {
+	margin-top: 0.25rem;
+	margin-bottom: 0.25rem;
+}
+
+/*Datatables styles*/
+.index-table {
+  font-size: 0.7rem;
+	text-align: center;
+	border-collapse: collapase;
+	width: 100%;
+	table-layout: fixed;
+}
+
+/* Adjust the size of DataTables search box */
+.dataTables_filter input {
+    width: 200px; /* Set your preferred width */
+    height: 30px;
+    margin-right: 10px; /* Adjust margin as needed */
+    font-size: 0.75rem;
+}
+/* Adjust the height of DataTables length menu */
+/*div.dataTables_length select {
+    height: 30px; /
+}*/
+#index-table td {
+  padding: 3px;
+}
+
