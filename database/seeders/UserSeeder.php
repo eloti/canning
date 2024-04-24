@@ -1,5 +1,7 @@
 <?php
+
 namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use App\Models\User;
 
@@ -14,7 +16,6 @@ class UserSeeder extends Seeder
     {
         // Crear usuarios de prueba
         User::create([
-           
             'email' => 'john@example.com',
             'password' => bcrypt('password'),
             'alias' => 'matias',
@@ -24,6 +25,32 @@ class UserSeeder extends Seeder
             'cell' => '123456789',
             'formal_name' => 'John Doe',
             'rank' => 'Manager',
+            'company' => 'Example Inc',
+        ]);
+
+        User::create([
+            'email' => 'andres@example.com',
+            'password' => bcrypt('password'),
+            'alias' => 'andres',
+            'firstname' => 'Andres',
+            'lastname' => 'Gomez',
+            'clearance' => 1, 
+            'cell' => '987654321',
+            'formal_name' => 'Andres Gomez',
+            'rank' => 'Supervisor',
+            'company' => 'Example Inc',
+        ]);
+
+        User::create([
+            'email' => 'lucia@example.com',
+            'password' => bcrypt('password'),
+            'alias' => 'lucia',
+            'firstname' => 'Lucia',
+            'lastname' => 'Perez',
+            'clearance' => 1, 
+            'cell' => '555555555',
+            'formal_name' => 'Lucia Perez',
+            'rank' => 'Associate',
             'company' => 'Example Inc',
         ]);
 

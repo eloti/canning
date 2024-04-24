@@ -10,6 +10,7 @@
 @inject('counties', 'App\Services\Counties')
 @inject('cities', 'App\Services\Cities')
 
+
 <div class="container eagle-container">
   
   <div class="col d-flex justify-content-center" style="margin-top: 0.5rem">
@@ -81,8 +82,8 @@
   <label for="county" class="col-4 mac-label">Partido:</label>
   <select id="county" name="county_id" class="col-8 form-control mac-form-control">
       <option value="">Seleccione Partido</option>
-      @foreach($counties as $countyId => $countyName)
-          <option value="{{ $countyId }}">{{ $countyName }}</option>
+      @foreach($counties->get() as $countie => $provinceName)
+      <option value="{{ $countie }}">{{ $provinceName }}</option>
       @endforeach
   </select>
 </div>
@@ -91,8 +92,8 @@
   <label for="city" class="col-4 mac-label">Localidad/Ciudad:</label>
   <select id="city" name="city_id" class="col-8 form-control mac-form-control">
       <option value="">Seleccione Localidad/Ciudad</option>
-      @foreach($cities as $cityId => $cityName)
-          <option value="{{ $cityId }}">{{ $cityName }}</option>
+      @foreach($cities->get() as $city => $provinceName)
+      <option value="{{ $city }}">{{ $provinceName }}</option>
       @endforeach
   </select>
 </div>
