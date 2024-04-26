@@ -8,7 +8,7 @@
                     <div class="card-header">Perfil de Usuario</div>
 
                     <div class="card-body">
-                        <p><strong>Nombre:</strong> {{ $user->name }}</p>
+                        <p><strong>Nombre:</strong> {{ $user->firstname }}</p>
                         <p><strong>Email:</strong> {{ $user->email }}</p>
                         <p><strong>Cell:</strong> {{ $user->cell }}</p>
                         <p><strong>Rank:</strong> {{ $user->rank }}</p>

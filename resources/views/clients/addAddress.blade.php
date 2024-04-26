@@ -82,8 +82,8 @@
   <label for="county" class="col-4 mac-label">Partido:</label>
   <select id="county" name="county_id" class="col-8 form-control mac-form-control">
       <option value="">Seleccione Partido</option>
-      @foreach($counties->get() as $countie => $provinceName)
-      <option value="{{ $countie }}">{{ $provinceName }}</option>
+      @foreach($counties->get() as $countie)
+      <option value="{{ $countie->id }}" data-province="{{$countie->province_id}}" >{{ $countie->value }}</option>
       @endforeach
   </select>
 </div>
@@ -92,8 +92,8 @@
   <label for="city" class="col-4 mac-label">Localidad/Ciudad:</label>
   <select id="city" name="city_id" class="col-8 form-control mac-form-control">
       <option value="">Seleccione Localidad/Ciudad</option>
-      @foreach($cities->get() as $city => $provinceName)
-      <option value="{{ $city }}">{{ $provinceName }}</option>
+      @foreach($cities->get() as $city)
+      <option value="{{ $city->id }}" data-county="{{$city->county_id}}" >{{ $city->value }}</option>
       @endforeach
   </select>
 </div>
@@ -180,8 +180,59 @@
 @endsection
 
 @section('script')
-
 <script>
+  document.addEventListener("DOMContentLoaded", function() {
+      var provinceSelect = document.getElementById('province');
+      var countySelect = document.getElementById('county');
+      var citySelect = document.getElementById('city');
+      var countiesOptions = Array.from(document.querySelectorAll('#county option'));
+      var citiesOptions = Array.from(document.querySelectorAll('#city option'));
+  
+      // Initial population of county options based on the selected province
+      provinceSelect.addEventListener('change', function() {
+          var selectedProvinceId = this.value;
+          updateCountyOptions(selectedProvinceId);
+      });
+  
+      // Initial population of city options based on the selected county
+      countySelect.addEventListener('change', function() {
+          var selectedCountyId = this.value;
+          updateCityOptions(selectedCountyId);
+      });
+  
+      // Function to update county options based on the selected province
+      function updateCountyOptions(selectedProvinceId) {
+          countySelect.innerHTML = '<option value="">Seleccione Partido</option>';
+          countiesOptions.forEach(function(option) {
+              if (option.getAttribute('data-province') === selectedProvinceId || option.getAttribute('data-province') === '') {
+                  countySelect.appendChild(option.cloneNode(true));
+              }
+          });
+          // Trigger change event on county select to update city options
+          countySelect.dispatchEvent(new Event('change'));
+      }
+  
+      // Function to update city options based on the selected county
+      function updateCityOptions(selectedCountyId) {
+          citySelect.innerHTML = '<option value="">Seleccione Localidad/Ciudad</option>';
+          citiesOptions.forEach(function(option) {
+              if (option.getAttribute('data-county') === selectedCountyId || option.getAttribute('data-county') === '') {
+                  citySelect.appendChild(option.cloneNode(true));
+              }
+          });
+      }
+  
+  });
+  </script>
+  
+  
+<script>
+  document.getElementById('countySelect').addEventListener('change', function() {
+    var selectedCounty = this.value;
+    var selectedProvince = this.options[this.selectedIndex].getAttribute('data-province');
+    console.log('Selected County:', selectedCounty);
+    console.log('Province of Selected County:', selectedProvince);
+});
 // JavaScript
 document.addEventListener('DOMContentLoaded', function() {
     var provinceSelect = document.getElementById('province');
