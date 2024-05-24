@@ -13,12 +13,16 @@ class Client extends Model
 
     public function scopeSearch($query, $q)
     {
-    if ($q == null) return $query; // If there is no search query
-    return $query
-      ->where('legal_name', 'LIKE', "%{$q}%")
-      ->orWhere('id', 'LIKE', "%{$q}%")
-      ->orWhere('commercial_name', 'LIKE', "%{$q}%");
+        if ($q == null) {
+            return $query; // If there is no search query
+        }
+        
+        return $query
+            ->where('legal_name', 'LIKE', "%{$q}%")
+            ->orWhere('id', 'LIKE', "%{$q}%")
+            ->orWhere('commercial_name', 'LIKE', "%{$q}%");
     }
+    
     // Relationships
     // Each client may have many contacts
     public function contacts()
