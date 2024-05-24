@@ -17,8 +17,7 @@ class Client extends Model
     return $query
       ->where('legal_name', 'LIKE', "%{$q}%")
       ->orWhere('id', 'LIKE', "%{$q}%")
-      ->orWhere('commercial_name', 'LIKE', "%{$q}%")
-     
+      ->orWhere('commercial_name', 'LIKE', "%{$q}%");
     }
     // Relationships
     // Each client may have many contacts
