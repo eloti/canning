@@ -44,11 +44,7 @@
                   <td width=35% class="model_table"><a class="eagle-link" href="/clients/{{$oneClient->id}}">{{$oneClient->legal_name}}</a></td>
                   <td width=24% class="model_table"><a class="eagle-link" href="/clients/{{$oneClient->id}}">{{$oneClient->commercial_name}}</a></td>
                   <td width=9% class="model_table">
-                    @if ($oneClient->industry_id === null || $oneClient->industry_id === "")
-                      <a class="eagle-link" href="/clients/{{$oneClient->id}}">--</a>
-                    @else
-                      <a class="eagle-link" href="/clients/{{$oneClient->id}}">{{$oneClient->industry->value}}</a>
-                    @endif
+                  
                   </td>
                   <td width=4% class="model_table">
                     @if($oneClient->cuit_type === 1)
@@ -79,11 +75,7 @@
                   <td width=36% class="model_table"><a class="eagle-link" href="/clients/{{$oneClient->id}}">{{$oneClient->legal_name}}</a></td>
                   <td width=25% class="model_table"><a class="eagle-link" href="/clients/{{$oneClient->id}}">{{$oneClient->commercial_name}}</a></td>
                   <td width=10% class="model_table">
-                    @if ($oneClient->industry_id === null || $oneClient->industry_id === "")
-                      <a class="eagle-link" href="/clients/{{$oneClient->id}}">--</a>
-                    @else
-                      <a class="eagle-link" href="/clients/{{$oneClient->id}}">{{$oneClient->industry->value}}</a>
-                    @endif
+               
                   </td>
                   <td width=5% class="model_table">
                     @if($oneClient->cuit_type === 1)
@@ -148,22 +140,9 @@
 
             <div class="form-group row eagle-row-flex">
               <label for="industry" class="col-form-label form-label-modal col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">Rubro / Industria*:</label>
-              <select class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8 form-control form-control-modal{{ $errors->has('industry_id') ? ' is-invalid' : '' }}" id="industry_id" name="industry_id">
-                @foreach($industries->get() as $index => $industry)
-                  <option value="{{ $index }}" {{ old('industry_id') == $index ? 'selected' : '' }}>{{ $industry }}</option>
-                @endforeach
-              </select>
+             
               <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
-              @if ($errors->has('industry_id'))
-                <span class="invalid-feedback col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8" role="alert">
-                  <strong>Debe especificar el rubro del cliente.</strong>
-                </span>
-                <script>
-                  $(document).ready(function(){
-                    $('#modalAddClient').modal({show: true});
-                  });
-                </script>
-              @endif
+          
             </div>
 
             <div class="form-group row eagle-row-flex">
