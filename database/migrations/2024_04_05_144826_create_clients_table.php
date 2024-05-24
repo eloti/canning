@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('legal_name');
             $table->string('commercial_name');
-            //$table->foreignId('industry_id')->constrained();
+          
             $table->string('cuit_num');
             $table->string('vat_status');
             $table->string('payment_terms');

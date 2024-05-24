@@ -80,7 +80,7 @@ class ClientController extends Controller
         $sortFieldsArray['id'] = 'ID';
         $sortFieldsArray['legal_name'] = 'Razón Social';
         $sortFieldsArray['commercial_name'] = 'Nombre Comercial';
-       // $sortFieldsArray['industry_id'] = 'Industria/Rubro';
+     
 
         $vatArray[''] = 'Seleccione Condición';
         $vatArray['Responsable Inscripto'] = 'Responsable Inscripto';
@@ -186,7 +186,7 @@ class ClientController extends Controller
       'legal_name' => 'required',
       'commercial_name' => 'required',
       'cuit_num' => 'required|unique:App\Client,cuit_num',
-      //'industry_id' => 'required',
+
       'vat_status' => 'required',
       'sales_tax_rate' => 'required',
       'payment_terms' => 'required',
@@ -201,7 +201,7 @@ class ClientController extends Controller
         $client = new Client;
         $client->legal_name = $request->legal_name;
         $client->commercial_name = $request->commercial_name;
-        //$client->industry_id = $request->industry_id;
+     
         $client->cuit_type = $request->cuit_type;
         $client->cuit_num = $clean_cuit;
         $client->vat_status = $request->vat_status;
@@ -313,7 +313,7 @@ class ClientController extends Controller
         'legal_name' => 'required',
         'commercial_name' => 'required',
         'cuit_num' => 'required',
-       // 'industry_id' => 'required',
+      
         'vat_status' => 'required',
         'sales_tax_rate' => 'required',
         'payment_terms' => 'required'
@@ -323,7 +323,7 @@ class ClientController extends Controller
       $client = Client::find($request->id);
       $client->legal_name = $request->legal_name;
       $client->commercial_name = $request->commercial_name;
-      //$client->industry_id = $request->industry_id;
+
       $client->vat_status = $request->vat_status;
       $client->payment_terms = $request->payment_terms;
       $client->sales_tax_rate = $request->sales_tax_rate;

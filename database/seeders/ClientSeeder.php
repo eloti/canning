@@ -18,7 +18,7 @@ class ClientSeeder extends Seeder
         $client = Client::create([
             'legal_name' => 'Cliente Ejemplo',
             'commercial_name' => 'Cliente Comercial',
-            //'industry_id' => 1, // Suponiendo que el ID de la industria es 1
+         
             'cuit_num' => '123456789', // Ejemplo de CUIT
             'vat_status' => 'Activo',
             'payment_terms' => '30 días',

@@ -44,37 +44,7 @@
               @endif
             </div>
 
-            <!--<div class="row eagle-row-clean col-12">
-              <label for="commercial_name" class="mac-label col-4 col-sm-4 col-md-4 col-lg-4">País*:</label>
-              <select class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8 form-control mac-form-control{{ $errors->has('country_id') ? ' is-invalid' : '' }}" id="country" name="country_id">
-              @foreach($countries->get() as $index => $country)
-                <option value="{{ $index }}" {{ old('country_id') == $index ? 'selected' : '' }}>
-                  {{ $country }}
-                </option>
-              @endforeach                                             
-              </select>
-              <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
-              @if ($errors->has('country_id'))
-                <span class="invalid-feedback col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8" role="alert">
-                  <strong style="font-size: 0.7rem;">Debe ingresar País</strong>
-                </span>
-              @endif
-            </div>-->
-
-            <!--<div class="row eagle-row-clean col-12">
-              <label for="industry" class="mac-label col-4 col-sm-4 col-md-4 col-lg-4">Rubro / Industria*:</label>
-              <select class="col-8 col-sm-8 col-md-8 col-lg-8 form-control mac-form-control{{ $errors->has('industry_id') ? ' is-invalid' : '' }}" id="industry_id" name="industry_id">
-                @foreach($industries->get() as $index => $industry)
-                  <option value="{{ $index }}" {{ old('industry_id') == $index ? 'selected' : '' }}>{{ $industry }}</option>
-                @endforeach
-              </select>
-              <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
-              @if ($errors->has('industry_id'))
-                <span class="invalid-feedback col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8" role="alert">
-                  <strong style="font-size: 0.7rem;">Debe especificar el rubro del cliente.</strong>
-                </span>
-              @endif
-            </div>-->
+ 
 
             <div class="row eagle-row-clean col-12">
               <label for="cuit_type" class="mac-label col-4 col-sm-4 col-md-4 col-lg-4">Tipo de ID Fiscal*:</label>
