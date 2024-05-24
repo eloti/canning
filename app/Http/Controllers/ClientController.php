@@ -40,16 +40,16 @@ class ClientController extends Controller
 
         if ($request->industryFilter == null && $request->countryFilter == null)
         {
-            $clients = Client::select('id', 'legal_name', 'commercial_name', 'industry_id', 'cuit_type', 'cuit_num', 'country_id')
+            $clients = Client::select('id', 'legal_name', 'commercial_name' 'cuit_type', 'cuit_num', 'country_id')
                                 ->search($q)
                                 ->orderBy($sortBy, $orderBy)
                                 ->get();        
         }
         elseif ($request->industryFilter !== null && $request->countryFilter == null)
         {
-            $clients = Client::select('id', 'legal_name', 'commercial_name', 'industry_id', 'cuit_type', 'cuit_num', 'country_id')
+            $clients = Client::select('id', 'legal_name', 'commercial_name',  'cuit_type', 'cuit_num', 'country_id')
                                 ->where([
-                                            ['industry_id', '=', $industryFilter],
+                                          
                                             ['commercial_name', 'LIKE', $q]
                                         ])
                                 ->orderBy($sortBy, $orderBy)
@@ -57,7 +57,7 @@ class ClientController extends Controller
         }
         elseif ($request->industryFilter == null && $request->countryFilter !== null)
         {
-            $clients = Client::select('id', 'legal_name', 'commercial_name', 'industry_id', 'cuit_type', 'cuit_num', 'country_id')
+            $clients = Client::select('id', 'legal_name', 'commercial_name', 'cuit_type', 'cuit_num', 'country_id')
                                 ->where([
                                             ['country_id', '=', $countryFilter],
                                             ['commercial_name', 'LIKE', $q]
@@ -67,9 +67,9 @@ class ClientController extends Controller
         }
         else
         {
-            $clients = Client::select('id', 'legal_name', 'commercial_name', 'industry_id', 'cuit_type', 'cuit_num', 'country_id')
+            $clients = Client::select('id', 'legal_name', 'commercial_name',  'cuit_type', 'cuit_num', 'country_id')
                                 ->where([
-                                            ['industry_id', '=', $industryFilter],
+                                           
                                             ['country_id', '=', $countryFilter],
                                             ['commercial_name', 'LIKE', $q]
                                         ])
@@ -80,7 +80,7 @@ class ClientController extends Controller
         $sortFieldsArray['id'] = 'ID';
         $sortFieldsArray['legal_name'] = 'Razón Social';
         $sortFieldsArray['commercial_name'] = 'Nombre Comercial';
-        $sortFieldsArray['industry_id'] = 'Industria/Rubro';
+       // $sortFieldsArray['industry_id'] = 'Industria/Rubro';
 
         $vatArray[''] = 'Seleccione Condición';
         $vatArray['Responsable Inscripto'] = 'Responsable Inscripto';
@@ -201,7 +201,7 @@ class ClientController extends Controller
         $client = new Client;
         $client->legal_name = $request->legal_name;
         $client->commercial_name = $request->commercial_name;
-        $client->industry_id = $request->industry_id;
+        //$client->industry_id = $request->industry_id;
         $client->cuit_type = $request->cuit_type;
         $client->cuit_num = $clean_cuit;
         $client->vat_status = $request->vat_status;
@@ -313,7 +313,7 @@ class ClientController extends Controller
         'legal_name' => 'required',
         'commercial_name' => 'required',
         'cuit_num' => 'required',
-        'industry_id' => 'required',
+       // 'industry_id' => 'required',
         'vat_status' => 'required',
         'sales_tax_rate' => 'required',
         'payment_terms' => 'required'
@@ -323,7 +323,7 @@ class ClientController extends Controller
       $client = Client::find($request->id);
       $client->legal_name = $request->legal_name;
       $client->commercial_name = $request->commercial_name;
-      $client->industry_id = $request->industry_id;
+      //$client->industry_id = $request->industry_id;
       $client->vat_status = $request->vat_status;
       $client->payment_terms = $request->payment_terms;
       $client->sales_tax_rate = $request->sales_tax_rate;
