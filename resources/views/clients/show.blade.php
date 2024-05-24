@@ -206,7 +206,7 @@
               <th class="model_table">Código Postal</th>
               <th class="model_table">Partido</th>
               <th class="model_table">Provincia</th>
-              <th class="model_table">País</th>
+           
               <th class="model_table">Facturación?</th>
               <th class="model_table"></th>
             </tr>
@@ -241,9 +241,9 @@
               @elseif($oneAddress->billing_address === 0)
                 <td class="eagle-td" style="text-align: center">No</td>
               @endif
-              <td>
+              <!--<td>
                 <a type="button" class="btn eagle-button" style="font-size: 0.5rem; padding: 0.25rem" href="/addresses/{{$oneAddress->id}}/edit">Editar</a>
-              </td>
+              </td>-->
             </tr>
 
             @endforeach

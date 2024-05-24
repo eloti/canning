@@ -1,19 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <br>
+<div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Ingrese a la Plataforma') }}  {{Auth::id()}}</div>
-
+                <div class="card-header">{{ __('Login') }}</div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Usuario') }}</label>
+                            <label for="alias" class="col-md-4 col-form-label text-md-right">{{ __('Usuario') }}</label>
 
                             <div class="col-md-6">
                                 <input id="alias" type="text" class="form-control @error('alias') is-invalid @enderror" name="alias" value="{{ old('alias') }}" required autocomplete="alias" autofocus>
@@ -26,7 +24,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row mt-3">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>
 
                             <div class="col-md-6">
@@ -40,12 +38,11 @@
                             </div>
                         </div>
 
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">                                
+                        <div class="form-group row mb-0 mt-3">
+                            <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn eagle-button" style="display: inline-block;">
                                     {{ __('Ingresar') }}
-                                </button>                                
+                                </button>
 
                                 @if (Route::has('password.request'))
                                     <a class="eagle-link" style="padding-left: 1rem" href="{{ route('password.request') }}">

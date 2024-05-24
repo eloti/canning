@@ -90,7 +90,7 @@
                             <li><a class="dropdown-item" style="padding: 0.25rem 1.5rem 0.25rem 0.5rem" href="">Alq. Finalizados</a></li>
                             <li><a class="dropdown-item" style="padding: 0.25rem 1.5rem 0.25rem 0.5rem" href="">Alq. s/Facturar</a></li>
                         </ul>
-                    </li>-->
+                    </li>
                                   
                     <li class="nav-item dropdown">  
                         <a class="nav-link dropdown-toggle" style="padding: 0 0.75rem" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">A&F</a>
@@ -98,7 +98,7 @@
                             <li style="padding: 0.25rem 1.5rem 0.25rem 0.5rem; color: white"><b>ARGENTINA:</b></li>
                                 <li><a class="dropdown-item" style="padding: 0.25rem 1.5rem 0.25rem 0.5rem" href="">Fact. Pendientes</a></li>
                                 <li><a class="dropdown-item" style="padding: 0.25rem 1.5rem 0.25rem 0.5rem" href="">Fact. Cobradas</a></li>
-                                <!--li><a class="dropdown-item" style="padding: 0.25rem 1.5rem 0.25rem 0.5rem" href="">Ingresar Cob.</a></li-->
+                                <!--li><a class="dropdown-item" style="padding: 0.25rem 1.5rem 0.25rem 0.5rem" href="">Ingresar Cob.</a></li
                                 <li><a class="dropdown-item" style="padding: 0.25rem 1.5rem 0.25rem 0.5rem" href="">Ventas</a></li>
                                 <li><a class="dropdown-item" style="padding: 0.25rem 1.5rem 0.25rem 0.5rem" href="">Aging</a></li>
                                 <li><a class="dropdown-item" style="padding: 0.25rem 1.5rem 0.25rem 0.5rem" href="">Cobranzas</a></li>
@@ -111,7 +111,7 @@
                                 <li><a class="dropdown-item" style="padding: 0.25rem 1.5rem 0.25rem 0.5rem" href="">Aging</a></li>
                                 <li><a class="dropdown-item" style="padding: 0.25rem 1.5rem 0.25rem 0.5rem" href="">Cobranzas</a></li>
                         </ul> 
-                    </li>
+                    </li>-->
                 @endif    
 
 

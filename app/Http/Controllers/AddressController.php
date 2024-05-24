@@ -15,7 +15,7 @@ class AddressController extends Controller
     public function __construct()
     {
       $this->middleware('auth');
-      $this->middleware('aandf');
+
     }
     /**
      * Display a listing of the resource.
