@@ -16,6 +16,7 @@ class UserSeeder extends Seeder
     {
         // Crear usuarios de prueba
         User::create([
+            'name' => 'Matias'
             'email' => 'john@example.com',
             'password' => bcrypt('password'),
             'alias' => 'matias',
@@ -29,6 +30,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
+            'name' => 'Andres'
             'email' => 'andres@example.com',
             'password' => bcrypt('password'),
             'alias' => 'andres',
@@ -42,6 +44,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
+            'name' => 'Lucia Lucia'
             'email' => 'lucia@example.com',
             'password' => bcrypt('password'),
             'alias' => 'lucia',
