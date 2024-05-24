@@ -101,7 +101,7 @@ class ClientController extends Controller
 
         //return $clients;
 
-        return view ('clients.index', compact('clients', 'orderBy', 'sortBy', 'industryFilter', 'countryFilter', 'q', 'sortFieldsArray', 'vatArray', 'payment_termsArray'));
+        return view ('clients.index', compact('clients', 'orderBy', 'sortBy', 'countryFilter', 'q', 'sortFieldsArray', 'vatArray', 'payment_termsArray'));
     }
 
     /**
