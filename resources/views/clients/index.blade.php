@@ -40,7 +40,7 @@
             @foreach($clients as $oneClient)
                 <tr>
                   <td width=3% class="model_table"><a class="eagle-link" href="/clients/{{$oneClient->id}}">{{$oneClient->id}}</a></td>
-                  <td width=9% class="model_table"><a class="eagle-link" href="/clients/{{$oneClient->id}}">{{$oneClient->country->value}}</a></td>
+                 
                   <td width=35% class="model_table"><a class="eagle-link" href="/clients/{{$oneClient->id}}">{{$oneClient->legal_name}}</a></td>
                   <td width=24% class="model_table"><a class="eagle-link" href="/clients/{{$oneClient->id}}">{{$oneClient->commercial_name}}</a></td>
                   <td width=9% class="model_table">
@@ -71,7 +71,7 @@
               @if(isset($oneClient->country))
                 <tr>
                   <td width=3% class="model_table"><a class="eagle-link" href="/clients/{{$oneClient->id}}">{{$oneClient->id}}</a></td>
-                  <td width=10% class="model_table"><a class="eagle-link" href="/clients/{{$oneClient->id}}">{{$oneClient->country->value}}</a></td>
+                 
                   <td width=36% class="model_table"><a class="eagle-link" href="/clients/{{$oneClient->id}}">{{$oneClient->legal_name}}</a></td>
                   <td width=25% class="model_table"><a class="eagle-link" href="/clients/{{$oneClient->id}}">{{$oneClient->commercial_name}}</a></td>
                   <td width=10% class="model_table">
