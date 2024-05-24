@@ -57,10 +57,7 @@ class Client extends Model
       return $this->belongsTo('App\Country');
     }
     // Each client has only one industry
-    public function industry()
-    {
-      return $this->belongsTo('App\Industry');
-    }
+ 
     // Each client has many invoices
     public function invoices()
     {
