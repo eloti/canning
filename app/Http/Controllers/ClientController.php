@@ -40,7 +40,7 @@ class ClientController extends Controller
 
         if ($request->industryFilter == null && $request->countryFilter == null)
         {
-            $clients = Client::select('id', 'legal_name', 'commercial_name' 'cuit_type', 'cuit_num', 'country_id')
+            $clients = Client::select('id', 'legal_name', 'commercial_name' ,'cuit_type', 'cuit_num', 'country_id')
                                 ->search($q)
                                 ->orderBy($sortBy, $orderBy)
                                 ->get();        
