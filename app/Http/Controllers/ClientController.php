@@ -40,14 +40,14 @@ class ClientController extends Controller
 
         if ($request->industryFilter == null && $request->countryFilter == null)
         {
-            $clients = Client::select('id', 'legal_name', 'commercial_name' ,'cuit_type', 'cuit_num', 'country_id')
+            $clients = Client::select('id', 'legal_name', 'commercial_name' ,'cuit_type', 'cuit_num')
                                 ->search($q)
                                 ->orderBy($sortBy, $orderBy)
                                 ->get();        
         }
         elseif ($request->industryFilter !== null && $request->countryFilter == null)
         {
-            $clients = Client::select('id', 'legal_name', 'commercial_name',  'cuit_type', 'cuit_num', 'country_id')
+            $clients = Client::select('id', 'legal_name', 'commercial_name',  'cuit_type', 'cuit_num')
                                 ->where([
                                           
                                             ['commercial_name', 'LIKE', $q]
@@ -57,9 +57,9 @@ class ClientController extends Controller
         }
         elseif ($request->industryFilter == null && $request->countryFilter !== null)
         {
-            $clients = Client::select('id', 'legal_name', 'commercial_name', 'cuit_type', 'cuit_num', 'country_id')
+            $clients = Client::select('id', 'legal_name', 'commercial_name', 'cuit_type', 'cuit_num')
                                 ->where([
-                                            ['country_id', '=', $countryFilter],
+                                         
                                             ['commercial_name', 'LIKE', $q]
                                         ])
                                 ->orderBy($sortBy, $orderBy)
@@ -67,10 +67,10 @@ class ClientController extends Controller
         }
         else
         {
-            $clients = Client::select('id', 'legal_name', 'commercial_name',  'cuit_type', 'cuit_num', 'country_id')
+            $clients = Client::select('id', 'legal_name', 'commercial_name',  'cuit_type', 'cuit_num')
                                 ->where([
                                            
-                                            ['country_id', '=', $countryFilter],
+                                          
                                             ['commercial_name', 'LIKE', $q]
                                         ])
                                 ->orderBy($sortBy, $orderBy)
@@ -207,7 +207,7 @@ class ClientController extends Controller
         $client->vat_status = $request->vat_status;
         $client->payment_terms = $request->payment_terms;
         $client->sales_tax_rate = $request->sales_tax_rate;
-        $client->country_id = 1;
+      
 
     $client->save();
 

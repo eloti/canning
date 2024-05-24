@@ -47,23 +47,7 @@
                   <label for="line2" class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 mac-label">Línea 2:</label>
                   <input type="text" id="line2" name="line2" class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8 mac-form-control form-control" value="{{ old('line2') }}">
               </div>
-              
-             <!-- <div class="row eagle-row-clean col-12">
-                  <label for="country_id" class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 mac-label">País*:</label>
-                  <select class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8 form-control mac-form-control{{ $errors->has('country_id') ? ' is-invalid' : '' }}" id="country" name="country_id">
-                      @foreach($countries->get() as $index => $country)
-                          <option value="{{ $index }}" {{ old('country_id') == $index ? 'selected' : '' }}>
-                              {{ $country }}
-                          </option>
-                      @endforeach                                             
-                  </select>
-                  <span class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4"></span>
-                  @if ($errors->has('country_id'))
-                      <span class="invalid-feedback col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8" role="alert">
-                          <strong>Debe ingresar País</strong>
-                      </span>
-                  @endif
-              </div>-->
+         
               
 
              <!-- HTML -->

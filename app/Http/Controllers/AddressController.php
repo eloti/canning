@@ -151,7 +151,7 @@ class AddressController extends Controller
       $address->county_id = $request->county_id;
       $address->province_id = $request->province_id;
       $address->zip_code = $request->zip_code;
-      $address->country_id = $request->country_id;
+     
       $address->billing_address = $request->billing_address;
       $address->county_name = $request->county_name;
       $address->city_name = $request->city_name;
@@ -263,7 +263,6 @@ class AddressController extends Controller
       //validate the Data
       $this->validate($request, array(
         'line1' => 'required',
-        'country_id' => 'required'
       ));
 
       //store in the Database
@@ -275,7 +274,7 @@ class AddressController extends Controller
       $address->county_id = $request->county_id;
       $address->province_id = $request->province_id;
       $address->zip_code = $request->zip_code;
-      $address->country_id = $request->country_id;
+    
       $address->billing_address = $request->billing_address;
       $address->county_name = $request->county_name;
       $address->city_name = $request->city_name;

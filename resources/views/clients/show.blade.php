@@ -71,7 +71,7 @@
                 País:
               </label>
               <input class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8 form-control eagle-input-2" value="{{$client->country->value}}" readonly>
-              <input id="country_id" name="country_id" value="{{$client->country_id}}" hidden>
+             
             </div>
    
             <div class="form-group row eagle-row">
