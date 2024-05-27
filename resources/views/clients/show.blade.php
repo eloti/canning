@@ -66,13 +66,7 @@
               </label>
               <input class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8 form-control eagle-input-2" value="{{$client->commercial_name}}" readonly>         
             </div>
-            <div class="form-group row eagle-row">
-              <label class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 col-form-label eagle-label-box">
-                País:
-              </label>
-              <input class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8 form-control eagle-input-2" value="{{$client->country->value}}" readonly>
-             
-            </div>
+          
    
             <div class="form-group row eagle-row">
               <label class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 col-form-label eagle-label-box">
@@ -260,41 +254,7 @@
 
         <!-- HISTORY PANE -->
 
-        <div class="tab-pane container fade eagle-card-body-table" id="historial">
-
-          @if ($rentals->isNotEmpty())
-
-          <h3>Alquileres</h3>
-
-          <table class="table table-striped">
-            <tr style="text-align: center">
-              <th>N° Op</th>
-              <th>Fecha Inicio</th>
-              <th>Fecha Fin</th>
-              <th>Int.</th>
-              <th>Subfamilia</th>
-              <th>Modelo</th>
-              <th>Facturado</th>
-            </tr>
-
-            @foreach ($rentals as $oneRental)
-              <tr style="text-align: center">
-                <td>{{$oneRental->id}}</td>
-                <td>{{$oneRental->start_date()}}</td>
-                <td>{{$oneRental->end_date()}}</td>
-                <td>{{ isset($oneRental->unit->unit_number) ? $oneRental->unit->unit_number : 'R2R'}}</td>
-                <td>{{$oneRental->unit->machineModel->subfamily->value}}</td>
-                <td>{{$oneRental->unit->machineModel->brand->value}} {{$oneRental->unit->machineModel->value}}</td>
-                <td>{{$oneRental->net_rental_price}}</td>
-              </tr>
-            @endforeach
-          </table>
-
-          <hr>
-
-          @endif
-
-        </div> <!-- end of history pane -->
+       
 
 
         <!-- Comments PANE -->
@@ -303,14 +263,14 @@
           <table class="table table-striped">
             <tr style="text-align: center">
               <th width="20%">Fecha</th>
-              <th width="20%">Autor</th>
+            
               <th width="60%">Comentarios</th>
             </tr>
 
             @foreach ($comments as $oneComment)
               <tr style="text-align: center">
                 <td>{{$oneComment->created_at()}}</td>
-                <td>{{$oneComment->user->alias}}</td>
+               
                 <td>{{$oneComment->comment}}</td>
               </tr>
             @endforeach

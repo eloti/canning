@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\AysController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -55,4 +56,6 @@ Route::get('/get-counties-and-cities', 'AddressController@getCountiesAndCities')
 Route::get('/get-counties/{provinceId}', 'AddressController@getCountiesByProvince');
 
 // --------------------------------------------------------------------------------
-Route::resource('comments', 'CommentController');
+
+
+Route::resource('comments', CommentController::class);

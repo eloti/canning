@@ -50,7 +50,7 @@ class CommentController extends Controller
       $comment = new Comment;
       $comment->client_id = $request->client_id;
       $comment->comment = $request->comment;
-      $comment->user_id = auth()->user()->id;
+     // $comment->user_id = auth()->user()->id;
 
       $comment->save();
 

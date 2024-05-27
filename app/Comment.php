@@ -21,7 +21,7 @@ class Comment extends Model
   // Each commento belongs to one user
   public function user()
   {
-    return $this->belongsTo('App\User');
+   // return $this->belongsTo('App\User');
   }
 
   //Time functions

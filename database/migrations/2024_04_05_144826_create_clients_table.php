@@ -16,12 +16,12 @@ return new class extends Migration
             $table->timestamps();
             $table->string('legal_name');
             $table->string('commercial_name');
-          
+            $table->integer('cuit_type');
             $table->string('cuit_num');
             $table->string('vat_status');
             $table->string('payment_terms');
             $table->decimal('sales_tax_rate', 8, 2);
-            $table->string('cuit_type');
+  
             //$table->foreignId('country_id')->constrained();
           
         });

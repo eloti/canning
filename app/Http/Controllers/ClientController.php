@@ -263,9 +263,9 @@ class ClientController extends Controller
         $contacts = Contact::where('client_id', $id)->orderBy('deactivate', 'asc')->orderBy('name', 'asc')->get();
         $addresses = Address::where('client_id', $id)->get();
         $comments = Comment::where('client_id', $id)->orderBy('created_at', 'desc')->get();
-        $rentals = Rental::where('client_id', $id)->orderBy('id', 'asc')->get();
+        //$rentals = Rental::where('client_id', $id)->orderBy('id', 'asc')->get();
 
-        return view('clients.show')->with('client', $client)->with('contacts', $contacts)->with('addresses', $addresses)->with('comments', $comments)->with('rentals', $rentals);
+        return view('clients.show')->with('client', $client)->with('contacts', $contacts)->with('addresses', $addresses)->with('comments', $comments);//->with('rentals', $rentals);
     }
 
     /**

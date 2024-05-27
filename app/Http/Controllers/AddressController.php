@@ -134,6 +134,7 @@ class AddressController extends Controller
      */
     public function store(Request $request)
     {
+       // dd($request);
       //return $request;
       //validate the Data
       $this->validate($request, [
@@ -153,8 +154,8 @@ class AddressController extends Controller
       $address->zip_code = $request->zip_code;
      
       $address->billing_address = $request->billing_address;
-      $address->county_name = $request->county_name;
-      $address->city_name = $request->city_name;
+      //$address->county_name = $request->county_name;
+      //$address->city_name = $request->city_name;
 
 
       $address->save();
