@@ -43,9 +43,7 @@
                  
                   <td width=35% class="model_table"><a class="eagle-link" href="/clients/{{$oneClient->id}}">{{$oneClient->legal_name}}</a></td>
                   <td width=24% class="model_table"><a class="eagle-link" href="/clients/{{$oneClient->id}}">{{$oneClient->commercial_name}}</a></td>
-                  <td width=9% class="model_table">
-                  
-                  </td>
+
                   <td width=4% class="model_table">
                     @if($oneClient->cuit_type === 1)
                       <a class="eagle-link" href="/clients/{{$oneClient->id}}">CUIT</a>
