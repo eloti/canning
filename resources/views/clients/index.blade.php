@@ -26,10 +26,10 @@
         <thead>
           <tr style="text-align: center">
             <th width=3% class="model_table">ID</th>
-            <th width=9% class="model_table">País</th>
+          
             <th width=35% class="model_table">Razón Social</th>
             <th width=24% class="model_table">Nombre Comercial</th>
-            <th width=9% class="model_table">Industria/Rubro</th>
+         
             <th width=4% class="model_table">Tipo ID</th>
             <th width=10% class="model_table">Num</th>
           </tr>
