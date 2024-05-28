@@ -101,7 +101,14 @@ class ClientController extends Controller
 
         //return $clients;
 
-        return view ('clients.index', compact('clients', 'orderBy', 'sortBy', 'countryFilter', 'q', 'sortFieldsArray', 'vatArray', 'payment_termsArray'));
+        $cuit_typeArray[''] = 'Seleccione Tipo';
+        $cuit_typeArray['1'] = 'CUIT';
+        $cuit_typeArray['2'] = 'CUIL';
+        $cuit_typeArray['3'] = 'RUT';
+
+
+
+        return view ('clients.index', compact('clients', 'orderBy', 'sortBy', 'countryFilter', 'q', 'sortFieldsArray', 'vatArray', 'payment_termsArray', 'cuit_typeArray'));
     }
 
     /**
@@ -188,7 +195,7 @@ class ClientController extends Controller
       'cuit_num' => 'required|unique:App\Client,cuit_num',
 
       'vat_status' => 'required',
-      'sales_tax_rate' => 'required',
+      'sales_tax_rate' => 'required|numeric',
       'payment_terms' => 'required',
       //'country_id' => 'required',
       'cuit_type' => 'required',
