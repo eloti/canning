@@ -1,7 +1,7 @@
 @guest
 
 <nav class="sticky top-0 flex justify-center hidden">
-    <a href="{{ url('/') }}" class="py-0.5">
+    <a href="{{ route('home') }}" class="py-0.5">
         <img src="/images/Logo2RP greenback.jpg" class="h-10">
     </a>
     <button class="ml-auto p-2 text-white" id="ChangeToggle">
@@ -22,7 +22,7 @@
       <div class="flex h-16 items-center justify-between">
         <div class="flex items-center">
           <div class="flex-shrink-0">
-            <a href="{{ url('/') }}" class="py-0.5">
+            <a href="{{ route('home') }}" class="py-0.5">
                 <img src="/images/Logo2RP greenback.jpg" class="h-9" alt="rental logo">
             </a>
           </div>
@@ -40,7 +40,8 @@
 
                   @if (Auth::user()->clearance === 1)
                    
-                  <a href="#" class="rounded-md px-3 py-2 text-sm  text-gray-300 font-semibold hover:text-white">Admin</a>
+                  <a href="{{ route('admin.panel') }}" class="rounded-md px-3 py-2 text-sm text-gray-300 font-semibold hover:text-white">Admin</a>
+
 
                   <ul class="dropdown-menu absolute hidden bg-white text-gray-800">
                       <li><a href="/admin" class="block py-2 px-4">Admin</a></li>

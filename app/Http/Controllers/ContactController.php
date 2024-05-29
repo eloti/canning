@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contact;
+
 use App\Client;
 use Illuminate\Http\Request;
 
@@ -175,7 +176,10 @@ class ContactController extends Controller
                 return redirect('/quotes/similarQuoteAlq/'.$request->client_id.'/'.$newContact->id.'/'.$request->address_id.'/'.$request->quote_id);
             }
         } else {
-            return redirect('/clients/'.$clientredirect);
+            return redirect('/clients/'.$clientredirect)->with([
+                'contactAdded' => true,
+                'success' => 'Contacto Creado Exitosamente'
+            ]);
         }
     }
 
@@ -198,45 +202,31 @@ class ContactController extends Controller
      */
     public function edit(Contact $contact)
     {
-        return view ('clients.editContact')
-                ->with('contact', $contact);
+        return view('clients.editContact', compact('contact'));
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Contact  $contact
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request, $id)
     {
-        //return $request;
-      //validate the Data
-    $this->validate($request, array(
-      'name' => 'required',
-      //'email' => 'required'
-    ));
-
-    //store in the Database
-    $contact = Contact::find($id);
-    $contact->client_id = $request->client_id;
-    $contact->name = $request->name;
-    $contact->position = $request->position;
-    $contact->email = $request->email;
-    $contact->cell_phone = $request->cell_phone;
-    $contact->phone = $request->phone;
-    $contact->extension = $request->extension;
-    $contact->comment = $request->comment;
-    $contact->deactivate = $request->deactivate;
-
-    $contact->save();
-
-    $clientredirect = $contact->client_id;
-
-    //redirect
-    return redirect('/clients/'.$clientredirect);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'position' => 'nullable|string|max:255',
+            'email' => 'nullable|string|email|max:255',
+            'cell_phone' => 'nullable|string|max:20',
+            'phone' => 'nullable|string|max:20',
+            'extension' => 'nullable|string|max:20',
+        ]);
+    
+        $contact = Contact::findOrFail($id);
+        $clientId = $contact->client_id;
+        $contact->update($request->all());
+    
+        return redirect()->route('clients.show', ['client' => $clientId])->with([
+            'success' => 'Contacto actualizado correctamente.',
+            'contactAdded' => true,
+        ]);
+        
     }
+    
 
     /**
      * Remove the specified resource from storage.

@@ -1,103 +1,102 @@
 @extends('layouts.app')
 
-@section('title', 'Contacto')
+@section('title', 'Editar Contacto')
 
 @section('content')
 
-<div class="container eagle-container">
-  
-	<div class="col d-flex justify-content-center" style="margin-top: 0.5rem">
-    	<div class="card eagle-card col-12 col-sm-12 col-md-8 col-lg-6 col-xl-6">    
+<div id="contactModal" class=" inset-0  flex justify-center items-center  border-gray-500">
+    <!-- Modal Dialog -->
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+    <div class="bg-white rounded-lg w-full max-w-3xl">
 
-        	<div class="card-header eagle-card-header">
-          		<h3 class="eagle-h3">Editar Contacto: {{$contact->client->legal_name}}</h3>
-        	</div>
+        <!-- Modal Header -->
+        <div class="flex justify-between items-center p-4 border-b border-gray-300">
+            <h4 class="text-lg font-semibold">Editar Contacto: {{$contact->name}}</h4>
+            <button id="closeModalButton" class="text-gray-500 hover:text-gray-800">&times;</button>
+        </div>
 
-        		<form method="POST" action="/contacts/{{$contact->id}}" novalidate>
-                    {{method_field('PUT')}}
-                    {{csrf_field()}}
-
-                    <div class="card-body eagle-card-body">
-              			<div class="container-fluid">
-
-                        <div class="row eagle-row-clean col-12">
-                          {{ Form::label("Nombre y Apellido*:", null, ['class' => 'col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4, mac-label']) }}
-                          {{ Form::text('name', $contact->name, ['class' => 'col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8, form-control mac-form-control', 'readonly']) }}
-                        </div>
-                        <div class="row eagle-row-clean col-12">
-                          {{ Form::label("Puesto:", null, ['class' => 'col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4, mac-label']) }}
-                          {{ Form::text('position', $contact->position, ['class' => 'col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8, form-control mac-form-control']) }}
-                        </div>
-                        <div class="row eagle-row-clean col-12">
-                          {{ Form::label("E-mail:", null, ['class' => 'col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4, mac-label']) }}
-                          {{ Form::email('email', $contact->email, ['class' => 'col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8, form-control mac-form-control']) }}
-                        </div>
-                        <div class="row eagle-row-clean col-12">
-                          {{ Form::label("Celular:", null, ['class' => 'col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4, mac-label']) }}
-                          {{ Form::text('cell_phone', $contact->cell_phone, ['class' => 'col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8, form-control mac-form-control']) }}
-                        </div>
-                        <div class="row eagle-row-clean col-12">
-                          {{ Form::label("Teléfono fijo:", null, ['class' => 'col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4, mac-label']) }}
-                          {{ Form::text('phone', $contact->phone, ['class' => 'col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8, form-control mac-form-control']) }}
-                        </div>
-                        <div class="row eagle-row-clean col-12">
-                          {{ Form::label("Interno:", null, ['class' => 'col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4, mac-label']) }}
-                          {{ Form::text('extension', $contact->extension, ['class' => 'col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8, form-control mac-form-control']) }}
-                        </div>
-                        <div class="row eagle-row-clean col-12">
-                          {{ Form::label("Comentarios:", null, ['class' => 'col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4, mac-label']) }}
-                          {{ Form::textarea('comment', $contact->comment, ['class' => 'col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8, form-control form-control-modal', 'rows' => 3]) }}
-                        </div>
-
-                        <hr>
-
-                        <div class="row eagle-row-clean col-12">
-                          {{ Form::label("Status:", null, ['class' => 'col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4, mac-label']) }}
-                            <div class="col-2 mac-label">Activo</div>
-                            <div class="col-2 row eagle-row-clean" style="display: flex; align-items: center">
-                              @if($contact->deactivate === 0)
-                                {{ Form::radio('deactivate', '0', true) }}
-                              @else
-                                {{ Form::radio('deactivate', '0') }}
-                              @endif
-                            </div>
-                            <div class="col-2 mac-label">Inactivo</div>
-                            <div class="col-2 row eagle-row-clean" style="display: flex; align-items: center">
-                              @if($contact->deactivate === 1)
-                                {{ Form::radio('deactivate', '1', true) }}
-                              @else
-                                {{ Form::radio('deactivate', '1') }}
-                              @endif
-                            </div>
-                          </div>
-
-                          <br>
-
-                          <input type="hidden" name="client_id" value="{{$contact->client_id}}" readonly>
-                        </div>
-                      </div>
-
-                      <br>
-
-                    <div class="card-footer row eagle-row" style="background-color: white; border: none">
-              			<div class="col-3"></div>
-                        <button class="btn eagle-button col-2" type="submit">Actualizar</button>
-                        <div class="col-2"></div>
-                        <a type="button" class="btn eagle-button col-2" href="{{ url()->previous() }}">Cancelar</a>
-                        <div class="col-3"></div>
+        <!-- Modal Form -->
+        <form method="POST" action="/contacts/{{$contact->id}}/edit" novalidate class="p-4 space-y-6">
+            {{method_field('PUT')}}
+            {{csrf_field()}}
+            <section>
+                <div class="grid grid-cols-1 gap-4">
+                    <!-- Nombre y Apellido -->
+                    <div class="col-span-1">
+                        <label for="name" class="block text-md font-medium text-gray-700">Nombre y Apellido*</label>
+                        <input id="name" type="text" name="name" value="{{$contact->name}}" class="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3 {{ $errors->has('name') ? 'border-red-500' : '' }}">
+                        @if ($errors->has('name'))
+                            <span class="text-red-500 text-sm mt-2"><strong>Debe ingresar el nombre</strong></span>
+                        @endif
                     </div>
 
-                    <hr>
+                    <!-- Puesto -->
+                    <div class="col-span-1">
+                        <label for="position" class="block text-md font-medium text-gray-700">Puesto</label>
+                        <input id="position" type="text" name="position" value="{{$contact->position}}" class="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3">
+                    </div>
 
-            		<div class="eagle-button-container col-12"><b>* Campos Obligatorios</b></div>
+                    <!-- E-mail -->
+                    <div class="col-span-1">
+                        <label for="email" class="block text-md font-medium text-gray-700">E-mail</label>
+                        <input id="email" type="email" name="email" value="{{$contact->email}}" class="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3">
+                    </div>
 
-            		<br>
+                    <!-- Celular -->
+                    <div class="col-span-1">
+                        <label for="cell_phone" class="block text-md font-medium text-gray-700">Celular</label>
+                        <input id="cell_phone" type="text" name="cell_phone" value="{{$contact->cell_phone}}" class="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3">
+                    </div>
 
-                    </form>
+                    <!-- Teléfono fijo -->
+                    <div class="col-span-1">
+                        <label for="phone" class="block text-md font-medium text-gray-700">Teléfono fijo</label>
+                        <input id="phone" type="text" name="phone" value="{{$contact->phone}}" class="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3">
+                    </div>
 
+                    <!-- Interno -->
+                    <div class="col-span-1">
+                        <label for="extension" class="block text-md font-medium text-gray-700">Interno</label>
+                        <input id="extension" type="text" name="extension" value="{{$contact->extension}}" class="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3">
+                    </div>
 
-	    </div>
-	</div>
+                    <!-- Hidden Fields -->
+                    @if(isset($origin->what_blade))
+                        <input type="hidden" name="what_blade" value="{{$origin->what_blade}}">
+                    @endif
+
+                    <input type="hidden" name="client_id" value="{{$contact->client_id}}">
+
+                    @if(isset($origin->unit_id))
+                        <input type="hidden" name="unit_id" value="{{$origin->unit_id}}">
+                    @endif
+
+                    @if(isset($origin->address_id))
+                        <input type="hidden" name="address_id" value="{{$origin->address_id}}">
+                    @endif
+                </div>
+
+                <!-- Form Actions -->
+                <div class="flex justify-end space-x-4 mt-6">
+                    <button type="submit" class="py-2 px-4 bg-rental text-white font-semibold rounded-lg shadow-md hover:bg-rentallight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Actualizar</button>
+                    <button type="button" id="cancelModalButton" class="py-2 px-4 bg-gray-600 text-white font-semibold rounded-lg shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">Cancelar</button>
+                </div>
+
+                <hr class="my-6">
+
+                <!-- Footer Note -->
+                <div class="text-center text-gray-500"><b>* Campos Obligatorios</b></div>
+            </section>
+        </form>
+    </div>
 </div>
 
 @endsection

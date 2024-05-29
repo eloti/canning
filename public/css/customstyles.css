@@ -16,7 +16,20 @@ html {
   min-height: 100%;
 }
 body {
-  margin-bottom: 30px;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+footer {
+  flex-shrink: 0;
+}
+body {
+  
   font-family: 'Cairo', sans-serif;
 }
 .subtitle {

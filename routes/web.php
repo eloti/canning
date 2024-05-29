@@ -10,6 +10,9 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Auth;
 
+Route::get('/admin-panel', [UserController::class, 'adminPanel'])->middleware('superadmin')->name('admin.panel');
+
+
 
 Route::get('/', [AysController::class, 'index']);
 Route::get('/home', [AysController::class, 'home'])->name('home');
@@ -22,8 +25,9 @@ Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
 Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
 
 // Registration Routes...
-Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
-Route::post('register', [RegisterController::class, 'register']);
+Route::get('register', [RegisterController::class, 'showRegistrationForm'])->middleware('superadmin');
+Route::post('register', [RegisterController::class, 'adminRegister'])->middleware('superadmin')->name('register');
+Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
 
 
 //CLIENTS
@@ -48,7 +52,11 @@ Route::get('/contacts/from_rental/create_client_contact', 'App\Http\Controllers\
 Route::get('/contacts/from_quote/create_client_contact', 'App\Http\Controllers\ContactController@create_client_contact_from_quote');
 Route::get('/contacts/from_reQuote/create_client_contact', 'App\Http\Controllers\ContactController@create_client_contact_from_quote');
 Route::get('/contacts/from_rent_to_rent/create_client_contact', 'App\Http\Controllers\ContactController@create_client_contact_from_r2r');
-Route::put('/contacts/{id}/edit', 'App\Http\Controllers\ContactController@edit');
+Route::get('/contacts/{id}/edit', 'App\Http\Controllers\ContactController@edit');
+Route::put('/contacts/{id}/edit', 'App\Http\Controllers\ContactController@update');
+Route::resource('contacts', 'App\Http\Controllers\ContactController')->only([
+    'edit', 'update'
+]);
 
 // ADDRESSES ---------------------------------------------------------------------------------
 Route::resource('addresses', 'App\Http\Controllers\AddressController');

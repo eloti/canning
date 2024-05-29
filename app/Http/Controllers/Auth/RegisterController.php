@@ -43,4 +43,42 @@ class RegisterController extends Controller
 
         return redirect('home');
     }
-}
+
+
+    public function adminRegister(Request $request) {
+
+        $request->validate([
+            'lastname' => 'required|string|max:255',
+            'firstname' => 'required|string|max:255',
+           
+            'email' => 'required|string|email|max:255|unique:users',
+            'clearance' => 'required|integer|min:1',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $formal_name = $request->firstname . ' ' . $request->lastname;
+
+        $user = User::create([
+            'lastname' => $request->lastname,
+            'firstname' => $request->firstname,
+            'name' => $formal_name,
+            'alias' => $request->firstname,
+            'email' => $request->email,
+            'clearance' => $request->clearance,
+            'password' => Hash::make($request->password),
+            'formal_name' => $formal_name,
+        ]);
+
+
+
+        
+        if ($user) {
+            return redirect()->back()->with('success', 'Usuario registrado exitosamente.');
+        } else {
+            return redirect()->back()->with('error', 'No se pudo registrar el usuario.');
+        }
+        
+    }
+    }
+
+

@@ -10,6 +10,7 @@
 
 
 <div class="relative border-b bg-rentalgrey border-gray-200 pb-5 sm:pb-0 px-8 pt-6">
+
   <div class="md:flex md:items-center md:justify-between">
     <h3 class="text-4xl font-semibold leading-6 text-gray-200">Cliente:  <span class="ml-2 text-3xl font-semibold leading-6 text-white">{{$client->legal_name}}</span></h3>
   
@@ -30,24 +31,30 @@
         <option>Hired</option>
       </select>
     </div>
+
+    
     <!-- Tabs at small breakpoint and up -->
     <div class="hidden sm:block mt-6">
   
         <nav class="flex space-x-8 mb-2">
-          <a href="#" class="tab-link active border-rentallight text-white font-bold whitespace-nowrap border-b-4 px-1 pb-0 text-sm" data-tab="tab-datos">Datos</a>
-          <a href="#" class="tab-link border-transparent text-white hover:border-gray-300 whitespace-nowrap border-b-2 px-1 pb-0 text-md font-medium" data-tab="tab-contactos">Contactos</a>
+          <a href="#" class="tab-link @if (session('contactAdded')) @else active @endif border-rentallight text-white font-bold whitespace-nowrap border-b-4 px-1 pb-0 text-sm" data-tab="tab-datos">Datos</a>
+          <a href="#" class="tab-link @if (session('contactAdded')) active @endif border-transparent text-white hover:border-gray-300 whitespace-nowrap border-b-2 px-1 pb-0 text-md font-medium" data-tab="tab-contactos">Contactos</a>
           <a href="#" class="tab-link border-transparent text-white hover:border-gray-300 whitespace-nowrap border-b-2 px-1 pb-0 text-md font-medium" data-tab="tab-direcciones">Direcciones</a>
           <a href="#" class="tab-link border-transparent text-white hover:border-gray-300  whitespace-nowrap border-b-2 px-1 pb-0 text-md font-medium" data-tab="tab-alquileres">Alquileres</a>
           <a href="#" class="tab-link border-transparent text-white hover:border-gray-300 whitespace-nowrap border-b-2 px-1 pb-0 text-md font-medium" data-tab="tab-comentarios">Comentarios</a>
       </nav>
         <!-- Current: "border-indigo-500 text-indigo-600", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" -->
       
-  
+    
     </div>
   </div>
 </div>
-
-<div id="tab-datos" class="tab-content active">
+@if (session('success'))
+<div class="bg-rentallight text-white p-4 rounded mb-4 ">
+    {{ session('success') }}
+</div>
+@endif
+<div id="tab-datos" class="tab-content @if (session('contactAdded')) @else active @endif">
   <div id="datos" class="mt-8 px-8 m-auto " >
     <div class="grid grid-cols-2 gap-4">
         <div>
@@ -114,7 +121,7 @@
 </div>
 
 
-<div id="tab-contactos" class="tab-content">
+<div id="tab-contactos" class="tab-content @if (session('contactAdded'))  active @endif">
   <div id="contactos" class="tab-pane fade p-4 bg-white shadow-md rounded-lg">
     <div class="flex justify-end mb-6">
      <!-- <a href="/contacts/create_client_contact/{{$client->id}}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-rental hover:bg-rentallight focus:outline-none focus:ring-2 focus:ring-offset-2 ">Agregar Contacto</a>-->

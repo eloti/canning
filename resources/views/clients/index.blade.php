@@ -180,30 +180,7 @@
 
 @section ('script')
 
-  <script>
-    $(document).ready(function() {
 
-      var cuits = document.querySelectorAll(".cuit");
-
-      $.each(cuits, function() {
-        $('.cuit').mask('99-99999999-9');
-      })
-
-      $('#index-table').DataTable( {
-        "paging": false,
-        "scrollY": '65vh',
-        "language": {
-          "search": "Buscar:",
-          "info": "_TOTAL_ registros en total",
-          "infoFiltered": "filtrado de _MAX_ entradas",
-          "infoEmpty": "Mostrando 0 a 0 de 0 Entradas"
-        }
-      });    
-    });
-
-
-    
-  </script>
 <script>
   document.getElementById('openModalButton').addEventListener('click', function() {
       document.getElementById('modalAddClient').classList.remove('hidden');
