@@ -5,85 +5,106 @@
 @section('content')
 
 
-@inject('industries', 'App\Services\Industries')
+
 
 
 <div class="container eagle-container">
   
-  	<div class="col d-flex justify-content-center" style="margin-top: 0.5rem">
-    	<div class="card eagle-card col-12 col-sm-12 col-md-8 col-lg-6 col-xl-6">    
-
-        	<div class="card-header eagle-card-header">
-          		<h3 class="eagle-h3">Editar Cliente: {{$client->commercial_name}}</h3>
-        	</div>
-
-          <form method="POST" action="{{ route('clients.update', $client->id) }}" enctype="multipart/form-data">
-            @method('PUT')
-            @csrf
-        
-            <div class="card-body eagle-card-body">
-                <div class="container-fluid">
-        
-                    <div class="row eagle-row-clean col-12">
-                        <label class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 mac-label" for="name">Nombre y Apellido*:</label>
-                        <input class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8 form-control mac-form-control" id="name" name="name" placeholder="{{ $client->name }}" value="{{ $client->name }}" readonly>
-                    </div>
-        
-                    <div class="row eagle-row-clean col-12">
-                        <label class="mac-label col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4" for="position">Puesto:</label>
-                        <input class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8 form-control mac-form-control" id="position" name="position" value="{{ $client->position }}">
-                    </div>
-        
-                    <div class="row eagle-row-clean col-12">
-                        <label class="mac-label col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4" for="email">E-mail:</label>
-                        <input class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8 form-control mac-form-control" id="email" name="email" value="{{ $client->email }}">
-                    </div>
-        
-                    <div class="row eagle-row-clean col-12">
-                        <label class="mac-label col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4" for="cell_phone">Celular:</label>
-                        <input class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8 form-control mac-form-control" id="cell_phone" name="cell_phone" value="{{ $client->cell_phone }}">
-                    </div>
-        
-                    <div class="row eagle-row-clean col-12">
-                        <label class="mac-label col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4" for="phone">Teléfono fijo:</label>
-                        <input class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8 form-control mac-form-control" id="phone" name="phone" value="{{ $client->phone }}">
-                    </div>
-        
-                    <div class="row eagle-row-clean col-12">
-                        <label class="mac-label col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4" for="extension">Interno:</label>
-                        <input class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8 form-control mac-form-control" id="extension" name="extension" value="{{ $client->extension }}">
-                    </div>
-        
-                    <div class="row eagle-row-clean col-12">
-                        <label class="mac-label col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4" for="comment">Comentarios:</label>
-                        <textarea class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8 form-control form-control-modal" id="comment" name="comment" rows="3">{{ $client->comment }}</textarea>
-                    </div>
-        
-                    <hr>
-        
-                    <div class="row eagle-row-clean col-12">
-                        <label class="mac-label col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4" for="deactivate">Status:</label>
-                        <div class="col-2 mac-label">Activo</div>
-                        <div class="col-2 row eagle-row-clean" style="display: flex; align-items: center">
-                            <input type="radio" name="deactivate" id="deactivate_active" value="0" {{ $client->deactivate === 0 ? 'checked' : '' }}>
-                        </div>
-                        <div class="col-2 mac-label">Inactivo</div>
-                        <div class="col-2 row eagle-row-clean" style="display: flex; align-items: center">
-                            <input type="radio" name="deactivate" id="deactivate_inactive" value="1" {{ $client->deactivate === 1 ? 'checked' : '' }}>
-                        </div>
-                    </div>
-        
-                    <input type="hidden" name="client_id" value="{{ $client->client_id }}" readonly>
-                </div>
+    <div id="modalAddClient" class="inset-0  flex justify-center items-center ">
+        <!-- Modal Dialog -->
+        <div class="bg-white rounded-lg w-full max-w-3xl">
+      
+            <!-- Modal Header -->
+            <div class="flex justify-between items-center p-4 border-b border-gray-300">
+                <h4 class="text-lg font-semibold">Editar Cliente:: {{ $client->legal_name }}</h4>
+                <button id="closeModalButton" class="text-gray-500 hover:text-gray-800">&times;</button>
             </div>
-        
-            <div class="card-footer row eagle-row" style="background-color: white; border: none">
-                <div class="col-3"></div>
-                <button class="btn eagle-button col-2" type="submit">A
-        
-
-    	</div>
-	</div>
+      
+            <!-- Modal Form -->
+            <form method="POST"  action="{{ route('clients.update', ['client' => $client->id]) }}" novalidate autocomplete="off" class="p-4">
+                @method('PUT')
+                @csrf
+            
+                <div class="space-y-4">
+                    <div class="flex flex-col space-y-2">
+                        <label for="legal_name" class="font-medium">Razón Social:</label>
+                        <input type="text" id="legal_name" name="legal_name" placeholder="{{$client->legal_name}}" value="{{$client->legal_name}}" class="form-input w-full border border-gray-300 rounded p-2{{ $errors->has('legal_name') ? ' border-red-500' : '' }}">
+                        @if ($errors->has('legal_name'))
+                            <span class="text-red-500 text-sm">Debe especificar la razón social del cliente.</span>
+                        @endif
+                    </div>
+            
+                    <div class="flex flex-col space-y-2">
+                        <label for="commercial_name" class="font-medium">Nombre Comercial:</label>
+                        <input type="text" id="commercial_name" name="commercial_name" placeholder="{{$client->commercial_name}}" value="{{ $client->commercial_name }}" class="form-input w-full border border-gray-300 rounded p-2">
+                    </div>
+            
+                    <div class="flex flex-col space-y-2">
+                        <label for="cuit_type" class="font-medium">Tipo de ID Fiscal:</label>
+                        <select id="cuit_type" name="cuit_type" class="form-select w-full border border-gray-300 rounded p-2{{ $errors->has('cuit_type') ? ' border-red-500' : '' }}">
+                            @foreach($cuit_typeArray as $index => $onecuit_typeArray)
+                                <option value="{{ $index }}" {{ $client->cuit_type == $index ? 'selected' : '' }}>{{ $onecuit_typeArray }}</option>
+                            @endforeach
+                        </select>
+                        
+                        @if ($errors->has('cuit_type'))
+                            <span class="text-red-500 text-sm">Debe ingresar tipo de ID fiscal.</span>
+                        @endif
+                    </div>
+                    
+            
+                    <div class="flex flex-col space-y-2">
+                        <label for="cuit_num" class="font-medium">CUIT/RUT:</label>
+                        <input type="text" id="cuit_num" name="cuit_num" placeholder="{{$client->cuit_num}}" value="{{ $client->cuit_num}}" class="form-input w-full border border-gray-300 rounded p-2{{ $errors->has('cuit_num') ? ' border-red-500' : '' }}">
+                        @if ($errors->has('cuit_num'))
+                            <span class="text-red-500 text-sm">Debe especificar el CUIT del cliente y no debe estar repetido.</span>
+                        @endif
+                    </div>
+            
+                    <div class="flex flex-col space-y-2">
+                        <label for="vat_status" class="font-medium">Condición frente al IVA:</label>
+                        <select id="vat_status" name="vat_status" class="form-select w-full border border-gray-300 rounded p-2{{ $errors->has('vat_status') ? ' border-red-500' : '' }}">
+                            @foreach($vatArray as $index => $oneVatArray)
+                                <option value="{{ $index }}" {{ $client->vat_status == $index ? 'selected' : '' }}>{{ $oneVatArray }}</option>
+                            @endforeach
+                        </select>
+                        @if ($errors->has('vat_status'))
+                            <span class="text-red-500 text-sm">Debe especificar la condición frente al IVA del cliente.</span>
+                        @endif
+                    </div>
+            
+                    <div class="flex flex-col space-y-2">
+                        <label for="sales_tax_rate" class="font-medium">Perc. IIBB [%]:</label>
+                        <input type="text" id="sales_tax_rate" name="sales_tax_rate" placeholder="{{$client->sales_tax_rate}}" value="{{$client->sales_tax_rate }}" class="form-input w-full border border-gray-300 rounded p-2{{ $errors->has('sales_tax_rate') ? ' border-red-500' : '' }}">
+                        @if ($errors->has('sales_tax_rate'))
+                            <span class="text-red-500 text-sm">Debe especificar alícuota de IIBB.</span>
+                        @endif
+                    </div>
+            
+                    <div class="flex flex-col space-y-2">
+                        <label for="payment_terms" class="font-medium">Condición de Venta:</label>
+                        <select id="payment_terms" name="payment_terms" class="form-select w-full border border-gray-300 rounded p-2{{ $errors->has('payment_terms') ? ' border-red-500' : '' }}">
+                            @foreach($payment_termsArray as $index => $onePayment_termsArray)
+                                <option value="{{ $index }}"{{ $client->payment_terms == $index ? 'selected' : '' }}>{{ $onePayment_termsArray }}</option>
+                            @endforeach
+                        </select>
+                        @if ($errors->has('payment_terms'))
+                            <span class="text-red-500 text-sm">Debe especificar la condición de venta.</span>
+                        @endif
+                    </div>
+                </div>
+            
+                <div class="flex justify-between items-center mt-4">
+                    <div class="space-x-2">
+                        <button type="submit" class="bg-rental text-white font-bold py-2 px-4 rounded hover:bg-rentallight">Agregar</button>
+                        <button type="button" id="cancelModalButton" class="bg-gray-500 text-white font-bold py-2 px-4 rounded hover:bg-gray-700">Cancelar</button>
+                    </div>
+                </div>
+            </form>
+            
+      
+        </div>
+      </div>
 
 </div>
 

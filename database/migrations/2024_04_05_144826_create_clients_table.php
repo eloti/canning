@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('legal_name');
+            $table->string('legal_name')->nullable();
             $table->string('commercial_name');
-            $table->integer('cuit_type');
-            $table->string('cuit_num');
-            $table->string('vat_status');
-            $table->string('payment_terms');
-            $table->decimal('sales_tax_rate', 8, 2);
+            $table->integer('cuit_type')->nullable();
+            $table->string('cuit_num')->nullable();
+            $table->string('vat_status')->nullable();
+            $table->string('payment_terms')->nullable();
+            $table->decimal('sales_tax_rate', 8, 2)->nullable();
   
             //$table->foreignId('country_id')->constrained();
           

@@ -206,7 +206,10 @@ class AddressController extends Controller
                 return redirect('/quotes/similarQuoteAlq/'.$request->client_id.'/'.$request->contact_id.'/'.$newAddress->id.'/'.$request->quote_id);
             }
         } else {
-            return redirect('/clients/'.$clientredirect);
+            return redirect()->route('clients.show', ['client' => $request->client_id])->with([
+                'success' => 'Dirección Agregada correctamente.',
+                'addressAdded' => true,
+            ]);
         }
     }
 

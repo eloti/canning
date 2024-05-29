@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
+
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\AysController;
@@ -31,17 +32,16 @@ Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update')
 
 
 //CLIENTS
+Route::resource('clients', 'App\Http\Controllers\ClientController')->except(['edit', 'update']);
+Route::get('/clients/create_client', 'App\Http\Controllers\ClientController@create_client')->name('clients.create_client');
+Route::get('/clients/createFromRental/{what_blade}/{what_unit}', 'App\Http\Controllers\ClientController@createFromRental')->name('clients.createFromRental');
+Route::get('/clients/{id}/edit', 'App\Http\Controllers\ClientController@edit')->name('clients.edit');
+Route::put('/clientes/{id}', 'ClientController@update')->name('clientes.update');
 
-Route::resource('clients', 'ClientController');
-Route::get('/clients/create_client', 'ClientController@create_client');
-Route::get('/clients/createFromRental/{what_blade}/{what_unit}', 'ClientController@createFromRental')->name('clients.createFromRental');
-Route::put('/clients/{id}/edit', 'ClientController@edit');
-Route::get('/clients/cc/{id}', 'DocController@cc');
-Route::get('/clients/{id}', 'ClientController@show');
-Route::put('/clients/{id}', 'ClientController@update')->name('clients.update');
 
-// Rutas para el controlador de clientes
-Route::resource('clients', ClientController::class);
+Route::get('/clients/cc/{id}', 'App\Http\Controllers\DocController@cc')->name('clients.cc');
+Route::get('/clients/{id}', 'App\Http\Controllers\ClientController@show')->name('clients.show');
+
 
 // CONTACTS --------------------------------------------------------------------------------------
 

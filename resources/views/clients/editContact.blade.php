@@ -25,8 +25,8 @@
 
         <!-- Modal Form -->
         <form method="POST" action="/contacts/{{$contact->id}}/edit" novalidate class="p-4 space-y-6">
-            {{method_field('PUT')}}
-            {{csrf_field()}}
+            @method('PUT')
+            @csrf
             <section>
                 <div class="grid grid-cols-1 gap-4">
                     <!-- Nombre y Apellido -->
