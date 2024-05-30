@@ -2,7 +2,7 @@
 @inject('provincesService', 'App\Services\Provinces')
 @inject('counties', 'App\Services\Counties')
 @inject('cities', 'App\Services\Cities')
-@inject('checkService', 'App\Services\checkBillingAddress')
+
 
 
 @php

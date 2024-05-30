@@ -39,7 +39,7 @@ Route::get('/clients/{id}/edit', 'App\Http\Controllers\ClientController@edit')->
 
 
 Route::get('/clients/cc/{id}', 'App\Http\Controllers\DocController@cc')->name('clients.cc');
-Route::get('/clients/{id}', 'App\Http\Controllers\ClientController@show')->name('clients.show');
+//Route::get('/clients/{id}', 'App\Http\Controllers\ClientController@show')->name('clients.show');
 
 
 // CONTACTS --------------------------------------------------------------------------------------
