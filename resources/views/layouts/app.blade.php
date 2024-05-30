@@ -8,7 +8,7 @@
 
   <body>
     @include('inc._navbar')
-      <main>
+      <main id="app">
         <!--@include('inc._messages')-->
         @yield('content')
       </main>

@@ -19,7 +19,15 @@
         <div class="card-header eagle-card-header">
           <h3 class="eagle-h3">Agregar Dirección: {{$client->legal_name}}</h3>
         </div>
-
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+      @endif
           <form action="{{ route('addresses.store') }}" method="POST" autocomplete="off" novalidate>
             {{csrf_field()}}
             @if ($errors->any())
@@ -49,9 +57,6 @@
               </div>
          
               
-
-             <!-- HTML -->
-<!-- HTML -->
 <div class="row eagle-row-clean col-12">
   <label for="province" class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 mac-label">Provincia*:</label>
   <select id="province" name="province_id" class="col-8 col-sm-8 col-md-8 col-lg-8 form-control mac-form-control">

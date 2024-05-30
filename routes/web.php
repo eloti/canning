@@ -2,39 +2,46 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
+
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\AysController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Auth;
+
+Route::get('/admin-panel', [UserController::class, 'adminPanel'])->middleware('superadmin')->name('admin.panel');
+
 
 
 Route::get('/', [AysController::class, 'index']);
 Route::get('/home', [AysController::class, 'home'])->name('home');
 
-
 // Authentication Routes...
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
+Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
 
 // Registration Routes...
-Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
-Route::post('register', [RegisterController::class, 'register']);
+Route::get('register', [RegisterController::class, 'showRegistrationForm'])->middleware('superadmin');
+Route::post('register', [RegisterController::class, 'adminRegister'])->middleware('superadmin')->name('register');
+Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
 
 
 //CLIENTS
-Route::resource('clients', 'ClientController');
-Route::get('/clients/create_client', 'ClientController@create_client');
-Route::get('/clients/createFromRental/{what_blade}/{what_unit}', 'ClientController@createFromRental')->name('clients.createFromRental');
-Route::put('/clients/{id}/edit', 'ClientController@edit');
-Route::get('/clients/cc/{id}', 'DocController@cc');
-Route::get('/clients/{id}', 'ClientController@show');
-Route::put('/clients/{id}', 'ClientController@update')->name('clients.update');
+Route::resource('clients', 'App\Http\Controllers\ClientController')->except(['edit', 'update']);
+Route::get('/clients/create_client', 'App\Http\Controllers\ClientController@create_client')->name('clients.create_client');
+Route::get('/clients/createFromRental/{what_blade}/{what_unit}', 'App\Http\Controllers\ClientController@createFromRental')->name('clients.createFromRental');
+Route::get('/clients/{id}/edit', 'App\Http\Controllers\ClientController@edit')->name('clients.edit');
+Route::put('/clientes/{id}', 'ClientController@update')->name('clientes.update');
 
-// Rutas para el controlador de clientes
-Route::resource('clients', ClientController::class);
+
+Route::get('/clients/cc/{id}', 'App\Http\Controllers\DocController@cc')->name('clients.cc');
+Route::get('/clients/{id}', 'App\Http\Controllers\ClientController@show')->name('clients.show');
+
 
 // CONTACTS --------------------------------------------------------------------------------------
 
@@ -45,7 +52,11 @@ Route::get('/contacts/from_rental/create_client_contact', 'App\Http\Controllers\
 Route::get('/contacts/from_quote/create_client_contact', 'App\Http\Controllers\ContactController@create_client_contact_from_quote');
 Route::get('/contacts/from_reQuote/create_client_contact', 'App\Http\Controllers\ContactController@create_client_contact_from_quote');
 Route::get('/contacts/from_rent_to_rent/create_client_contact', 'App\Http\Controllers\ContactController@create_client_contact_from_r2r');
-Route::put('/contacts/{id}/edit', 'App\Http\Controllers\ContactController@edit');
+Route::get('/contacts/{id}/edit', 'App\Http\Controllers\ContactController@edit');
+Route::put('/contacts/{id}/edit', 'App\Http\Controllers\ContactController@update');
+Route::resource('contacts', 'App\Http\Controllers\ContactController')->only([
+    'edit', 'update'
+]);
 
 // ADDRESSES ---------------------------------------------------------------------------------
 Route::resource('addresses', 'App\Http\Controllers\AddressController');

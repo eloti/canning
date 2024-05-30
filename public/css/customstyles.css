@@ -16,7 +16,20 @@ html {
   min-height: 100%;
 }
 body {
-  margin-bottom: 30px;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+footer {
+  flex-shrink: 0;
+}
+body {
+  
   font-family: 'Cairo', sans-serif;
 }
 .subtitle {
@@ -81,7 +94,7 @@ body {
 .eagle-button {
   background-color: rgb(0, 76, 84);
   font-family: 'Cairo', sans-serif;
-  font-size: 0.25rem;
+  font-size: 1rem;
   color: white;
   text-align: center;
   white-space: normal;

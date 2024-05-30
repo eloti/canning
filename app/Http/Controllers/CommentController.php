@@ -57,7 +57,10 @@ class CommentController extends Controller
       $clientredirect = $comment->client_id;
 
       //redirect
-      return redirect('/clients/'.$clientredirect);
+      return redirect()->route('clients.show', ['client' => $clientredirect])->with([
+        'success' => 'Comentario Agregado Correctamente.',
+        'commentAdded' => true,
+    ]);
     }
 
     /**

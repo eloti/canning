@@ -6,6 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Client extends Model
 {
+
+  protected $fillable = [
+    'legal_name',
+    'commercial_name',
+    'cuit_type',
+    'cuit_num',
+    'vat_status',
+    'sales_tax_rate',
+    'payment_terms',
+    // Agrega los demás campos aquí si es necesario
+];
     // Table name
     protected $table = 'clients';
     // Primary Key

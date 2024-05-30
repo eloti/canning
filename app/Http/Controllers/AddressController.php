@@ -140,7 +140,7 @@ class AddressController extends Controller
       $this->validate($request, [
         'line1' => 'required',
         'province_id' => 'required',
-        'billing_address' => 'required'
+        
       ]);
 
       //store in the Database
@@ -206,7 +206,10 @@ class AddressController extends Controller
                 return redirect('/quotes/similarQuoteAlq/'.$request->client_id.'/'.$request->contact_id.'/'.$newAddress->id.'/'.$request->quote_id);
             }
         } else {
-            return redirect('/clients/'.$clientredirect);
+            return redirect()->route('clients.show', ['client' => $request->client_id])->with([
+                'success' => 'Dirección Agregada correctamente.',
+                'addressAdded' => true,
+            ]);
         }
     }
 
@@ -277,8 +280,8 @@ class AddressController extends Controller
       $address->zip_code = $request->zip_code;
     
       $address->billing_address = $request->billing_address;
-      $address->county_name = $request->county_name;
-      $address->city_name = $request->city_name;
+      //$address->county_name = $request->county_name;
+      //$address->city_name = $request->city_name;
 
       $address->save();
       $clientredirect = $address->client_id;

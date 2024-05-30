@@ -8,8 +8,8 @@
 
 <link rel="shortcut icon" type="image/png" href="{{ asset('/images/favicon.png') }}">
 <link rel="shortcut icon" sizes="192x192" href="{{ asset('/images/favicon.png') }}">
-
-<!-- Scripts -->
+<link rel="stylesheet" href="{{asset('css/tailwind.css')}}">
+@vite(['resources/css/app.css', 'resources/js/app.js'])
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/jquery.min.js') }}"></script>
 <script src="{{ asset('js/croppie.min.js') }}"></script>
@@ -39,8 +39,8 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer">
 
-<!-- Styles -->
-<link rel="stylesheet" href="{{asset('css/app.css')}}">
+<!-- Styles 
+<link rel="stylesheet" href="{{asset('css/app.css')}}">-->
 <link rel="stylesheet" href="{{asset('css/customstyles.css')}}">
 <link rel="stylesheet" href="{{asset('css/customstyles2.css')}}">
 <link rel="stylesheet" href="{{asset('css/croppie.min.css')}}">

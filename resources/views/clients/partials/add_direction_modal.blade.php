@@ -1,41 +1,31 @@
-@extends('layouts.app')
-
-@section('title', 'Dirección')
-
-@section('content')
-
 @inject('countries', 'App\Services\Countries')
-@inject('industries', 'App\Services\Industries')
 @inject('provincesService', 'App\Services\Provinces')
 @inject('counties', 'App\Services\Counties')
 @inject('cities', 'App\Services\Cities')
+@inject('checkService', 'App\Services\checkBillingAddress')
+
+
 @php
+$clientId = $client->id; 
+$billingInfo = $checkService->hasBillingAddress($clientId);
+$hasBillingAddress = $billingInfo['hasBillingAddress'];
 
 @endphp
-<div class="container ">
-  @if ($errors->any())
-  <div class="alert alert-danger">
-      <ul>
-          @foreach ($errors->all() as $error)
-              <li>{{ $error }}</li>
-          @endforeach
-      </ul>
-  </div>
-@endif
-  <div class="bg-white rounded-lg w-full max-w-3xl">
 
-      <!-- Modal Header -->
-      <div class="flex justify-between items-center p-4 border-b border-gray-300">
-          <h4 class="text-lg font-semibold">Editar Dirrección:{{$address->client->legal_name}}</h4>
-          <button id="closeModalButton" class="text-gray-500 hover:text-gray-800">&times;</button>
-      </div>
 
-      <!-- Modal Form -->
-      <form method="POST" action=" /addresses/{{$address->id}}" novalidate class="p-4 space-y-6">
-          @method('PUT')
-          @csrf
-        
-  
+<div id="directionModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
+    <!-- Modal Dialog -->
+    <div class="bg-white rounded-lg w-full max-w-3xl">
+
+        <!-- Modal Header -->
+        <div class="flex justify-between items-center p-4 border-b border-gray-300">
+            <h4 class="text-lg font-semibold">Agregar Dirección: {{$client->legal_name}}</h4>
+            <button id="closeModalButton2" class="text-gray-500 hover:text-gray-800">&times;</button>
+        </div>
+
+        <!-- Modal Form -->
+        <form method="POST" action="{{ route('addresses.store') }}" autocomplete="off"  class="p-4 space-y-6">
+            {{ csrf_field() }}
             @if ($errors->any())
                 <span class="invalid-feedback col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8" role="alert">
                     <strong>Debe corregir los errores en el formulario.</strong>
@@ -135,7 +125,16 @@
   
                   @endif
                     <!-- Hidden Fields -->
-                    <input type="hidden" name="client_id" value="{{$address->client_id}}">
+                    @if(isset($origin->what_blade))
+                        <input type="hidden" name="what_blade" value="{{ $origin->what_blade }}">
+                    @endif
+                    <input type="hidden" name="client_id" value="{{ $client->id }}">
+                    @if(isset($origin->unit_id))
+                        <input type="hidden" name="unit_id" value="{{ $origin->unit_id }}">
+                    @endif
+                    @if(isset($origin->contact_id))
+                        <input type="hidden" name="contact_id" value="{{ $origin->contact_id }}">
+                    @endif
                 </div>
         
                 <!-- Form Actions -->
@@ -149,134 +148,112 @@
                 <div class="eagle-button-container col-12"><b>* Campos Obligatorios</b></div>
             </section>
         </form>
-  </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div> <!-- end container -->
-
-@endsection
-
+        
+    </div>
+</div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function() {
+        var provinceSelect = document.getElementById('province');
+        var countySelect = document.getElementById('county');
+        var citySelect = document.getElementById('city');
+        var countiesOptions = Array.from(document.querySelectorAll('#county option'));
+        var citiesOptions = Array.from(document.querySelectorAll('#city option'));
+    
+        // Initial population of county options based on the selected province
+        provinceSelect.addEventListener('change', function() {
+            var selectedProvinceId = this.value;
+            updateCountyOptions(selectedProvinceId);
+        });
+    
+        // Initial population of city options based on the selected county
+        countySelect.addEventListener('change', function() {
+            var selectedCountyId = this.value;
+            updateCityOptions(selectedCountyId);
+        });
+    
+        // Function to update county options based on the selected province
+        function updateCountyOptions(selectedProvinceId) {
+            countySelect.innerHTML = '<option value="">Seleccione Partido</option>';
+            countiesOptions.forEach(function(option) {
+                if (option.getAttribute('data-province') === selectedProvinceId || option.getAttribute('data-province') === '') {
+                    countySelect.appendChild(option.cloneNode(true));
+                }
+            });
+            // Trigger change event on county select to update city options
+            countySelect.dispatchEvent(new Event('change'));
+        }
+    
+        // Function to update city options based on the selected county
+        function updateCityOptions(selectedCountyId) {
+            citySelect.innerHTML = '<option value="">Seleccione Localidad/Ciudad</option>';
+            citiesOptions.forEach(function(option) {
+                if (option.getAttribute('data-county') === selectedCountyId || option.getAttribute('data-county') === '') {
+                    citySelect.appendChild(option.cloneNode(true));
+                }
+            });
+        }
+    
+    });
+    </script>
+    
+    
+  <script>
+    document.getElementById('countySelect').addEventListener('change', function() {
+      var selectedCounty = this.value;
+      var selectedProvince = this.options[this.selectedIndex].getAttribute('data-province');
+      console.log('Selected County:', selectedCounty);
+      console.log('Province of Selected County:', selectedProvince);
+  });
+  // JavaScript
+  document.addEventListener('DOMContentLoaded', function() {
       var provinceSelect = document.getElementById('province');
       var countySelect = document.getElementById('county');
       var citySelect = document.getElementById('city');
-      var countiesOptions = Array.from(document.querySelectorAll('#county option'));
-      var citiesOptions = Array.from(document.querySelectorAll('#city option'));
+      var counties = {!! json_encode($counties) !!};
+      var cities = {!! json_encode($cities) !!};
   
-      // Initial population of county options based on the selected province
+      // Event listener for province select change
       provinceSelect.addEventListener('change', function() {
-          var selectedProvinceId = this.value;
-          updateCountyOptions(selectedProvinceId);
+          var selectedProvinceId = provinceSelect.value;
+  
+          // Filter counties based on the selected province
+          var filteredCounties = counties.filter(function(county) {
+              return county.province_id == selectedProvinceId;
+          });
+  
+          // Update county select options
+          updateSelectOptions(countySelect, filteredCounties, 'id', 'name');
+  
+          // Filter cities based on the selected province
+          var filteredCities = cities.filter(function(city) {
+              return city.province_id == selectedProvinceId;
+          });
+  
+          // Update city select options
+          updateSelectOptions(citySelect, filteredCities, 'id', 'name');
       });
   
-      // Initial population of city options based on the selected county
-      countySelect.addEventListener('change', function() {
-          var selectedCountyId = this.value;
-          updateCityOptions(selectedCountyId);
-      });
+      // Function to update select options
+      function updateSelectOptions(selectElement, data, valueKey, textKey) {
+          // Clear existing options
+          selectElement.innerHTML = '';
   
-      // Function to update county options based on the selected province
-      function updateCountyOptions(selectedProvinceId) {
-          countySelect.innerHTML = '<option value="">Seleccione Partido</option>';
-          countiesOptions.forEach(function(option) {
-              if (option.getAttribute('data-province') === selectedProvinceId || option.getAttribute('data-province') === '') {
-                  countySelect.appendChild(option.cloneNode(true));
-              }
-          });
-          // Trigger change event on county select to update city options
-          countySelect.dispatchEvent(new Event('change'));
-      }
+          // Add default option
+          var defaultOption = document.createElement('option');
+          defaultOption.value = '';
+          defaultOption.textContent = 'Seleccione ' + selectElement.getAttribute('name');
+          selectElement.appendChild(defaultOption);
   
-      // Function to update city options based on the selected county
-      function updateCityOptions(selectedCountyId) {
-          citySelect.innerHTML = '<option value="">Seleccione Localidad/Ciudad</option>';
-          citiesOptions.forEach(function(option) {
-              if (option.getAttribute('data-county') === selectedCountyId || option.getAttribute('data-county') === '') {
-                  citySelect.appendChild(option.cloneNode(true));
-              }
+          // Add options based on filtered data
+          data.forEach(function(item) {
+              var option = document.createElement('option');
+              option.value = item[valueKey];
+              option.textContent = item[textKey];
+              selectElement.appendChild(option);
           });
       }
-  
   });
+  
+  
   </script>
-  
-  
-<script>
-  document.getElementById('countySelect').addEventListener('change', function() {
-    var selectedCounty = this.value;
-    var selectedProvince = this.options[this.selectedIndex].getAttribute('data-province');
-    console.log('Selected County:', selectedCounty);
-    console.log('Province of Selected County:', selectedProvince);
-});
-// JavaScript
-document.addEventListener('DOMContentLoaded', function() {
-    var provinceSelect = document.getElementById('province');
-    var countySelect = document.getElementById('county');
-    var citySelect = document.getElementById('city');
-    var counties = {!! json_encode($counties) !!};
-    var cities = {!! json_encode($cities) !!};
-
-    // Event listener for province select change
-    provinceSelect.addEventListener('change', function() {
-        var selectedProvinceId = provinceSelect.value;
-
-        // Filter counties based on the selected province
-        var filteredCounties = counties.filter(function(county) {
-            return county.province_id == selectedProvinceId;
-        });
-
-        // Update county select options
-        updateSelectOptions(countySelect, filteredCounties, 'id', 'name');
-
-        // Filter cities based on the selected province
-        var filteredCities = cities.filter(function(city) {
-            return city.province_id == selectedProvinceId;
-        });
-
-        // Update city select options
-        updateSelectOptions(citySelect, filteredCities, 'id', 'name');
-    });
-
-    // Function to update select options
-    function updateSelectOptions(selectElement, data, valueKey, textKey) {
-        // Clear existing options
-        selectElement.innerHTML = '';
-
-        // Add default option
-        var defaultOption = document.createElement('option');
-        defaultOption.value = '';
-        defaultOption.textContent = 'Seleccione ' + selectElement.getAttribute('name');
-        selectElement.appendChild(defaultOption);
-
-        // Add options based on filtered data
-        data.forEach(function(item) {
-            var option = document.createElement('option');
-            option.value = item[valueKey];
-            option.textContent = item[textKey];
-            selectElement.appendChild(option);
-        });
-    }
-});
-
-
-</script>
-

@@ -101,7 +101,14 @@ class ClientController extends Controller
 
         //return $clients;
 
-        return view ('clients.index', compact('clients', 'orderBy', 'sortBy', 'countryFilter', 'q', 'sortFieldsArray', 'vatArray', 'payment_termsArray'));
+        $cuit_typeArray[''] = 'Seleccione Tipo';
+        $cuit_typeArray['1'] = 'CUIT';
+        $cuit_typeArray['2'] = 'CUIL';
+        $cuit_typeArray['3'] = 'RUT';
+
+
+
+        return view ('clients.index', compact('clients', 'orderBy', 'sortBy', 'countryFilter', 'q', 'sortFieldsArray', 'vatArray', 'payment_termsArray', 'cuit_typeArray'));
     }
 
     /**
@@ -183,15 +190,16 @@ class ClientController extends Controller
     {
       //validate the Data
     $this->validate($request, array(
-      'legal_name' => 'required',
+     
       'commercial_name' => 'required',
-      'cuit_num' => 'required|unique:App\Client,cuit_num',
+       'legal_name' => 'nullable',
+      'cuit_num' => 'nullable|unique:App\Client,cuit_num',
 
-      'vat_status' => 'required',
-      'sales_tax_rate' => 'required',
-      'payment_terms' => 'required',
+      'vat_status' => 'nullable',
+      'sales_tax_rate' => 'nullable|numeric',
+      'payment_terms' => 'nullable',
       //'country_id' => 'required',
-      'cuit_type' => 'required',
+      'cuit_type' => 'nullable',
     ));
    
     $clean_cuit = str_replace('-', '', $request->cuit_num);
@@ -292,10 +300,17 @@ class ClientController extends Controller
         $payment_termsArray['90 días FF'] = '90 días FF';
         $payment_termsArray['105 días FF'] = '105 días FF';
         $payment_termsArray['120 días FF'] = '120 días FF';
+        $cuit_typeArray[''] = 'Seleccione Tipo';
+        $cuit_typeArray['1'] = 'CUIT';
+        $cuit_typeArray['2'] = 'CUIL';
+        $cuit_typeArray['3'] = 'RUT';
+
+
 
         return view('clients.editClient')
                     ->with('client', $client)
                     ->with('vatArray', $vatArray)
+                    ->with('cuit_typeArray', $cuit_typeArray)
                     ->with('payment_termsArray', $payment_termsArray);
     }
 
@@ -306,33 +321,33 @@ class ClientController extends Controller
      * @param  \App\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-      //validate the Data
-      $this->validate($request, array(
-        'legal_name' => 'required',
-        'commercial_name' => 'required',
-        'cuit_num' => 'required',
-      
-        'vat_status' => 'required',
-        'sales_tax_rate' => 'required',
-        'payment_terms' => 'required'
-      ));
-
-      //store in the Database
-      $client = Client::find($request->id);
-      $client->legal_name = $request->legal_name;
-      $client->commercial_name = $request->commercial_name;
-
-      $client->vat_status = $request->vat_status;
-      $client->payment_terms = $request->payment_terms;
-      $client->sales_tax_rate = $request->sales_tax_rate;
-      $client->save();
-
-      //redirect
-      return redirect()->route('clients.show',$request->id);
+        // Validate the Data Types
+        $this->validate($request, [
+            'legal_name' => 'nullable|string|max:255',
+            'commercial_name' => 'nullable|string|max:255',
+            'cuit_type' => 'nullable|string|max:255',
+            'cuit_num' => 'nullable|string|max:20',
+            'vat_status' => 'nullable|string|max:255',
+            'sales_tax_rate' => 'nullable|numeric',
+            'payment_terms' => 'nullable|string|max:255',
+        ]);
+    
+        // Find the client by ID
+        $client = Client::findOrFail($id);
+    
+        // Update client attributes
+        $client->update($request->all());
+    
+        // Redirect
+        return redirect()->route('clients.show', ['client' => $id])->with([
+            'success' => 'Cliente actualizado correctamente.',
+            'contactAdded' => false,
+        ]);
     }
-
+    
+    
     /**
      * Remove the specified resource from storage.
      *
