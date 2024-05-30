@@ -22,7 +22,7 @@
       </ul>
   </div>
 @endif
-  <div class="bg-white rounded-lg w-full max-w-3xl">
+  <div class="bg-white rounded-lg w-full max-w-3xl m-auto">
 
       <!-- Modal Header -->
       <div class="flex justify-between items-center p-4 border-b border-gray-300">
