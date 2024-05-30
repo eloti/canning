@@ -45,4 +45,26 @@
 <link rel="stylesheet" href="{{asset('css/customstyles2.css')}}">
 <link rel="stylesheet" href="{{asset('css/croppie.min.css')}}">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>
+<style>
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
 
+main {
+  flex: 1;
+}
+
+footer {
+  flex-shrink: 0;
+}
+body {
+  
+  font-family: 'Cairo', sans-serif;
+}
+    </style>
