@@ -19,7 +19,15 @@
         <div class="card-header eagle-card-header">
           <h3 class="eagle-h3">Agregar Dirección: {{$client->legal_name}}</h3>
         </div>
-
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+      @endif
           <form action="{{ route('addresses.store') }}" method="POST" autocomplete="off" novalidate>
             {{csrf_field()}}
             @if ($errors->any())

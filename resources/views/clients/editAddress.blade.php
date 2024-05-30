@@ -6,237 +6,277 @@
 
 @inject('countries', 'App\Services\Countries')
 @inject('industries', 'App\Services\Industries')
-@inject('provinces', 'App\Services\Provinces')
+@inject('provincesService', 'App\Services\Provinces')
+@inject('counties', 'App\Services\Counties')
+@inject('cities', 'App\Services\Cities')
+@php
 
+@endphp
+<div class="container ">
+  @if ($errors->any())
+  <div class="alert alert-danger">
+      <ul>
+          @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+          @endforeach
+      </ul>
+  </div>
+@endif
+  <div class="bg-white rounded-lg w-full max-w-3xl">
 
-<div class="container eagle-container">
+      <!-- Modal Header -->
+      <div class="flex justify-between items-center p-4 border-b border-gray-300">
+          <h4 class="text-lg font-semibold">Editar Dirrección:{{$address->client->legal_name}}</h4>
+          <button id="closeModalButton" class="text-gray-500 hover:text-gray-800">&times;</button>
+      </div>
+
+      <!-- Modal Form -->
+      <form method="POST" action=" /addresses/{{$address->id}}" novalidate class="p-4 space-y-6">
+          @method('PUT')
+          @csrf
+        
   
-  <div class="col d-flex justify-content-center" style="margin-top: 0.5rem">
-    <div class="card eagle-card col-12 col-sm-12 col-md-8 col-lg-6 col-xl-6">    
-
-        <div class="card-header eagle-card-header">
-          <h3 class="eagle-h3">Editar Dirección: {{$address->client->legal_name}}</h3>
-        </div>
-
-          <form method="POST" action="/addresses/{{$address->id}}" novalidate>
-            {{method_field('PUT')}}
-            {{csrf_field()}}
+            @if ($errors->any())
+                <span class="invalid-feedback col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8" role="alert">
+                    <strong>Debe corregir los errores en el formulario.</strong>
+                </span>                
+            @endif
+        
             <section>
-            <div class="card-body eagle-card-body">
-              <div class="container-fluid">
-
-                <div class="row eagle-row-clean col-12">
-                  {{ Form::label("Línea 1*:", null, ['class' => 'col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4, mac-label']) }}                  
-                  <input type="text" id="line1" name="line1" class="form-control mac-form-control col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8 {{ $errors->has('line1') ? ' is-invalid' : '' }}" value="{{$address->line1}}">
-                  <span class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4"></span>
-                    @if ($errors->has('line1'))
-                      <span class="invalid-feedback col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8" role="alert" style="padding: 0">
-                        <strong>Debe ingresar Línea 1</strong>
-                      </span>                
-                    @endif
-                </div>
-
-                <div class="row eagle-row-clean col-12">
-                  {{ Form::label("Línea 2:", null, ['class' => 'col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4, mac-label']) }}
-                  {{ Form::text('line2', $address->line2, ['class' => 'col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8, form-control mac-form-control']) }}
-                </div>
-
-                <div class="row eagle-row-clean col-12">
-                  {{ Form::label("País*:", null, ['class' => 'col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4, mac-label']) }}
-                  <select class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8 form-control mac-form-control{{ $errors->has('country_id') ? ' is-invalid' : '' }}" id="country" name="country_id">
-                    @foreach($countries->get() as $index => $country)
-                      <option value="{{ $index }}" {{ $address->country_id == $index ? 'selected' : '' }}>
-                        {{ $country }}
-                      </option>
-                    @endforeach
-                  </select>
-                    <span class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4"></span>
-                    @if ($errors->has('country_id'))
-                      <span class="invalid-feedback col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8" role="alert" style="padding: 0">
-                        <strong>Debe ingresar País</strong>
-                      </span>
-                    @endif
-                </div>
-
-                <div class="row eagle-row-clean col-12">
-                  <label for="province" class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 mac-label">Provincia*:</label>
-                  <select id="province" data-old= "{{ $address->province_id }}" name="province_id" class="col-8 col-sm-8 col-md-8 col-lg-8 form-control mac-form-control"></select>
-                </div>
-
-                <div class="row eagle-row-clean col-12">
-                  <label for="county" class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 mac-label">Partido:</label>     
-                  <!--select id="county" data-oldcounty="{{ $address->county_id}}" name="county_id" class="col-8 col-sm-8 col-md-8 col-lg-8 form-control mac-form-control"></select-->
-                  @if(isset($address->county_id))
-                    <input type="text" id="county_id" name="county_id" class="form-control mac-form-control col-8" placeholder="{{$address->county->value}}" value="{{$address->county_id}}">
-                  @else
-                    <input type="text" id="county_name" name="county_name" class="form-control mac-form-control col-8" value="{{$address->county_name}}">
-                  @endif
-                </div>
-
-                <div class="row eagle-row-clean col-12">
-                  <label for="city" class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 mac-label">Localidad/Ciudad:</label>   
-                  <!--select id="city" data-oldcity="{{ $address->city_id }}" name="city_id" class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8 form-control mac-form-control"></select-->
-                  @if(isset($address->city_id))
-                    <input type="text" id="city_id" name="city_id" class="form-control mac-form-control col-8" placeholder="{{$address->city->value}}" value="{{$address->city_id}}">
-                  @else
-                    <input type="text" id="city_name" name="city_name" class="form-control mac-form-control col-8" value="{{$address->city_name}}">
-                  @endif
-                </div>
-                
-                <div class="row eagle-row-clean col-12">
-                  {{ Form::label("Código Postal:", null, ['class' => 'col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4, mac-label']) }}
-                  {{ Form::text('zip_code', $address->zip_code, ['class' => 'col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8, form-control mac-form-control']) }}
-                </div>
-
-                <hr>
-
-                <div class="form-group row" style="margin-bottom: 0">
-                  {{ Form::label("Dirección de facturación?", null, ['class' => 'col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4, mac-label']) }}
-                    <div class="col-2 mac-label">Si</div>
-                    <div class="col-2 row eagle-row-clean" style="display: flex; align-items: center">
-                      @if ($address->billing_address === 1)
-                        {{ Form::radio('billing_address', '1', true) }}
-                      @else
-                        {{ Form::radio('billing_address', '1') }}
-                      @endif
+                <div class="grid grid-cols-1 gap-4">
+                    <!-- Nombre y Apellido -->
+                    <div class="col-span-1">
+                        <label for="line1" class="block text-md font-medium text-gray-700">Línea 1*:</label>
+                        <input id="line1" type="text" name="line1" class="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3 {{ $errors->has('line1') ? 'border-red-500' : '' }}" value="{{ old('line1') }}">
+                        @if ($errors->has('line1'))
+                            <span class="invalid-feedback col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8" role="alert">
+                                <strong>Debe ingresar Línea 1</strong>
+                            </span>                
+                        @endif
                     </div>
-                    <div class="col-1 mac-label">No</div>
-                    <div class="col-2" style="display: flex; align-items: center">
-                      @if ($address->billing_address === 0)
-                        {{ Form::radio('billing_address', '0', true) }}
-                      @else
-                        {{ Form::radio('billing_address', '0') }}
-                      @endif
+        
+                    <!-- Puesto -->
+                    <div class="col-span-1">
+                        <label for="line2" class="block text-md font-medium text-gray-700">Línea 2:</label>
+                        <input id="line2" type="text" name="line2" class="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3" value="{{ old('line2') }}">
                     </div>
+        
+                    <!-- E-mail -->
+                    <div class="col-span-1">
+                        <label for="province" class="block text-md font-medium text-gray-700">Provincia</label>
+                        <select id="province" name="province_id" class="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3">
+                            @foreach($provincesService->get() as $provinceId => $provinceName)
+                                <option value="{{ $provinceId }}">{{ $provinceName }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+        
+                    <!-- Celular -->
+                    <div class="col-span-1">
+                        <label for="county" class="block text-md font-medium text-gray-700">Partido</label>
+                        <select id="county" name="county_id" class="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3">
+                            <option value="">Seleccione Partido</option>
+                            @foreach($counties->get() as $countie)
+                                <option value="{{ $countie->id }}" data-province="{{ $countie->province_id }}">{{ $countie->value }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+        
+                    <!-- Teléfono fijo -->
+                    <div class="col-span-1">
+                        <label for="city" class="block text-md font-medium text-gray-700">Localidad/Ciudad: </label>
+                        <select id="city" name="city_id" class="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3">
+                            <option value="">Seleccione Localidad/Ciudad</option>
+                            @foreach($cities->get() as $city)
+                                <option value="{{ $city->id }}" data-county="{{ $city->county_id }}">{{ $city->value }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+        
+                    <!-- Interno -->
+                    <div class="col-span-1">
+                        <label for="zip_code" class="block text-md font-medium text-gray-700">Código Postal:
+                        </label>
+                        <input id="zip_code" type="number" name="zip_code" class="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3">
+                    </div>
+      
+                    @if(!isset($hasBillingAddress) || $hasBillingAddress === 'NO')
+
+                    <div class="col-12" style="text-align: center; font-weight: bold">El cliente NO cuenta con una dirección de facturación.</div>
+  
+                    
+  
+                    <div class="flex flex-wrap items-center space-y-4">
+                        <label for="billing_address" class="w-full md:w-1/3 text-md font-medium text-gray-700">Dirección de facturación?*</label>
+                        
+                        <div class="flex items-center w-1/6">
+                            <span class="text-md font-medium text-gray-700">Si</span>
+                        </div>
+                        
+                        <div class="flex items-center w-1/6">
+                            <input type="radio" id="billing_address" name="billing_address" value="1" class="form-radio h-4 w-4 text-blue-600 transition duration-150 ease-in-out">
+                        </div>
+                        
+                        <div class="flex items-center w-1/12">
+                            <span class="text-md font-medium text-gray-700">No</span>
+                        </div>
+                        
+                        <div class="flex items-center w-1/6">
+                            <input type="radio" id="billing_address" name="billing_address" value="0" class="form-radio h-4 w-4 text-blue-600 transition duration-150 ease-in-out">
+                        </div>
+                    </div>
+                    
+                  
+  
+                  @else
+  
+                    <div class="col-12" style="text-align: center; font-weight: bold">El cliente ya cuenta con una dirección de facturación.</div>
+                    <input name="billing_address" value="0" hidden> 
+  
+                  @endif
+                    <!-- Hidden Fields -->
+                    <input type="hidden" name="client_id" value="{{$address->client_id}}">
                 </div>
+        
+                <!-- Form Actions -->
+                <div class="flex justify-end space-x-4 mt-6">
+                    <button class="py-2 px-4 bg-rental text-white font-semibold rounded-lg shadow-md hover:bg-rentallight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" type="submit">Agregar</button>
+                    <a type="button" class="py-2 px-4 bg-gray-600 text-white font-semibold rounded-lg shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2" href="{{ url()->previous() }}">Cancelar</a>
+                </div>
+        
+                <hr class="my-6">
+        
+                <div class="eagle-button-container col-12"><b>* Campos Obligatorios</b></div>
+            </section>
+        </form>
+  </div>
 
-                <br>
 
-                <input type="hidden" name="client_id" value="{{$address->client->id}}" readonly>
 
-              </div>
-            </div>
 
-            <br>
 
-            <div class="card-footer row eagle-row" style="background-color: white; border: none">
-              <div class="col-3"></div>
-              <button class="btn eagle-button modalbutton col-2" type="submit">Guardar</button>
-              <div class="col-2"></div>
-              <a type="button" class="btn eagle-button modalbutton col-2" href="/clients/{{$address->client->id}}">Cancelar</a>
-              <div class="col-3"></div>
-            </div>
 
-            <hr>
 
-            <div class="eagle-button-container col-12"><b>* Campos Obligatorios</b></div>
 
-            <br>
 
-          </section>  
-          </form>
 
-    </div>
-  </div> 
+
+
+
+
+
+
+
+
 
 </div> <!-- end container -->
 
 @endsection
 
-@section('script')
 
 <script>
-  $(document).ready(function(){
-
-      function loadProvince() {
-          var country_id = $('#country').val();
-          if ($.trim(country_id) != '') {
-              $.get('/provinces', {country_id: country_id}, function (provinces) {
-
-                 var old = $('#province').data('old') != '' ? $('#province').data('old') : '';
-
-                  $('#province').empty();
-                  $('#province').append("<option value=''>Seleccione Provincia</option>");
-
-                  $.each(provinces, function (index, value) {
-                    $('#province').append("<option value='" + index + "'" + (old == index ? 'selected' : '') + ">" + value +"</option>");
-                  })
-              });
-          }
+  document.addEventListener("DOMContentLoaded", function() {
+      var provinceSelect = document.getElementById('province');
+      var countySelect = document.getElementById('county');
+      var citySelect = document.getElementById('city');
+      var countiesOptions = Array.from(document.querySelectorAll('#county option'));
+      var citiesOptions = Array.from(document.querySelectorAll('#city option'));
+  
+      // Initial population of county options based on the selected province
+      provinceSelect.addEventListener('change', function() {
+          var selectedProvinceId = this.value;
+          updateCountyOptions(selectedProvinceId);
+      });
+  
+      // Initial population of city options based on the selected county
+      countySelect.addEventListener('change', function() {
+          var selectedCountyId = this.value;
+          updateCityOptions(selectedCountyId);
+      });
+  
+      // Function to update county options based on the selected province
+      function updateCountyOptions(selectedProvinceId) {
+          countySelect.innerHTML = '<option value="">Seleccione Partido</option>';
+          countiesOptions.forEach(function(option) {
+              if (option.getAttribute('data-province') === selectedProvinceId || option.getAttribute('data-province') === '') {
+                  countySelect.appendChild(option.cloneNode(true));
+              }
+          });
+          // Trigger change event on county select to update city options
+          countySelect.dispatchEvent(new Event('change'));
       }
-      loadProvince();
-      $('#country').on('change', loadProvince);
-
-      //function loadCounty() {
-          //var province_id = $('#province').val();
-          //console.log(province_id);
-          //if ($.trim(province_id) != '') {
-              //$.get('/counties', {province_id: province_id}, function (counties) {
-
-                  //var oldcounty = $('#county').data('oldcounty') != '' ? $('#county').data('oldcounty') : '';
-
-                  //$('#county').empty();
-                  //$('#county').append("<option value=''>Seleccione Partido</option>");
-
-                  //var counties = Object.keys(counties).map((key) => [Number(key), counties[key]]);
-                  //counties.sort(function(a, b){
-                    //var x = a[1].toLowerCase();
-                    //var y = b[1].toLowerCase();
-                    //if (x < y) {return -1;}
-                    //if (x > y) {return 1;}
-                    //return 0;
-                  //});                      
-
-                  //$.each(counties, function (a, b) {
-                    //var x = b[0];                      
-                    //var y = b[1];                  
-              
-                    //$('#county').append("<option value='" + x + "'" + (oldcounty == x ? 'selected' : '') + ">" + y +"</option>");
-                  //})
-              //});
-          //}
-      //}
-      //loadCounty();
-      //$('#country').on('change', loadCounty);
-      //$('#province').on('change', loadCounty);
-
-      //function loadCity() {
-          //var county_id = $('#county').val();
-          //if ($.trim(county_id) != '') {
-              //$.get('/cities', {county_id: county_id}, function (cities) {
-
-                //var oldcity = $('#city').data('oldcity') != '' ? $('#city').data('oldcity') : '';
-
-                //console.log(oldcity);
-
-                  //$('#city').empty();
-                  //$('#city').append("<option value=''>Seleccione Localidad/Ciudad</option>");
-
-                //var cities = Object.keys(cities).map((key) => [Number(key), cities[key]]);
-                  //cities.sort(function(a, b){
-                    //var x = a[1].toLowerCase();
-                    //var y = b[1].toLowerCase();
-                    //if (x < y) {return -1;}
-                    //if (x > y) {return 1;}
-                    //return 0;
-                  //});                      
-
-                  //$.each(cities, function (a, b) {
-                    //var x = b[0];                      
-                    //var y = b[1]; 
-
-                    //$('#city').append("<option value='" + x + "'" + (oldcity == x ? 'selected' : '') + ">" + y +"</option>");
-                  //})
-              //});
-          //}
-      //}
-      //loadCity();
-      //$('#country').on('change', loadCity);
-      //$('#province').on('change', loadCity);
-      //$('#county').on('change', loadCity);    
-
+  
+      // Function to update city options based on the selected county
+      function updateCityOptions(selectedCountyId) {
+          citySelect.innerHTML = '<option value="">Seleccione Localidad/Ciudad</option>';
+          citiesOptions.forEach(function(option) {
+              if (option.getAttribute('data-county') === selectedCountyId || option.getAttribute('data-county') === '') {
+                  citySelect.appendChild(option.cloneNode(true));
+              }
+          });
+      }
+  
   });
+  </script>
+  
+  
+<script>
+  document.getElementById('countySelect').addEventListener('change', function() {
+    var selectedCounty = this.value;
+    var selectedProvince = this.options[this.selectedIndex].getAttribute('data-province');
+    console.log('Selected County:', selectedCounty);
+    console.log('Province of Selected County:', selectedProvince);
+});
+// JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+    var provinceSelect = document.getElementById('province');
+    var countySelect = document.getElementById('county');
+    var citySelect = document.getElementById('city');
+    var counties = {!! json_encode($counties) !!};
+    var cities = {!! json_encode($cities) !!};
+
+    // Event listener for province select change
+    provinceSelect.addEventListener('change', function() {
+        var selectedProvinceId = provinceSelect.value;
+
+        // Filter counties based on the selected province
+        var filteredCounties = counties.filter(function(county) {
+            return county.province_id == selectedProvinceId;
+        });
+
+        // Update county select options
+        updateSelectOptions(countySelect, filteredCounties, 'id', 'name');
+
+        // Filter cities based on the selected province
+        var filteredCities = cities.filter(function(city) {
+            return city.province_id == selectedProvinceId;
+        });
+
+        // Update city select options
+        updateSelectOptions(citySelect, filteredCities, 'id', 'name');
+    });
+
+    // Function to update select options
+    function updateSelectOptions(selectElement, data, valueKey, textKey) {
+        // Clear existing options
+        selectElement.innerHTML = '';
+
+        // Add default option
+        var defaultOption = document.createElement('option');
+        defaultOption.value = '';
+        defaultOption.textContent = 'Seleccione ' + selectElement.getAttribute('name');
+        selectElement.appendChild(defaultOption);
+
+        // Add options based on filtered data
+        data.forEach(function(item) {
+            var option = document.createElement('option');
+            option.value = item[valueKey];
+            option.textContent = item[textKey];
+            selectElement.appendChild(option);
+        });
+    }
+});
+
 
 </script>
 
-@endsection

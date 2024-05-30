@@ -39,7 +39,7 @@
           <a href="#" class="tab-link {{ session('contactAdded') ? '' : (session('addressAdded') ? '' : 'active') }} border-rentallight text-white font-bold whitespace-nowrap border-b-4 px-1 pb-0 text-sm" data-tab="tab-datos">Datos</a>
           <a href="#" class="tab-link @if (session('contactAdded')) active @endif border-transparent text-white hover:border-gray-300 whitespace-nowrap border-b-2 px-1 pb-0 text-md font-medium" data-tab="tab-contactos">Contactos</a>
           <a href="#" class=" {{ (session('addressAdded') ? 'active' : '') }} tab-link border-transparent text-white hover:border-gray-300 whitespace-nowrap border-b-2 px-1 pb-0 text-md font-medium" data-tab="tab-direcciones">Direcciones</a>
-          <a href="#" class="tab-link border-transparent text-white hover:border-gray-300  whitespace-nowrap border-b-2 px-1 pb-0 text-md font-medium" data-tab="tab-alquileres">Alquileres</a>
+          <a href="#" class="hidden tab-link border-transparent text-white hover:border-gray-300  whitespace-nowrap border-b-2 px-1 pb-0 text-md font-medium" data-tab="tab-alquileres">Alquileres</a>
           <a href="#" class="tab-link border-transparent text-white hover:border-gray-300 whitespace-nowrap border-b-2 px-1 pb-0 text-md font-medium" data-tab="tab-comentarios">Comentarios</a>
       </nav>
         <!-- Current: "border-indigo-500 text-indigo-600", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" -->
@@ -229,9 +229,10 @@
                   No
                   @endif
               </td>
-              <!--<td>
-                  <a type="button" class="btn eagle-button" style="font-size: 0.5rem; padding: 0.25rem" href="/addresses/{{$oneAddress->id}}/edit">Editar</a>
-              </td>-->
+             <td>
+                  
+                  <a href="/addresses/{{$oneAddress->id}}/edit" class="inline-block text-rental hover:text-indigo-900 text-xs font-medium">Editar</a>
+              </td>
           </tr>
           @endforeach
       </tbody>
@@ -487,7 +488,7 @@ function toggleModalComment() {
         modal.classList.toggle('hidden');
     }
 
-    document.querySelector("#closeModalButton2").onclick = function() {
+    document.querySelector("#closeModalButton3").onclick = function() {
       const modal = document.getElementById('directionModal');
         modal.classList.toggle('hidden');
 }

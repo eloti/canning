@@ -5,7 +5,7 @@
         <!-- Modal Header -->
         <div class="flex justify-between items-center p-4 border-b border-gray-300">
             <h4 class="text-lg font-semibold">Agregar Comentario: {{$client->legal_name}}</h4>
-            <button id="closeModalButton" class="text-gray-500 hover:text-gray-800">&times;</button>
+            <button id="closeModalButton3" class="text-gray-500 hover:text-gray-800">&times;</button>
         </div>
 
         <!-- Modal Form -->
