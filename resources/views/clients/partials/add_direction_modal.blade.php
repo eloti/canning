@@ -7,8 +7,6 @@
 
 @php
 $clientId = $client->id; 
-//$billingInfo = $checkService->hasBillingAddress($clientId);
-//$hasBillingAddress = $billingInfo['hasBillingAddress'];
 
 @endphp
 
