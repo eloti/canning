@@ -39,7 +39,7 @@ Route::get('/clients/create_client', 'ClientController@create_client')->name('cl
 Route::get('/clients/createFromRental/{what_blade}/{what_unit}', 'ClientController@createFromRental')->name('clients.createFromRental');
 Route::get('/clients/{id}/edit', 'ClientController@edit');
 
-Route::get('/clients/cc/{id}', 'DocController@cc')
+Route::get('/clients/cc/{id}', 'DocController@cc');
 Route::get('/clients/{id}', 'ClientController@show');
 Route::put('/clients/{id}/update', 'ClientController@update');
 
