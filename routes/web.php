@@ -32,29 +32,30 @@ Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update')
 
 
 //CLIENTS
-// CLIENTS
-Route::prefix('clients')->name('clients.')->group(function () {
-    Route::resource('/', 'App\Http\Controllers\ClientController');
-    
-    Route::get('create_client', 'App\Http\Controllers\ClientController@create_client')->name('create_client');
-    Route::get('createFromRental/{what_blade}/{what_unit}', 'App\Http\Controllers\ClientController@createFromRental')->name('createFromRental');
-    Route::get('cc/{id}', 'App\Http\Controllers\DocController@cc')->name('cc');
-});
+Route::resource('clients', 'App\Http\Controllers\ClientController')->except(['edit', 'update']);
+Route::get('/clients/create_client', 'App\Http\Controllers\ClientController@create_client')->name('clients.create_client');
+Route::get('/clients/createFromRental/{what_blade}/{what_unit}', 'App\Http\Controllers\ClientController@createFromRental')->name('clients.createFromRental');
+Route::get('/clients/{id}/edit', 'App\Http\Controllers\ClientController@edit')->name('clients.edit');
 
-// La ruta individual para 'show' ya está incluida en el resource, así que podemos omitir esta línea adicional.
+
+Route::get('/clients/cc/{id}', 'App\Http\Controllers\DocController@cc')->name('clients.cc');
+Route::get('/clients/{id}', 'App\Http\Controllers\ClientController@show')->name('clients.show');
+
 
 // CONTACTS --------------------------------------------------------------------------------------
 
+Route::resource('contacts', 'App\Http\Controllers\ContactController');
+Route::get('/contacts/create_client_contact/{id}', 'App\Http\Controllers\ContactController@create_client_contact');
 
-// CONTACTS
-Route::prefix('contacts')->name('contacts.')->group(function () {
-    Route::resource('/', 'App\Http\Controllers\ContactController');
-
-    Route::get('create_client_contact/{id}', 'App\Http\Controllers\ContactController@create_client_contact')->name('create_client_contact');
-});
-
-// La ruta 'edit' y 'update' ya están incluidas en el resource, por lo que no es necesario definirlas de nuevo.
-
+Route::get('/contacts/from_rental/create_client_contact', 'App\Http\Controllers\ContactController@create_client_contact_from_rental');
+Route::get('/contacts/from_quote/create_client_contact', 'App\Http\Controllers\ContactController@create_client_contact_from_quote');
+Route::get('/contacts/from_reQuote/create_client_contact', 'App\Http\Controllers\ContactController@create_client_contact_from_quote');
+Route::get('/contacts/from_rent_to_rent/create_client_contact', 'App\Http\Controllers\ContactController@create_client_contact_from_r2r');
+Route::get('/contacts/{id}/edit', 'App\Http\Controllers\ContactController@edit');
+Route::put('/contacts/{id}/edit', 'App\Http\Controllers\ContactController@update');
+Route::resource('contacts', 'App\Http\Controllers\ContactController')->only([
+    'edit', 'update'
+]);
 
 // ADDRESSES ---------------------------------------------------------------------------------
 Route::resource('addresses', 'App\Http\Controllers\AddressController');
