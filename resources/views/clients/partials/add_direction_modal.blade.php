@@ -7,8 +7,8 @@
 
 @php
 $clientId = $client->id; 
-$billingInfo = $checkService->hasBillingAddress($clientId);
-$hasBillingAddress = $billingInfo['hasBillingAddress'];
+//$billingInfo = $checkService->hasBillingAddress($clientId);
+//$hasBillingAddress = $billingInfo['hasBillingAddress'];
 
 @endphp
 
@@ -90,9 +90,9 @@ $hasBillingAddress = $billingInfo['hasBillingAddress'];
                         <input id="zip_code" type="number" name="zip_code" class="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3">
                     </div>
       
-                    @if(!isset($hasBillingAddress) || $hasBillingAddress === 'NO')
+                   
 
-                    <div class="col-12" style="text-align: center; font-weight: bold">El cliente NO cuenta con una dirección de facturación.</div>
+                    <div class="col-12" style="hidden text-align: center; font-weight: bold">El cliente NO cuenta con una dirección de facturación.</div>
   
                     
   
@@ -118,12 +118,7 @@ $hasBillingAddress = $billingInfo['hasBillingAddress'];
                     
                   
   
-                  @else
-  
-                    <div class="col-12" style="text-align: center; font-weight: bold">El cliente ya cuenta con una dirección de facturación.</div>
-                    <input name="billing_address" value="0" hidden> 
-  
-                  @endif
+          
                     <!-- Hidden Fields -->
                     @if(isset($origin->what_blade))
                         <input type="hidden" name="what_blade" value="{{ $origin->what_blade }}">
