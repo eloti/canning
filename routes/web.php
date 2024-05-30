@@ -32,8 +32,6 @@ Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update')
 
 
 //CLIENTS
-use Illuminate\Support\Facades\Route;
-
 // CLIENTS
 Route::prefix('clients')->name('clients.')->group(function () {
     Route::resource('/', 'App\Http\Controllers\ClientController');
