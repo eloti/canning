@@ -36,7 +36,6 @@ Route::resource('clients', 'App\Http\Controllers\ClientController')->except(['ed
 Route::get('/clients/create_client', 'App\Http\Controllers\ClientController@create_client')->name('clients.create_client');
 Route::get('/clients/createFromRental/{what_blade}/{what_unit}', 'App\Http\Controllers\ClientController@createFromRental')->name('clients.createFromRental');
 Route::get('/clients/{id}/edit', 'App\Http\Controllers\ClientController@edit')->name('clients.edit');
-Route::put('/clientes/{id}', 'ClientController@update')->name('clientes.update');
 
 
 Route::get('/clients/cc/{id}', 'App\Http\Controllers\DocController@cc')->name('clients.cc');
