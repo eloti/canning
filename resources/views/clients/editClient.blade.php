@@ -21,7 +21,7 @@
             </div>
       
             <!-- Modal Form -->
-            <form method="POST"  action="{{ route('clients.update', ['client' => $client->id]) }}" novalidate autocomplete="off" class="p-4">
+            <form method="POST"  action="/clients/{{$client->id}}/update" novalidate autocomplete="off" class="p-4">
                 @method('PUT')
                 @csrf
             
