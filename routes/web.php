@@ -40,7 +40,7 @@ Route::get('/clients/createFromRental/{what_blade}/{what_unit}', 'ClientControll
 Route::get('/clients/{id}/edit', 'ClientController@edit');
 
 Route::get('/clients/cc/{id}', 'DocController@cc')
-Route::get('/clients/{id}', 'ClientController@show')
+Route::get('/clients/{id}', 'ClientController@show');
 Route::put('/clients/{id}/update', 'ClientController@update');
 
 
