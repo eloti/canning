@@ -32,14 +32,20 @@ Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update')
 
 
 //CLIENTS
-Route::resource('clients', 'App\Http\Controllers\ClientController')->except(['edit', 'update']);
-Route::get('/clients/create_client', 'App\Http\Controllers\ClientController@create_client')->name('clients.create_client');
-Route::get('/clients/createFromRental/{what_blade}/{what_unit}', 'App\Http\Controllers\ClientController@createFromRental')->name('clients.createFromRental');
-Route::get('/clients/{id}/edit', 'App\Http\Controllers\ClientController@edit')->name('clients.edit');
-Route::put('/clients/{id}', 'App\Http\Controllers\ClientController@update')->name('clients.update');
-Route::get('/clients/cc/{id}', 'App\Http\Controllers\DocController@cc')->name('clients.cc');
-Route::get('/clients/{id}', 'App\Http\Controllers\ClientController@show')->name('clients.show');
+Route::resource('clients', 'App\Http\Controllers\ClientController');
 
+Route::resource('clients', 'ClientController')->except(['edit', 'update']);
+Route::get('/clients/create_client', 'ClientController@create_client')->name('clients.create_client');
+Route::get('/clients/createFromRental/{what_blade}/{what_unit}', 'ClientController@createFromRental')->name('clients.createFromRental');
+Route::get('/clients/{id}/edit', 'ClientController@edit');
+
+Route::get('/clients/cc/{id}', 'DocController@cc')
+Route::get('/clients/{id}', 'ClientController@show')
+Route::put('/clients/{id}/update', 'ClientController@update');
+
+
+// Rutas para el controlador de clientes
+Route::resource('clients', ClientController::class);
 
 // CONTACTS --------------------------------------------------------------------------------------
 
