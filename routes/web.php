@@ -41,8 +41,12 @@ Route::get('/clients/{id}/edit', 'ClientController@edit');
 
 Route::get('/clients/cc/{id}', 'DocController@cc');
 Route::get('/clients/{id}', 'ClientController@show');
-Route::put('/clients/{id}/update', 'ClientController@update');
+Route::put('/clients/{id}/edit', 'ClientController@update');
 
+Route::post('/clients/{id}/edit', [\App\Http\Controllers\ClientController::class, "update"])
+    ->name('client.edit.process')
+    ->whereNumber('id')
+    ->middleware('auth');
 
 // Rutas para el controlador de clientes
 Route::resource('clients', ClientController::class);
