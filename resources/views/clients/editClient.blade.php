@@ -20,7 +20,7 @@
                 <button id="closeModalButton" class="text-gray-500 hover:text-gray-800">&times;</button>
             </div>
       
-            {{$client->id}}
+         
             <!-- Modal Form -->
             <form action="{{ route('client.edit.process', ['id' => $client->id]) }}" method="post" enctype="multipart/form-data" class="p-4">
                
