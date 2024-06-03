@@ -20,9 +20,10 @@
                 <button id="closeModalButton" class="text-gray-500 hover:text-gray-800">&times;</button>
             </div>
       
+            {{$client->id}}
             <!-- Modal Form -->
-            <form method="POST"  action="/clients/{{$client->id}}/update" novalidate autocomplete="off" class="p-4">
-                @method('PUT')
+            <form action="{{ route('client.edit.process', ['id' => $client->id]) }}" method="post" enctype="multipart/form-data" class="p-4">
+               
                 @csrf
             
                 <div class="space-y-4">
