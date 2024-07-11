@@ -32,23 +32,29 @@
           <div class="flex items-center">
             <div class="hidden sm:ml-6 sm:block">
                 <div class="flex space-x-4 font-rental items-center">
-                  <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                  <a href="{{ route('home') }}" class=" {{ request()->routeIs('home') ? ' text-white' : '' }} rounded-md  px-3 py-2 text-md  text-gray-300 font-semibold hover:text-white">Inicio</a>
-                  <a href="{{ route('clients.index') }}" class=" {{ request()->routeIs('clients.index') ? ' text-white' : '' }} rounded-md px-3 py-2 text-sm  text-gray-300 font-semibold hover:text-white">Clientes</a>
-                 <!-- <a href="#" class="rounded-md px-3 py-2 text-sm  text-gray-300 font-semibold hover:text-white">Projects</a>
-                  <a href="#" class="rounded-md px-3 py-2 text-sm  text-gray-300 font-semibold hover:text-white">Calendar</a>-->
+                    <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                    <a href="{{ route('home') }}" class=" {{ request()->routeIs('home') ? ' text-white' : '' }} rounded-md  px-3 py-2 text-md  text-gray-300 font-semibold hover:text-white">Inicio</a>
+                    <a href="{{ route('clients.index') }}" class=" {{ request()->routeIs('clients.index') ? ' text-white' : '' }} rounded-md px-3 py-2 text-sm  text-gray-300 font-semibold hover:text-white">Clientes</a>
+                    <a class="nav-link dropdown-toggle" style="padding: 0 0.75rem" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cotizaciones</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" style="padding: 0.25rem 2rem 0.25rem 0.5rem" href="{{ route('cotis.create') }}">Crear Cotización</a></li>
+                            <li><a class="dropdown-item" style="padding: 0.25rem 2rem 0.25rem 0.5rem" href="{{ route('cotis.open_index') }}">Cotizaciones Abiertas</a></li>
+                            <li><a class="dropdown-item" style="padding: 0.25rem 2rem 0.25rem 0.5rem" href="{{ route('cotis.closed_index') }}">Cotizaciones Cerradas</a></li>
+                        </ul>                    
+                    
+                        <!-- <a href="#" class="rounded-md px-3 py-2 text-sm  text-gray-300 font-semibold hover:text-white">Projects</a>
+                        <a href="#" class="rounded-md px-3 py-2 text-sm  text-gray-300 font-semibold hover:text-white">Calendar</a>-->
 
-                  @if (Auth::user()->clearance === 1)
+                @if (Auth::user()->clearance === 1)
                    
-                  <a href="{{ route('admin.panel') }}" class="rounded-md px-3 py-2 text-sm text-gray-300 font-semibold hover:text-white">Admin</a>
+                    <a href="{{ route('admin.panel') }}" class="rounded-md px-3 py-2 text-sm text-gray-300 font-semibold hover:text-white">Admin</a>
 
-
-                  <ul class="dropdown-menu absolute hidden bg-white text-gray-800">
-                      <li><a href="/admin" class="block py-2 px-4">Admin</a></li>
-                      <li><a href="{{ route('register') }}" class="block py-2 px-4">Registrar Usuario <i class="fas fa-user-plus"></i></a></li>
-                  </ul>
+                    <ul class="dropdown-menu absolute hidden bg-white text-gray-800">
+                        <li><a href="/admin" class="block py-2 px-4">Admin</a></li>
+                        <li><a href="{{ route('register') }}" class="block py-2 px-4">Registrar Usuario <i class="fas fa-user-plus"></i></a></li>
+                    </ul>
     
-          @endif
+                @endif
                   <div>
                    
                     <div>

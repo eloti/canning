@@ -78,3 +78,18 @@ Route::get('/get-counties/{provinceId}', 'AddressController@getCountiesByProvinc
 
 
 Route::resource('comments', CommentController::class);
+
+
+// COTIS -----------------------------------------------------------------------------------------
+
+Route::get('/cotis/create', 'App\Http\Controllers\CotiController@create')->name('cotis.create');
+Route::post('/cotis/store', 'App\Http\Controllers\CotiController@store')->name('cotis.store');
+Route::get('/cotis/show/{id}', 'App\Http\Controllers\CotiController@show');
+Route::get('/cotis/downloadPDF/{id}', 'App\Http\Controllers\CotiController@downloadPDF')->name('cotis.downloadPDF');
+Route::get('/cotis/showPDF/{id}', 'App\Http\Controllers\CotiController@showPDF')->name('cotis.showPDF');
+Route::get('/cotis/edit/{id}', 'App\Http\Controllers\CotiController@edit')->name('cotis.edit');
+Route::put('/cotis/update/{id}', 'App\Http\Controllers\CotiController@update');
+Route::put('/cotis/rejection_update/{id}', 'App\Http\Controllers\CotiController@rejection_update');
+Route::put('/cotis/acceptance_update/{id}', 'App\Http\Controllers\CotiController@acceptance_update');
+Route::get('/openCotis', 'App\Http\Controllers\CotiController@open_index')->name('cotis.open_index');
+Route::get('/closedCotis', 'App\Http\Controllers\CotiController@closed_index')->name('cotis.closed_index');
