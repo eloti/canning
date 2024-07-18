@@ -34,7 +34,7 @@
 
         <div class="col-2 sidebar-container"> <!-- 1st column -->
           
-            <input type="text" name="user_id" value="{{auth()->user()->id}}" hidden>
+          <input type="text" name="user_id" value="{{auth()->user()->id}}" hidden>
           
 
           <!--div class="row eagle-row-clean col-12">
@@ -170,12 +170,12 @@
                 <thead>
                   <tr style="height: 2.5rem; text-align: center; background-color: rgb(186, 202, 211)">
                     <th width=6% class="model_table">Item</th>
-                    <th width=4% class="model_table">Cant Un</th>
-                    <th width=43% class="model_table">Descripción</th>                    
+                    <th width=6% class="model_table">Cantidad</th>
+                    <th width=39% class="model_table">Descripción</th>                    
                     <!--th width=4% class="model_table">Potencia [kVA]</th-->
                     <!--th width=6% class="model_table">Régimen (solo Alq)</th-->                
                     <!--th width=4% class="model_table">Un Tiempo</th-->
-                    <th width=4% class="model_table">Días</th>
+                    <th width=6% class="model_table">Días<p class="no-marg no-pad small">Sólo Alq</p></th>
                     <!--th width=6% class="model_table">Frecuencia (solo Serv)</th-->
                     <th width=6% class="model_table">Precio Lista</th>
                     <th width=6% class="model_table">Precio Of</th>
@@ -199,7 +199,7 @@
                       </span>
                     </td>
 
-                     <td class="eagle-td">
+                    <td class="eagle-td">
                       <input name="cant[]" class="form-control mac-form-control-right cant">
                       <span class="col-12 invalid-feedback d-none text-center" role="alert" style="padding: 0">
                         <strong>Ingrese cantidad</strong>
@@ -240,7 +240,7 @@
                     </td-->
 
                     <td class="eagle-td">
-                      <input name="days[]" class="form-control mac-form-control-right cant">
+                      <input name="days[]" class="form-control mac-form-control-right days">
                       <span class="col-12 invalid-feedback d-none text-center" role="alert" style="padding: 0">
                         <strong>Ingrese días</strong>
                       </span>   
@@ -330,10 +330,6 @@
               <label style="margin: 0">{{$cotiOps->show('4')}}</label>
             </div>
 
-            <!--div class="col-1 flex-centered">
-              <input class="chbx" type="checkbox" name="op5" id="op5" value=1>
-            </div>
-            <label class="col-11 mac-checkbox-label">{{$cotiOps->show('5')}}</label-->
           </div>
 
         </div>
@@ -625,19 +621,16 @@ $('.addRow').on('click', function(){
     });
     function addRow(){
       var tr = '<tr>'+
-        '<td class="eagle-td"><select name="item[]" class="form-control mac-form-control item">@foreach($cotiItems->get() as $index => $cotiItem)<option value="{{ $index }}" {{ old('item') == $index ? 'selected' : '' }}>{{ $cotiItem }}</option>@endforeach</select>  <span class="col-12 invalid-feedback d-none text-center" role="alert" style="padding: 0"><strong>Debe seleccionar ítem</strong></span></td>'+
-        '<td class="eagle-td"><textarea rows="3" name="desc[]" class="form-control mac-form-control desc" style="resize: vertical; min-height: 50px;"></textarea><span class="col-12 invalid-feedback d-none text-center" role="alert" style="padding: 0"><strong>Incluya una descripción</strong></span></td>'+
-        '<td class="eagle-td"><input name="power[]" class="form-control mac-form-control-right pot"></td>'+
-        '<td class="eagle-td"><select type="text" name="regime[]" class="form-control mac-form-control regime">@foreach($regimes->get() as $index => $regime)<option value="{{ $index }}" {{ old('regime') == $index ? 'selected' : '' }}>{{ $regime }}</option>@endforeach</select><span class="col-12 invalid-feedback d-none text-center" role="alert" style="padding: 0"><strong>Si es alquiler, ingrese régimen</strong></span></td>'+
-        '<td class="eagle-td"><select type="text" name="units[]" class="form-control mac-form-control units">@foreach($units->get() as $index => $unit)<option value="{{ $index }}" {{ old('unit') == $index ? 'selected' : '' }}>{{ $unit }}</option>@endforeach</select><span class="col-12 invalid-feedback d-none text-center" role="alert" style="padding: 0"><strong>Ingrese unidades</strong></span></td>'+
+        '<td class="eagle-td"><select name="item[]" class="form-control mac-form-control item">@foreach($cotiItems->get() as $index => $cotiItem)<option value="{{ $index }}" {{ old('item') == $index ? 'selected' : '' }}>{{ $cotiItem }}</option>@endforeach</select><span class="col-12 invalid-feedback d-none text-center" role="alert" style="padding: 0"><strong>Debe seleccionar ítem</strong></span></td>'+
         '<td class="eagle-td"><input name="cant[]" class="form-control mac-form-control-right cant"><span class="col-12 invalid-feedback d-none text-center" role="alert" style="padding: 0"><strong>Ingrese cantidad</strong></span></td>'+
-        '<td class="eagle-td"><select type="text" name="frequency[]" class="form-control mac-form-control frequency">@foreach($frequencies->get() as $index => $frequency)<option value="{{ $index }}" {{ old('frequency') == $index ? 'selected' : '' }}>{{ $frequency }}</option>@endforeach</select><span class="col-12 invalid-feedback d-none text-center" role="alert" style="padding: 0"><strong>Si es servicio abono, ingrese frecuencia</strong></span></td>'+
+        '<td class="eagle-td"><textarea rows="3" name="desc[]" class="form-control mac-form-control desc" style="resize: vertical; min-height: 50px;"></textarea><span class="col-12 invalid-feedback d-none text-center" role="alert" style="padding: 0"><strong>Incluya una descripción</strong></span></td>'+
+        '<td class="eagle-td"><input name="days[]" class="form-control mac-form-control-right days"><span class="col-12 invalid-feedback d-none text-center" role="alert" style="padding: 0"><strong>Ingrese días</strong></span></td>'+
         '<td class="eagle-td"><input name="list_price[]" class="form-control mac-form-control-right list_price"></td>'+
         '<td class="eagle-td"><input name="of_price[]" class="form-control mac-form-control-right of_price"><span class="col-12 invalid-feedback d-none text-center" role="alert" style="padding: 0"><strong>Debe especificar el precio ofrecido</strong></span></td>'+
-        '<td class="eagle-td"><select id="vat_rate" name="vat_rate[]" class="form-control mac-form-control vat_rate"><option value="">Sel</option><option value=27>27.0</option><option value=21>21.0</option><option value=10.5>10.5</option><option value=5>5.0</option><option value=2.5>2.5</option><option value=0>0.0</option></select></td>'+
+        '<td class="eagle-td"><select id="vat_rate" name="vat_rate[]" class="form-control mac-form-control vat_rate"><option value="">Sel</option><option value=21>21.0</option><option value=0>0.0</option></select></td>'+
         '<td class="eagle-td"><input name="of_price_plus_IVA[]" class="of_price_plus_IVA" hidden><input class="form-control mac-form-control-right of_price_plus_IVA_form" readonly></td>'+
         '<td style="text-align: center"><a href="#" class="remove"><i class="fas fa-minus-square"></a></td>'+
-        '</tr>';
+      '</tr>';
       $('tbody:first').append(tr);
     };
 // -------------------------------------------------------------------------------------------

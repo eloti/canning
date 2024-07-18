@@ -51,4 +51,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    // Each user may have many cotis
+    public function Cotis()
+    {
+      return $this->hasMany('App\Coti');
+    }
 }
