@@ -10,7 +10,7 @@ use App\CotiDet;
 use App\Client;
 use App\Contact;
 use App\Address;
-use Barryvdh\DomPDF\Facade as PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class CotiController extends Controller
 {

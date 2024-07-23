@@ -206,7 +206,50 @@
 
               </table>
 
-            </div><!-- end of table container -->  
+            </div><!-- end of table container --> 
+
+            <hr> 
+
+            <div class="col-12 bordered-container row no-marg" style="margin-top: 0.25rem;">
+
+              <div class="col-12 row no-marg">
+
+                <div class="col-12"><b>INCLUYE:</b></div>
+                <br><br>
+
+                <div class="col-1" style="display: flex; justify-content: flex-end">
+                  <input class="chbx" type="checkbox" name="op1" id="op1" {{$coti->op1 === 1 ? 'checked' : ''}} disabled>
+                </div>
+                <div class="col-2" style="display: flex; justify-content: flex-start; align-items: center ;">
+                  <label style="margin: 0">{{$cotiOps->show('1')}}</label>
+                </div>
+
+                <div class="col-1" style="display: flex; justify-content: flex-end">
+                  <input class="chbx" type="checkbox" name="op2" id="op2" {{$coti->op2 === 1 ? 'checked' : ''}} disabled>
+                </div>
+                <div class="col-2" style="display: flex; justify-content: flex-start; align-items: center ;">
+                  <label style="margin: 0">{{$cotiOps->show('2')}}</label>
+                </div>
+
+                <div class="col-1" style="display: flex; justify-content: flex-end">
+                  <input class="chbx" type="checkbox" name="op3" id="op3" {{$coti->op3 === 1 ? 'checked' : ''}} disabled>
+                </div>
+                <div class="col-2" style="display: flex; justify-content: flex-start; align-items: center ;">
+                  <label style="margin: 0">{{$cotiOps->show('3')}}</label>
+                </div>
+
+                <div class="col-1" style="display: flex; justify-content: flex-end">
+                  <input class="chbx" type="checkbox" name="op4" id="op4" {{$coti->op4 === 1 ? 'checked' : ''}} disabled>
+                </div>
+                <div class="col-2" style="display: flex; justify-content: flex-start; align-items: center ;">
+                  <label style="margin: 0">{{$cotiOps->show('4')}}</label>
+                </div>
+
+              </div>  
+
+            </div>
+
+            <hr>
 
             @if($status === "Aceptada")
               <div class="col-4 no-marg no-pad">
@@ -216,7 +259,7 @@
                 </div>
                 <div class="row eagle-row-clean col-12">
                   <label class="mac-label col-5">Comentarios:</label>
-                  <textarea class="col-7 mac-form-textarea-2" rows="4" readonly>{{$coti->comments}}</textarea> 
+                  <textarea style="padding: 10px; background-color: lightgray; border-radius: 5px; border: 0.5px solid darkgray" class="col-7 mac-form-textarea-2" rows="4" readonly>{{$coti->comments}}</textarea> 
                 </div>
               </div>
             @endif
@@ -237,50 +280,16 @@
                 </div>
                 <div class="row eagle-row-clean col-12">
                   <label class="mac-label col-5">Comentarios:</label>
-                  <textarea class="col-7 mac-form-textarea-2" rows="4" readonly>{{$coti->comments}}</textarea> 
+                  <textarea style="padding: 10px; background-color: lightgray; border-color: red; border-radius: 5px; border: 0.5px solid darkgray" class="col-7 mac-form-textarea-2" rows="4" readonly>{{$coti->comments}}</textarea> 
                 </div>
               </div>
             @endif
 
+            
+
           <!--/div--><!-- end of row -->
 
         </div><!--end 2nd column-->
-
-        <div class="col-12 bordered-container row no-marg" style="margin-top: 0.25rem;"><!--3rd column-->
-          <div class="col-12 row no-marg">
-            <div class="col-12"><b>INCLUYE:</b></div>
-
-            <div class="col-1" style="display: flex; justify-content: flex-end">
-              <input class="chbx" type="checkbox" name="op1" id="op1" {{$coti->op1 === 1 ? 'checked' : ''}} disabled>
-            </div>
-            <div class="col-2" style="display: flex; justify-content: flex-start; align-items: center ;">
-              <label style="margin: 0">{{$cotiOps->show('1')}}</label>
-            </div>
-
-            <div class="col-1" style="display: flex; justify-content: flex-end">
-              <input class="chbx" type="checkbox" name="op2" id="op2" {{$coti->op2 === 1 ? 'checked' : ''}} disabled>
-            </div>
-            <div class="col-2" style="display: flex; justify-content: flex-start; align-items: center ;">
-              <label style="margin: 0">{{$cotiOps->show('2')}}</label>
-            </div>
-
-            <div class="col-1" style="display: flex; justify-content: flex-end">
-              <input class="chbx" type="checkbox" name="op3" id="op3" {{$coti->op3 === 1 ? 'checked' : ''}} disabled>
-            </div>
-            <div class="col-2" style="display: flex; justify-content: flex-start; align-items: center ;">
-              <label style="margin: 0">{{$cotiOps->show('3')}}</label>
-            </div>
-
-            <div class="col-1" style="display: flex; justify-content: flex-end">
-              <input class="chbx" type="checkbox" name="op4" id="op4" {{$coti->op4 === 1 ? 'checked' : ''}} disabled>
-            </div>
-            <div class="col-2" style="display: flex; justify-content: flex-start; align-items: center ;">
-              <label style="margin: 0">{{$cotiOps->show('4')}}</label>
-            </div>
-
-          </div>         
-
-        </div>   
   
       </section>
 
