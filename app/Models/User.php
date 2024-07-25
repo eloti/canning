@@ -43,7 +43,10 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
+    public function Cotis()
+    {
+      return $this->hasMany('App\Coti');
+    }
     /**
      * The attributes that should be cast.
      *
