@@ -8,6 +8,7 @@
 
 <link rel="shortcut icon" type="image/png" href="{{ asset('/images/favicon.png') }}">
 <link rel="shortcut icon" sizes="192x192" href="{{ asset('/images/favicon.png') }}">
+<link rel="stylesheet" href="{{asset('css/app.css')}}">
 <link rel="stylesheet" href="{{asset('css/tailwind.css')}}">
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 <script src="{{ asset('js/app.js') }}"></script>
@@ -40,7 +41,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer">
 
 <!-- Styles --> 
-<link rel="stylesheet" href="{{asset('css/app.css')}}">
+
 <link rel="stylesheet" href="{{asset('css/customstyles.css')}}">
 <link rel="stylesheet" href="{{asset('css/customstyles2.css')}}">
 <link rel="stylesheet" href="{{asset('css/croppie.min.css')}}">

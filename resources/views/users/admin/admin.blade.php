@@ -26,7 +26,7 @@
 </div>
 @endif
 <div id="tab-contactos" class="tab-content">
-    <div id="contactos" class="tab-pane fade p-4 bg-white shadow-md rounded-lg">
+    <div id="contactos" class=" p-4 bg-white shadow-md rounded-lg">
       <div class="flex justify-end mb-6">
 
         
@@ -39,6 +39,7 @@
                 <th class="py-2 px-4 border-b border-gray-200 text-center text-sm font-medium text-gray-600">Email</th>
                 <th class="py-2 px-4 border-b border-gray-200 text-center text-sm font-medium text-gray-600">Teléfono</th>
                 <th class="py-2 px-4 border-b border-gray-200 text-center text-sm font-medium text-gray-600">Rol</th>
+                <th class="py-2 px-4 border-b border-gray-200 text-center text-sm font-medium text-gray-600">Estado</th>
                 <th class="py-2 px-4 border-b border-gray-200 text-center text-sm font-medium text-gray-600"></th>
             </tr>
         </thead>
@@ -49,18 +50,23 @@
                     <td class="py-2 px-4 text-sm text-gray-600">{{ $user->lastname }}</td>
                     <td class="py-2 px-4 text-sm text-gray-600">{{ $user->email }}</td>
                     <td class="py-2 px-4 text-sm text-gray-600">{{ $user->cell }}</td>
+                   
                     <td class="py-2 px-4 text-sm text-gray-600">
-                        @if ( $user->clearance == 1 )
-                           Administrador
-                        @elseif ($user->clearance == 2)
-                        Administrativo
-                        @elseif ($user->clearance == 3)
-                        Otro
-                        @endif
+                   {{$user->role}}
 
                     </td>
                     <td class="py-2 px-4 text-sm text-gray-600">
-                        <a href="/users/{{ $user->id }}/edit" class="inline-block text-rental hover:text-indigo-900 text-xs font-medium">Ver/Editar</a>
+                        @if ( $user->active == true )
+                        Activo
+                     @else
+                    Inactivo
+                     @endif
+
+                    </td>
+                    <td class="py-2 px-4 text-sm text-gray-600">
+                        <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="inline-block text-rental hover:text-indigo-900 text-xs font-medium">Ver/Editar</a>
+
+
                     </td>
                 </tr>
             @endforeach

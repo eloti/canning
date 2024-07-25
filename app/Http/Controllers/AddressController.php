@@ -52,6 +52,9 @@ class AddressController extends Controller
         $origin = request();
         //return $origin;
 
+
+
+        
         $client = Client::select('id', 'legal_name')
                         ->where('id', '=', $origin->client_id)
                         ->first();
@@ -134,9 +137,10 @@ class AddressController extends Controller
      */
     public function store(Request $request)
     {
-       // dd($request);
-      //return $request;
-      //validate the Data
+       
+
+
+
       $this->validate($request, [
         'line1' => 'required',
         'province_id' => 'required',
@@ -209,6 +213,8 @@ class AddressController extends Controller
             return redirect()->route('clients.show', ['client' => $request->client_id])->with([
                 'success' => 'Dirección Agregada correctamente.',
                 'addressAdded' => true,
+                'hasBillingAddress' => $hasBillingAddress
+                
             ]);
         }
     }
@@ -251,7 +257,8 @@ class AddressController extends Controller
 
         return view ('clients.editAddress')
             ->with('address', $address)
-            ->with('otherAddresses', $otherAddresses);
+            ->with('otherAddresses', $otherAddresses)
+            ->with('hasBillingAddress', $hasBillingAddress);
     }
 
     /**

@@ -10,6 +10,9 @@ use Session;
 use Illuminate\Http\Request;
 use App\Rental;
 use App\Unit;
+use Illuminate\Support\Facades\Auth;
+
+
 
 class ClientController extends Controller
 {
@@ -189,8 +192,9 @@ class ClientController extends Controller
     public function store(Request $request)
     {
       //validate the Data
+      //dd($request);
     $this->validate($request, array(
-     
+        'rubro' => 'nullable|in:Banco/Financiera,Electricidad, Gas y Agua,Comercio Mayorista,Minorista/Supermercado,Minería,Pesca,Agricultura y Ganadería,Hotelería y Restaurantes,Otras Manufacturas,Alimenticia,Automotriz,Siderurgia,Construcción,Oil & Gas,Telecomunicaciones,Transporte Público,Alquiler de Maquinaria,Logística,Salud,Administración Pública,Centro Comercial,Otros Servicios,Ingeniería/Instalaciones,Entretenimiento/Espectáculos,Consorcio',
       'commercial_name' => 'required',
        'legal_name' => 'nullable',
       'cuit_num' => 'nullable|unique:App\Client,cuit_num',
@@ -209,7 +213,7 @@ class ClientController extends Controller
         $client = new Client;
         $client->legal_name = $request->legal_name;
         $client->commercial_name = $request->commercial_name;
-     
+        $client->rubro = $request->rubro;
         $client->cuit_type = $request->cuit_type;
         $client->cuit_num = $clean_cuit;
         $client->vat_status = $request->vat_status;
@@ -265,16 +269,46 @@ class ClientController extends Controller
      * @param  \App\Client  $client
      * @return \Illuminate\Http\Response
      */
+
     public function show($id)
     {
         $client = Client::find($id);
         $contacts = Contact::where('client_id', $id)->orderBy('deactivate', 'asc')->orderBy('name', 'asc')->get();
         $addresses = Address::where('client_id', $id)->get();
-        $comments = Comment::where('client_id', $id)->orderBy('created_at', 'desc')->get();
-        //$rentals = Rental::where('client_id', $id)->orderBy('id', 'asc')->get();
+        $comments = Comment::where('client_id', $id)->orderBy('created_at', 'desc')->with('user')->get();
+        
+        $otherAddresses = Address::select('id', 'billing_address')
+        ->where('client_id', '=', $id)
+        ->get();
 
-        return view('clients.show')->with('client', $client)->with('contacts', $contacts)->with('addresses', $addresses)->with('comments', $comments);//->with('rentals', $rentals);
+if (count($otherAddresses) != 0) {
+foreach ($otherAddresses as $otherAddress) {
+if ($otherAddress->billing_address === 1) {
+$hasBillingAddress = 'YES';
+break;
+} else {
+$hasBillingAddress = 'NO';
+}
+}
+} else {
+$hasBillingAddress = 'NO';
+}
+//dd($hasBillingAddress);
+
+
+        // Get the currently authenticated user
+        $user = Auth::user();
+    
+        return view('clients.show')->with([
+            'client' => $client,
+            'contacts' => $contacts,
+            'addresses' => $addresses,
+            'comments' => $comments,
+            'user' => $user,
+            'hasBillingAddress' => $hasBillingAddress
+        ]);
     }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -323,8 +357,8 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Validate the Data Types
-        $this->validate($request, [
+        // Validar los datos
+        $request->validate([
             'legal_name' => 'nullable|string|max:255',
             'commercial_name' => 'nullable|string|max:255',
             'cuit_type' => 'nullable|string|max:255',
@@ -332,19 +366,17 @@ class ClientController extends Controller
             'vat_status' => 'nullable|string|max:255',
             'sales_tax_rate' => 'nullable|numeric',
             'payment_terms' => 'nullable|string|max:255',
+            'rubro' => 'nullable|string|max:255' // Agregar validación para rubro
         ]);
     
-        // Find the client by ID
+        // Encontrar el cliente por ID
         $client = Client::findOrFail($id);
     
-        // Update client attributes
+        // Actualizar atributos del cliente
         $client->update($request->all());
     
-        // Redirect
-        return redirect()->route('clients.show', ['client' => $id])->with([
-            'success' => 'Cliente actualizado correctamente.',
-            'contactAdded' => false,
-        ]);
+        // Redireccionar
+        return redirect()->route('clients.show', ['client' => $id])->with('success', 'Cliente actualizado correctamente.');
     }
     
     

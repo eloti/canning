@@ -1,3 +1,4 @@
+<!-- resources/views/contacts/edit.blade.php -->
 @extends('layouts.app')
 
 @section('title', 'Editar Contacto')
@@ -14,7 +15,7 @@
             @endforeach
         </ul>
     </div>
-@endif
+    @endif
     <div class="bg-white rounded-lg w-full max-w-3xl">
 
         <!-- Modal Header -->
@@ -68,6 +69,12 @@
                         <input id="extension" type="text" name="extension" value="{{$contact->extension}}" class="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3">
                     </div>
 
+                    <!-- Desactivar Contacto -->
+                    <div class="col-span-1">
+                        <label for="deactivate" class="block text-md font-medium text-gray-700">Desactivar Contacto</label>
+                        <input id="deactivate" type="checkbox" name="deactivate" value="1" {{ $contact->deactivate ? 'checked' : '' }} class="mt-1 block border border-gray-300 rounded-md py-2 px-3">
+                    </div>
+                    
                     <!-- Hidden Fields -->
                     @if(isset($origin->what_blade))
                         <input type="hidden" name="what_blade" value="{{$origin->what_blade}}">

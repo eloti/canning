@@ -56,6 +56,11 @@
                         <input id="extension" type="text" name="extension" class="mt-2 block w-full  border-black py-1 px-3 border-2 rounded-md  max-w-72  sm:text-md">
                     </div>
         
+                    <div class="col-span-1">
+                        <label for="comment" class="block text-md font-medium text-gray-700">Comentario</label>
+                        <input id="comment" type="text" name="comment" class="mt-2 block w-full  border-black py-1 px-3 border-2 rounded-md  max-w-72  sm:text-md">
+                    </div>
+
                     <!-- Hidden Fields -->
                     @if(isset($origin->what_blade))
                         <input type="hidden" name="what_blade" value="{{$origin->what_blade}}">

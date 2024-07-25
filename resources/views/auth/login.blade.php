@@ -98,12 +98,12 @@
             @csrf
         
             <div>
-                <label for="alias" class="block text-sm font-medium leading-6 text-gray-900">{{ __('Usuario') }}</label>
+                <label for="email" class="block text-sm font-medium leading-6 text-gray-900">{{ __('Usuario') }}</label>
                 <div class="mt-2">
-                    <input id="alias" type="text" class=" px-3 block w-full rounded-md border-0 py-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rental sm:text-sm sm:leading-6 @error('alias') is-invalid @enderror" name="alias" value="{{ old('alias') }}" required autocomplete="alias" autofocus>
-                    @error('alias')
+                    <input id="email" type="email" class=" px-3 block w-full rounded-md border-0 py-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rental sm:text-sm sm:leading-6 @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="alias" autofocus>
+                    @error('email')
                     <span class="invalid-feedback text-red-500 mt-2" role="alert">
-                        <strong>El Usuario es incorrecto</strong>
+                        <strong>El email es incorrecto</strong>
                     </span>
                     @enderror
                 </div>

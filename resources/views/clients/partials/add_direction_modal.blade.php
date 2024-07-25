@@ -18,6 +18,7 @@ $clientId = $client->id;
         <!-- Modal Header -->
         <div class="flex justify-between items-center p-4 border-b border-gray-300">
             <h4 class="text-lg font-semibold">Agregar Dirección: {{$client->legal_name}}</h4>
+      
             <button id="closeModalButton2" class="text-gray-500 hover:text-gray-800">&times;</button>
         </div>
 
@@ -29,13 +30,14 @@ $clientId = $client->id;
                     <strong>Debe corregir los errores en el formulario.</strong>
                 </span>                
             @endif
-        
+ 
             <section>
+              
                 <div class="grid grid-cols-1 gap-4">
                     <!-- Nombre y Apellido -->
                     <div class="col-span-1">
                         <label for="line1" class="block text-md font-medium text-gray-700">Línea 1*:</label>
-                        <input id="line1" type="text" name="line1" class="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3 {{ $errors->has('line1') ? 'border-red-500' : '' }}" value="{{ old('line1') }}">
+                        <input id="line1" type="text" name="line1" class="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3 {{ $errors->has('line1') ? 'border-red-500' : '' }}" value="{{ old('line1') }}" required>
                         @if ($errors->has('line1'))
                             <span class="invalid-feedback col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8" role="alert">
                                 <strong>Debe ingresar Línea 1</strong>
@@ -51,8 +53,8 @@ $clientId = $client->id;
         
                     <!-- E-mail -->
                     <div class="col-span-1">
-                        <label for="province" class="block text-md font-medium text-gray-700">Provincia</label>
-                        <select id="province" name="province_id" class="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3">
+                        <label for="province" class="block text-md font-medium text-gray-700">Provincia*</label>
+                        <select id="province" name="province_id" class="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3" required>
                             @foreach($provincesService->get() as $provinceId => $provinceName)
                                 <option value="{{ $provinceId }}">{{ $provinceName }}</option>
                             @endforeach
@@ -90,29 +92,31 @@ $clientId = $client->id;
       
                    
 
-                    <div class="col-12" style="hidden text-align: center; font-weight: bold">El cliente NO cuenta con una dirección de facturación.</div>
+                    @if(!isset($hasBillingAddress) || $hasBillingAddress === 'NO')
+
+                    <div class="col-12" style="text-align: center; font-weight: bold">El cliente NO cuenta con una dirección de facturación.</div>
   
-                    
+                    <br>
   
-                    <div class="flex flex-wrap items-center space-y-4">
-                        <label for="billing_address" class="w-full md:w-1/3 text-md font-medium text-gray-700">Dirección de facturación?*</label>
-                        
-                        <div class="flex items-center w-1/6">
-                            <span class="text-md font-medium text-gray-700">Si</span>
-                        </div>
-                        
-                        <div class="flex items-center w-1/6">
-                            <input type="radio" id="billing_address" name="billing_address" value="1" class="form-radio h-4 w-4 text-blue-600 transition duration-150 ease-in-out">
-                        </div>
-                        
-                        <div class="flex items-center w-1/12">
-                            <span class="text-md font-medium text-gray-700">No</span>
-                        </div>
-                        
-                        <div class="flex items-center w-1/6">
-                            <input type="radio" id="billing_address" name="billing_address" value="0" class="form-radio h-4 w-4 text-blue-600 transition duration-150 ease-in-out">
-                        </div>
-                    </div>
+                    <div class="row eagle-row-clean col-12">
+                      <label for="billing_address" class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 mac-label">Dirección de facturación?*</label>
+                      <div class="col-2 mac-label">Si</div>
+                      <div class="col-2 row eagle-row-clean" style="display: flex; align-items: center">
+                          <input type="radio" id="billing_address" name="billing_address" value="1" class="form-control">
+                      </div>
+                      <div class="col-1 mac-label">No</div>
+                      <div class="col-2" style="display: flex; align-items: center">
+                          <input type="radio" id="billing_address" name="billing_address" value="0" class="form-control" checked>
+                      </div>
+                  </div>
+                  
+  
+                  @else
+  
+                    <div class="col-12" style="text-align: center; font-weight: bold">El cliente ya cuenta con una dirección de facturación.</div>
+                    <input name="billing_address" value="0" hidden> 
+  
+                  @endif
                     
                   
   
