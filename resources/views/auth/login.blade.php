@@ -119,7 +119,7 @@
                     @endif
                     @error('password')
                     <span class="invalid-feedback" role="alert">
-                        <strong>El Usuario es incorrecto</strong>
+                        <strong>La contraseña es incorrecta</strong>
                     </span>
                     @enderror
                 </div>
