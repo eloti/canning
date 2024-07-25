@@ -58,8 +58,5 @@ class User extends Authenticatable
     ];
 
     // Each user may have many cotis
-    public function Cotis()
-    {
-      return $this->hasMany('App\Coti');
-    }
+
 }
