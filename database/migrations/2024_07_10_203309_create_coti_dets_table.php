@@ -14,6 +14,18 @@ return new class extends Migration
         Schema::create('coti_dets', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->integer('coti_id')->unsigned()->index();
+            $table->integer('item');
+            $table->string('description', 382);
+            $table->string('power')->nullable();
+            $table->string('regime')->nullable();
+            $table->string('units');
+            $table->integer('cant');
+            $table->string('frequency')->nullable();
+            $table->decimal('list_price', 10, 2)->nullable();
+            $table->decimal('of_price', 10, 2);
+            $table->decimal('vat_rate', 10, 2)->nullable();
+            $table->decimal('of_price_plus_IVA', 10, 2)->nullable();
         });
     }
 

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Coti extends Model
 {
@@ -13,7 +14,7 @@ class Coti extends Model
     // Primary Key
     public $primaryKey = 'id';
 
-    protected $fillable = ['user_id', 'client_id', 'contact_id', 'address_id', 'date', 'validez', 'delivery_date', 'quote_curr', 'payment_terms', 'terms_desc', 'obs', 'op1', 'op2', 'op3', 'op4', 'op5'];
+    protected $fillable = ['user_id', 'client_id', 'contact_id', 'address_id', 'date', 'validez', 'plazo', 'delivery_date', 'quote_curr', 'payment_terms', 'terms_desc', 'obs', 'op1', 'op2', 'op3', 'op4', 'op5', 'op6', 'op7', 'op8', 'op9', 'op10', 'status', 'rejection', 'status_change', 'comments', 'op11', 'op12', 'op13', 'op14', 'company' ];
 
     //Time functions
     public function date()
@@ -27,10 +28,16 @@ class Coti extends Model
         return $date->format('d-m-Y');
     }
 
+    public function delivery_date()
+    {
+        $date = new Carbon($this->delivery_date);
+        return $date->format('d-m-Y');
+    }
+
     // Each coti belongs to only one user (el vendedor)
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Models\User');
     }
     // Each coti belongs to only one client
     public function client()

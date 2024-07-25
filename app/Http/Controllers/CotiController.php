@@ -10,7 +10,7 @@ use App\CotiDet;
 use App\Client;
 use App\Contact;
 use App\Address;
-use Barryvdh\DomPDF\Facade as PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class CotiController extends Controller
 {
@@ -183,7 +183,7 @@ class CotiController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
+        //return $request;
         $data = $request->all();
         //return $data;
         $lastid = Coti::create($data)->id;
@@ -194,22 +194,23 @@ class CotiController extends Controller
                 $data2 = array(
                     'coti_id' => $lastid,
                     'item' => $request->item[$item],
-                    'description' => $request->desc[$item],
-                    'power' => $request->power[$item],
-                    'regime' => $request->regime[$item],
-                    'units' => $request->units[$item],
                     'cant' => $request->cant[$item],
-                    'frequency' => $request->frequency[$item],
+                    'description' => $request->desc[$item],
+                    'days' => $request->days[$item],                    
                     'list_price' => $request->list_price[$item],
                     'of_price' => $request->of_price[$item],
                     'vat_rate' => $request->vat_rate[$item],
                     'of_price_plus_IVA' => $request->of_price_plus_IVA[$item]
+                    //'power' => $request->power[$item],
+                    //'regime' => $request->regime[$item],
+                    //'units' => $request->units[$item],                    
+                    //'frequency' => $request->frequency[$item],
                 );
                 CotiDet::insert($data2);
             }
         }
 
-        return redirect()->action('CotiController@show', ['id' => $lastid]);
+        return redirect()->action('App\Http\Controllers\CotiController@show', ['id' => $lastid]);
     }
 
     /**
@@ -356,11 +357,10 @@ class CotiController extends Controller
         $coti = Coti::find($id);
         //return $coti;
         $coti->contact_id = $data['contact_id'];
-        $coti->company = $data['company'];
         $coti->address_id = $data['address_id']; 
         $coti->date = $data['date']; 
         $coti->validez = $data['validez'];
-        $coti->plazo = $data['plazo'];
+        $coti->delivery_date = $data['delivery_date']; 
         $coti->quote_curr = $data['quote_curr'];
         $coti->payment_terms = $data['payment_terms']; 
         $coti->terms_desc = $data['terms_desc'];
@@ -385,56 +385,6 @@ class CotiController extends Controller
         } else {
             $coti->op4 = 0;
         }
-        if(isset($data['op5'])) {
-            $coti->op5 = 1;
-        } else {
-            $coti->op5 = 0;
-        }
-        if(isset($data['op6'])) {
-            $coti->op6 = 1;
-        } else {
-            $coti->op6 = 0;
-        }
-        if(isset($data['op7'])) {
-            $coti->op7 = 1;
-        } else {
-            $coti->op7 = 0;
-        }
-        if(isset($data['op8'])) {
-            $coti->op8 = 1;
-        } else {
-            $coti->op8 = 0;
-        }
-        if(isset($data['op9'])) {
-            $coti->op9 = 1;
-        } else {
-            $coti->op9 = 0;
-        }
-        if(isset($data['op10'])) {
-            $coti->op10 = 1;
-        } else {
-            $coti->op10 = 0;
-        }
-        if(isset($data['op11'])) {
-            $coti->op11 = 1;
-        } else {
-            $coti->op11 = 0;
-        }
-        if(isset($data['op12'])) {
-            $coti->op12 = 1;
-        } else {
-            $coti->op12 = 0;
-        }
-        if(isset($data['op13'])) {
-            $coti->op13 = 1;
-        } else {
-            $coti->op13 = 0;
-        }
-        if(isset($data['op14'])) {
-            $coti->op14 = 1;
-        } else {
-            $coti->op14 = 0;
-        }
 
         $coti->save();
 
@@ -452,12 +402,9 @@ class CotiController extends Controller
                 $data2 = array(
                     'coti_id' => $id,
                     'item' => $request->item[$item],
-                    'description' => $request->desc[$item],
-                    'power' => $request->power[$item],
-                    'regime' => $request->regime[$item],
-                    'units' => $request->units[$item],
                     'cant' => $request->cant[$item],
-                    'frequency' => $request->frequency[$item],
+                    'description' => $request->desc[$item],
+                    'days' => $request->days[$item],
                     'list_price' => $request->list_price[$item],
                     'of_price' => $request->of_price[$item],
                     'vat_rate' => $request->vat_rate[$item],
@@ -467,7 +414,7 @@ class CotiController extends Controller
             }
         }
 
-        return redirect()->action('CotiController@show', $request->id);
+        return redirect()->action('App\Http\Controllers\CotiController@show', $request->id);
     }
 
     public function rejection_update(Request $request, $id)
@@ -480,7 +427,7 @@ class CotiController extends Controller
         $coti->comments = $request->comments;
         $coti->save();
 
-        return redirect()->action('CotiController@show', $id);
+        return redirect()->action('App\Http\Controllers\CotiController@show', $request->id);
     }
 
     public function acceptance_update(Request $request, $id)
@@ -492,7 +439,7 @@ class CotiController extends Controller
         $coti->comments = $request->comments;
         $coti->save();
 
-        return redirect()->action('CotiController@show', $id);
+        return redirect()->action('App\Http\Controllers\CotiController@show', $request->id);
     }
 
     /**
