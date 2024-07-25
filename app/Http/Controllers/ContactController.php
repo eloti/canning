@@ -127,7 +127,7 @@ class ContactController extends Controller
         $contact->cell_phone = $request->cell_phone;
         $contact->phone = $request->phone;
         $contact->extension = $request->extension;
-
+        $contact->comment = $request->comment;
         $contact->save();
         $clientredirect = $contact->client_id;
 
@@ -205,27 +205,21 @@ class ContactController extends Controller
         return view('clients.editContact', compact('contact'));
     }
     
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'position' => 'nullable|string|max:255',
-            'email' => 'nullable|string|email|max:255',
-            'cell_phone' => 'nullable|string|max:20',
-            'phone' => 'nullable|string|max:20',
-            'extension' => 'nullable|string|max:20',
-        ]);
-    
-        $contact = Contact::findOrFail($id);
-        $clientId = $contact->client_id;
-        $contact->update($request->all());
-    
-        return redirect()->route('clients.show', ['client' => $clientId])->with([
-            'success' => 'Contacto actualizado correctamente.',
-            'contactAdded' => true,
-        ]);
-        
-    }
+ 
+public function update(Request $request, $id)
+{
+    $contact = Contact::findOrFail($id);
+    $contact->name = $request->input('name');
+    $contact->position = $request->input('position');
+    $contact->email = $request->input('email');
+    $contact->cell_phone = $request->input('cell_phone');
+    $contact->phone = $request->input('phone');
+    $contact->extension = $request->input('extension');
+    $contact->deactivate = $request->has('deactivate') ? 1 : 0; // Update deactivate field
+    $contact->save();
+
+    return redirect()->route('clients.show', $contact->client_id)->with('success', 'Contacto actualizado exitosamente');
+}
     
 
     /**

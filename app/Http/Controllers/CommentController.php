@@ -50,7 +50,7 @@ class CommentController extends Controller
       $comment = new Comment;
       $comment->client_id = $request->client_id;
       $comment->comment = $request->comment;
-     // $comment->user_id = auth()->user()->id;
+      $comment->user_id = auth()->user()->id;
 
       $comment->save();
 
@@ -69,9 +69,10 @@ class CommentController extends Controller
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function show(Comment $comment)
+    public function show($id)
     {
-        //
+        $comment = Comment::with('user')->findOrFail($id);
+        //return view('comments.show', compact('comment'));
     }
 
     /**
@@ -80,10 +81,20 @@ class CommentController extends Controller
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Comment $comment)
-    {
-        //
-    }
+ // app/Http/Controllers/CommentController.php
+
+public function edit($id)
+{
+    $comment = Comment::findOrFail($id);
+    return view('clients.comments.edit', compact('comment'));
+}
+
+public function destroy($id)
+{
+    $comment = Comment::findOrFail($id);
+    $comment->delete();
+    return redirect()->route('clients.show', $comment->client_id)->with('success', 'Comentario borrado exitosamente');
+}
 
     /**
      * Update the specified resource in storage.
@@ -92,19 +103,13 @@ class CommentController extends Controller
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comment $comment)
+    public function update(Request $request, $id)
     {
-        //
+        $comment = Comment::findOrFail($id);
+        $comment->comment = $request->input('comment');
+        $comment->save();
+    
+        return redirect()->route('clients.show', $comment->client_id)->with('success', 'Comentario actualizado exitosamente');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Comment  $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Comment $comment)
-    {
-        //
-    }
 }

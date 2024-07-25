@@ -7,6 +7,8 @@
         {{ session('success') }}
     </div>
 @endif
+
+
     <form action="{{ route('user.update', $user->id) }}" method="POST" class="editform">
         @csrf
         @method('PUT')
@@ -42,6 +44,24 @@
                         </div>
                     </div>
                     <div class="sm:col-span-3">
+                        <label for="company" class="block text-sm font-medium leading-6 text-gray-900">Compañía</label>
+                        <div class="mt-2">
+                            <input type="text" name="company" id="company" value="{{ $user->company }}" autocomplete="family-name" class=" input-selection block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rental sm:text-md sm:leading-6 px-3" disabled>
+                            @error('company')
+                                <span class="text-sm text-red-600">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="sm:col-span-3">
+                        <label for="rank" class="block text-sm font-medium leading-6 text-gray-900">Puesto</label>
+                        <div class="mt-2">
+                            <input type="text" name="rank" id="rank" value="{{ $user->rank }}" autocomplete="family-name" class=" input-selection block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rental sm:text-md sm:leading-6 px-3" disabled>
+                            @error('rank')
+                                <span class="text-sm text-red-600">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="sm:col-span-3">
                         <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email</label>
                         <div class="mt-2">
                             <input id="email" name="email" type="email" autocomplete="email" value="{{ $user->email }}" class=" input-selection block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rental sm:text-md sm:leading-6 px-3" disabled>
@@ -57,6 +77,30 @@
                             @error('cell')
                                 <span class="text-sm text-red-600">{{ $message }}</span>
                             @enderror
+                        </div>
+                    </div>
+                    <div class="sm:col-span-3">
+                        <label for="landline" class="block text-sm font-medium leading-6 text-gray-900">Teléfono Laboral</label>
+                        <div class="mt-2">
+                            <input id="landline" name="landline" type="tel" autocomplete="tel" placeholder="{{ $user->landline }}" value="{{ $user->landline }}" class="input-selection block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rental sm:text-md sm:leading-6 px-3" disabled>
+                            @error('landline')
+                                <span class="text-sm text-red-600">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="sm:col-span-3">
+                        <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Nueva Contraseña</label>
+                        <div class="mt-2">
+                            <input type="password" name="password" id="password" autocomplete="new-password" class="input-selection block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rental sm:text-md sm:leading-6 px-3" disabled>
+                            @error('password')
+                                <span class="text-sm text-red-600">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="sm:col-span-3">
+                        <label for="password_confirmation" class="block text-sm font-medium leading-6 text-gray-900">Confirmar Nueva Contraseña</label>
+                        <div class="mt-2">
+                            <input type="password" name="password_confirmation" id="password_confirmation" autocomplete="new-password" class="input-selection block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rental sm:text-md sm:leading-6 px-3" disabled>
                         </div>
                     </div>
                     <div id="enableEdit" class="sm:col-span-full">

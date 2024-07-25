@@ -51,7 +51,10 @@
                         <label for="extension" class="block text-md font-medium text-gray-700">Interno</label>
                         <input id="extension" type="text" name="extension" class="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3">
                     </div>
-
+                    <div class="col-span-1">
+                        <label for="comment" class="block text-md font-medium text-gray-700">Comentario</label>
+                        <input id="comment" type="text" name="comment" class="mt-2 block w-full  border-black py-1 px-3 border-2 rounded-md  max-w-72  sm:text-md">
+                    </div>
                     <!-- Hidden Fields -->
                     @if(isset($origin->what_blade))
                         <input type="hidden" name="what_blade" value="{{$origin->what_blade}}">
@@ -83,4 +86,22 @@
     </div>
 </div>
 
+
+
+
+<script>
+
+  document.getElementById('cancelModalButton').addEventListener('click', function() {
+      document.getElementById('contactModal').classList.add('hidden');
+  });
+
+  document.getElementById('cancelModalButton').addEventListener('click', function() {
+      document.getElementById('contactModal').classList.add('hidden');
+  });
+
+  // Show modal if there are validation errors
+  @if ($errors->has('legal_name') || $errors->has('cuit_num') || $errors->has('vat_status') || $errors->has('sales_tax_rate') || $errors->has('payment_terms'))
+  document.getElementById('modalAddClient').classList.remove('hidden');
+  @endif
+</script>
 

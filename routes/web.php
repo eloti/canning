@@ -51,6 +51,16 @@ Route::post('/clients/{id}/edit', [\App\Http\Controllers\ClientController::class
 // Rutas para el controlador de clientes
 Route::resource('clients', ClientController::class);
 
+
+// COMMENTS ----------------------------------
+Route::get('/comments/{id}', [CommentController::class, 'show'])->name('comments.show');
+Route::get('/comments/{id}/edit', [CommentController::class, 'edit'])->name('comments.edit');
+Route::put('/comments/{id}', [CommentController::class, 'update'])->name('comments.update');
+
+Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('comments.destroy');
+
+
+
 // CONTACTS --------------------------------------------------------------------------------------
 
 Route::resource('contacts', 'App\Http\Controllers\ContactController');

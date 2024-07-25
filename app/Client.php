@@ -15,6 +15,7 @@ class Client extends Model
     'vat_status',
     'sales_tax_rate',
     'payment_terms',
+    'rubro'
     // Agrega los demás campos aquí si es necesario
 ];
     // Table name

@@ -30,6 +30,8 @@ class User extends Authenticatable
         'formal_name',
         'rank',
         'company',
+        'active',
+        'role',
     ];
 
     /**

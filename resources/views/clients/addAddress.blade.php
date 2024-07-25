@@ -18,6 +18,7 @@
 
         <div class="card-header eagle-card-header">
           <h3 class="eagle-h3">Agregar Dirección: {{$client->legal_name}}</h3>
+          {{$client}}
         </div>
         @if ($errors->any())
         <div class="alert alert-danger">

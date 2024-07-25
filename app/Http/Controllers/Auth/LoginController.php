@@ -21,16 +21,16 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'alias' => 'required|string',
+            'email' => 'required|string',
             'password' => 'required|string',
         ]);
 
-        if (Auth::attempt(['alias' => $request->alias, 'password' => $request->password])) {
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             return redirect()->intended('home');
         }
 
         return back()->withErrors([
-            'alias' => 'The provided credentials do not match our records.',
+            'email' => 'Las credenciales proporcionadas no coinciden con nuestros registros.',
         ]);
     }
 

@@ -50,7 +50,24 @@
             </div>
           </div>
   
-
+          <div class="sm:col-span-3">
+            <label for="company" class="block text-sm font-medium leading-6 text-gray-900">Compañía</label>
+            <div class="mt-2">
+                <input type="text" name="company" id="company"  autocomplete="family-name" class=" input-selection block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rental sm:text-md sm:leading-6 px-3" >
+                @error('company')
+                    <span class="text-sm text-red-600">{{ $message }}</span>
+                @enderror
+            </div>
+        </div>
+        <div class="sm:col-span-3">
+            <label for="rank" class="block text-sm font-medium leading-6 text-gray-900">Puesto</label>
+            <div class="mt-2">
+                <input type="text" name="rank" id="rank" autocomplete="family-name" class=" input-selection block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rental sm:text-md sm:leading-6 px-3" >
+                @error('rank')
+                    <span class="text-sm text-red-600">{{ $message }}</span>
+                @enderror
+            </div>
+        </div>
           <div class="sm:col-span-3">
             <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email*</label>
             <div class="mt-2">
@@ -73,6 +90,29 @@
             </div>
         </div>
         <div class="sm:col-span-3">
+          <label for="landline" class="block text-sm font-medium leading-6 text-gray-900">Teléfono Laboral</label>
+          <div class="mt-2">
+              <input id="landline" name="landline" type="tel" autocomplete="tel" placeholder="{{ $user->landline }}" value="{{ $user->landline }}" class="input-selection block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rental sm:text-md sm:leading-6 px-3" >
+              @error('landline')
+                  <span class="text-sm text-red-600">{{ $message }}</span>
+              @enderror
+          </div>
+      </div>
+
+
+      <div class="sm:col-span-3">
+        <label for="role" class="block text-md font-medium text-gray-700">Rol:</label>
+        <select id="role" name="role" class="mt-1 block w-full border border-gray-300 rounded-md py-1.5 px-3">
+            <option value="Administración">Administración</option>
+            <option value="Comercial">Comercial</option>
+            <option value="Dirección">Dirección</option>
+            <option value="Logística">Logística</option>
+            <option value="Servicio Técnico">Servicio Técnico</option>
+        </select>
+    </div>
+
+
+        <div class="sm:col-span-3">
             <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Contraseña*</label>
             <div class="mt-2">
                 <input type="password" name="password" id="password" autocomplete="new-password" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rental sm:text-md sm:leading-6 px-3">
@@ -91,29 +131,7 @@
         </div>
       </div>
   
-      <div class="border-b border-gray-900/10 pb-4">
-
-        <div class="mt-4 space-y-10">
-          
-            <fieldset>
-                <legend class="text-sm font-semibold leading-6 text-gray-900">Rol del Usuario*</legend>
-                <div class="mt-6 space-y-6">
-                    <div class="flex items-center gap-x-3">
-                        <input id="admin" name="clearance" type="radio" value="1" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
-                        <label for="admin" class="block text-sm font-medium leading-6 text-gray-900">Administrador</label>
-                    </div>
-                    <div class="flex items-center gap-x-3">
-                        <input id="administrative" name="clearance" type="radio" value="2" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
-                        <label for="administrative" class="block text-sm font-medium leading-6 text-gray-900">Administrativo</label>
-                    </div>
-                </div>
-                @error('clearence')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                @enderror
-            </fieldset>
-            
-        </div>
-      </div>
+   <input type="hidden" name="clearance" value="2">
     </div>
   
     <div class="mt-6 flex items-center justify-end gap-x-6">

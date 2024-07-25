@@ -53,76 +53,81 @@
     {{ session('success') }}
 </div>
 @endif
-<div id="tab-datos" class="tab-content  {{ session('commentAdded') || session('contactAdded') || session('addressAdded') ? '' : 'active' }}
-">
-  <div id="datos" class="mt-8 px-8 m-auto " >
-    <div class="grid grid-cols-2 gap-4">
-        <div>
-            <label class=" text-xl font-medium text-gray-700">
-                Número de Cliente:
-            </label>
-            <input class="mt-1 mb-2 w-full  sm:text-lg  rounded-md" value="{{$client->id}}" readonly>
-        </div>
-        <div>
-            <label class=" text-xl font-medium text-gray-700">
-                Razón Social:
-            </label>
-            <input class="mt-1 mb-2 w-full  sm:text-lg  rounded-md" value="{{$client->legal_name}}" readonly>            
-        </div>
-        <div>
-            <label class=" text-xl font-medium text-gray-700">
-                Nombre comercial:
-            </label>
-            <input class="mt-1 mb-2 w-full  sm:text-lg  rounded-md" value="{{$client->commercial_name}}" readonly>         
-        </div>
-        <div>
-            <label class="block text-xl font-medium text-gray-700">
-                Tipo ID Fiscal:
-            </label>
-            @if($client->cuit_type === 1)
-                <input class="mt-1 mb-2 w-full  sm:text-lg  rounded-md" value="CUIT" readonly>
-            @elseif($client->cuit_type === 2)
-                <input class="mt-1 mb-2 w-full  sm:text-lg  rounded-md" value="CUIL" readonly>
-            @elseif($client->cuit_type === 3)
-                <input class="mt-1 mb-2 w-full  sm:text-lg  rounded-md" value="RUT" readonly>
-            @endif
-        </div>
-        <div>
-            <label class="block text-xl font-medium text-gray-700">
-                CUIT/RUT:
-            </label>
-            <input id="cuit_num" name="cuit_num" class="mt-1 mb-2 w-full  sm:text-lg  rounded-md" value="{{$client->cuit_num}}" readonly>
-        </div>
-        <div>
-            <label class="block text-xl font-medium text-gray-700">
-                Condición frente al IVA:
-            </label>
-            <input class="mt-1 mb-2 w-full  sm:text-lg  rounded-md" value="{{$client->vat_status}}" readonly> 
-        </div>
-        <div>
-            <label class="block text-xl font-medium text-gray-700">
-                Alícuota IIBB:
-            </label>
-            <input class="mt-1 mb-2 w-full  sm:text-lg  rounded-md" value="{{$client->sales_tax_rate}}" readonly>
-        </div>
-        <div>
-            <label class="block text-xl font-medium text-gray-700">
-                Condición de venta:
-            </label>
-            <input class="mt-1 mb-2 w-full  sm:text-lg  rounded-md" value="{{$client->payment_terms}}" readonly>
-        </div>
+<div id="tab-datos" class="tab-content  {{ session('commentAdded') || session('contactAdded') || session('addressAdded') ? '' : 'active' }}">
+    <div id="datos" class="mt-8 px-8 m-auto">
+      <div class="grid grid-cols-2 gap-4">
+          <div>
+              <label class=" text-xl font-medium text-gray-700">
+                  Número de Cliente:
+              </label>
+              <input class="mt-1 mb-2 w-full sm:text-lg rounded-md" value="{{$client->id}}" readonly>
+          </div>
+          <div>
+              <label class=" text-xl font-medium text-gray-700">
+                  Razón Social:
+              </label>
+              <input class="mt-1 mb-2 w-full sm:text-lg rounded-md" value="{{$client->legal_name}}" readonly>            
+          </div>
+          <div>
+              <label class=" text-xl font-medium text-gray-700">
+                  Nombre comercial:
+              </label>
+              <input class="mt-1 mb-2 w-full sm:text-lg rounded-md" value="{{$client->commercial_name}}" readonly>         
+          </div>
+          <div>
+              <label class="block text-xl font-medium text-gray-700">
+                  Tipo ID Fiscal:
+              </label>
+              @if($client->cuit_type === 1)
+                  <input class="mt-1 mb-2 w-full sm:text-lg rounded-md" value="CUIT" readonly>
+              @elseif($client->cuit_type === 2)
+                  <input class="mt-1 mb-2 w-full sm:text-lg rounded-md" value="CUIL" readonly>
+              @elseif($client->cuit_type === 3)
+                  <input class="mt-1 mb-2 w-full sm:text-lg rounded-md" value="RUT" readonly>
+              @endif
+          </div>
+          <div>
+              <label class="block text-xl font-medium text-gray-700">
+                  CUIT/RUT:
+              </label>
+              <input id="cuit_num" name="cuit_num" class="mt-1 mb-2 w-full sm:text-lg rounded-md" value="{{$client->cuit_num}}" readonly>
+          </div>
+          <div>
+              <label class="block text-xl font-medium text-gray-700">
+                  Rubro:
+              </label>
+              <input class="mt-1 mb-2 w-full sm:text-lg rounded-md" value="{{$client->rubro}}" readonly>
+          </div>
+          <div>
+              <label class="block text-xl font-medium text-gray-700">
+                  Condición frente al IVA:
+              </label>
+              <input class="mt-1 mb-2 w-full sm:text-lg rounded-md" value="{{$client->vat_status}}" readonly> 
+          </div>
+          <div>
+              <label class="block text-xl font-medium text-gray-700">
+                  Alícuota IIBB:
+              </label>
+              <input class="mt-1 mb-2 w-full sm:text-lg rounded-md" value="{{$client->sales_tax_rate}}" readonly>
+          </div>
+          <div>
+              <label class="block text-xl font-medium text-gray-700">
+                  Condición de venta:
+              </label>
+              <input class="mt-1 mb-2 w-full sm:text-lg rounded-md" value="{{$client->payment_terms}}" readonly>
+          </div>
+      </div>
+     
+      <div class="flex mt-10">
+          <a type="button" href="/clients/{{$client->id}}/edit" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-rental hover:bg-rentallight focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Editar</a>
+      </div>
     </div>
-   
-    <div class="flex mt-10">
-        <a type="button" href="/clients/{{$client->id}}/edit" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-rental hover:bg-rentallight focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Editar</a>
-    </div>
-</div>
-
-</div>
+  </div>
+  
 
 
 <div id="tab-contactos" class="tab-content @if (session('contactAdded'))  active @endif">
-  <div id="contactos" class="tab-pane fade p-4 bg-white shadow-md rounded-lg">
+  <div id="contactos" class=" p-4 bg-white shadow-md rounded-lg">
     <div class="flex justify-end mb-6">
      <!-- <a href="/contacts/create_client_contact/{{$client->id}}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-rental hover:bg-rentallight focus:outline-none focus:ring-2 focus:ring-offset-2 ">Agregar Contacto</a>-->
       <div class="flex justify-end mt-6">
@@ -138,6 +143,8 @@
                 <th class="py-2 px-4 border-b border-gray-200 text-center text-sm font-medium text-gray-600">Celular</th>
                 <th class="py-2 px-4 border-b border-gray-200 text-center text-sm font-medium text-gray-600">Fijo</th>
                 <th class="py-2 px-4 border-b border-gray-200 text-center text-sm font-medium text-gray-600">Interno</th>
+                <th class="py-2 px-4 border-b border-gray-200 text-center text-sm font-medium text-gray-600">Comentario</th>
+                <th class="py-2 px-4 border-b border-gray-200 text-center text-sm font-medium text-gray-600">Estado</th>
                 <th class="py-2 px-4 border-b border-gray-200 text-center text-sm font-medium text-gray-600"></th>
             </tr>
         </thead>
@@ -150,6 +157,14 @@
                     <td class="py-2 px-4 text-sm text-gray-600">{{$oneContact->cell_phone}}</td>
                     <td class="py-2 px-4 text-sm text-gray-600">{{$oneContact->phone}}</td>
                     <td class="py-2 px-4 text-sm text-gray-600">{{$oneContact->extension}}</td>
+                    <td class="py-2 px-4 text-sm text-gray-600">{{$oneContact->comment}}</td>
+                    <td class="py-2 px-4 text-sm text-gray-600">
+                        @if($oneContact->deactivate === 0)
+                          <p class="text-rental">Activo</p>
+                        @else
+                          <p class="text-red-500">Inactivo</p>
+                        @endif
+                    </td>
                     <td class="py-2 px-4 text-sm text-gray-600">
                         @if($oneContact->deactivate === 0)
                             <a href="/contacts/{{$oneContact->id}}/edit" class="inline-block text-rental hover:text-indigo-900 text-xs font-medium">Ver/Editar</a>
@@ -167,17 +182,18 @@
 
 </div>
 <div id="tab-interview" class="tab-content">
-  <!-- Interview Tab Content Here --> 3
+  <!-- Interview Tab Content Here --> 
 </div>
 <div id="tab-direcciones" class="tab-content  {{ (session('addressAdded') ? 'active' : '') }}">
-  <div id="direcciones" class="tab-pane fade p-4 bg-white shadow-md rounded-lg">
+  <div id="direcciones" class=" p-4 bg-white shadow-md rounded-lg">
     <div class="flex justify-end mb-6">
      <!-- <a href="/contacts/create_client_contact/{{$client->id}}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-rental hover:bg-rentallight focus:outline-none focus:ring-2 focus:ring-offset-2 ">Agregar Contacto</a>-->
       <div class="flex justify-end mt-6">
         <button class="py-2 px-4 bg-rental text-white font-semibold rounded-lg shadow-md hover:bg-rentallight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" onclick="toggleModalDirection()">Agregar Dirección</button>
+        
     </div>
   </div>
-  <div class="tab-pane container fade " id="direcciones">
+  <div class=" container " id="direcciones">
     <table class="min-w-full bg-white border border-gray-200 ">
       <thead>
           <tr class="bg-gray-50">
@@ -250,35 +266,46 @@
 </div>
 <div id="tab-comentarios" class="tab-content {{ session('commentAdded') ? 'active' : (session('contactAdded') ? '' : (session('addressAdded') ? '' : '')) }} ">
   <!-- Comentarios Tab Content Here -->
-  <div id="comentarios" class="tab-pane fade p-4 bg-white shadow-md rounded-lg">
+  <div id="comentarios" class="p-4 bg-white shadow-md rounded-lg">
     <div class="flex justify-end mb-6">
-     <!-- <a href="/contacts/create_client_contact/{{$client->id}}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-rental hover:bg-rentallight focus:outline-none focus:ring-2 focus:ring-offset-2 ">Agregar Contacto</a>-->
-      <div class="flex justify-end mt-6">
-        <button class="py-2 px-4 bg-rental text-white font-semibold rounded-lg shadow-md hover:bg-rentallight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" onclick="toggleModalComment()">Agregar Comentario</button>
+        <div class="flex justify-end mt-6">
+            <button class="py-2 px-4 bg-rental text-white font-semibold rounded-lg shadow-md hover:bg-rentallight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" onclick="toggleModalComment()">Agregar Comentario</button>
+        </div>
     </div>
-  </div>
-    <table class="min-w-full bg-white border border-gray-200 ">
-      <thead>
-          <tr class="bg-gray-50">
-              <th class="py-2 px-4 border-b border-gray-200 text-center text-sm font-medium text-gray-600">Fecha</th>
-              <th class="py-2 px-4 border-b border-gray-200 text-center text-sm font-medium text-gray-600">Comentarios</th>
-      </tr>
-      </thead>
-      <tbody>
-        @foreach ($comments as $oneComment)
-        <tr class="text-center border-b border-gray-200 hover:bg-gray-50">
-            <td class="py-2 px-4 text-sm text-gray-600 ">{{$oneComment->created_at()}}</td>
-            <td class="py-2 px-4 text-sm text-gray-600 ">{{$oneComment->comment}}</td>
-       
-        
-        </tr>
-      @endforeach
-      </tbody>
+    <table class="min-w-full bg-white border border-gray-200">
+        <thead>
+            <tr class="bg-gray-50">
+                <th class="py-2 px-4 border-b border-gray-200 text-center text-sm font-medium text-gray-600">Usuario</th>
+                <th class="py-2 px-4 border-b border-gray-200 text-center text-sm font-medium text-gray-600">Fecha</th>
+                <th class="py-2 px-4 border-b border-gray-200 text-center text-sm font-medium text-gray-600">Comentario</th>
+                <th class="py-2 px-4 border-b border-gray-200 text-center text-sm font-medium text-gray-600">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($comments as $oneComment)
+                <tr class="text-center border-b border-gray-200 hover:bg-gray-50">
+                    <td class="py-2 px-4 text-sm text-gray-600">
+                        <a href="{{ route('comments.show', $oneComment->id) }}" class="text-blue-500 hover:underline">
+                            {{ $oneComment->user->name }}
+                        </a>
+                    </td>
+                    <td class="py-2 px-4 text-sm text-gray-600">{{ $oneComment->created_at->format('d-m-Y') }}</td>
+                    <td class="py-2 px-4 text-sm text-gray-600">{{ $oneComment->comment }}</td>
+                    <td class="py-2 px-4 text-sm text-gray-600">
+                        <a href="{{ route('comments.edit', $oneComment->id) }}" class="text-rental hover:underline mr-2">Editar</a>
+                        <form action="{{ route('comments.destroy', $oneComment->id) }}" method="POST" style="display:inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-red-500 hover:underline" onclick="return confirm('¿Estás seguro de que quieres borrar este comentario?')">Borrar</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
     </table>
-
     <hr>
-  
-  </div>
+</div>
+
 </div>
 
 
@@ -287,7 +314,6 @@
 
 
 @include('clients.partials.add_contact_modal')
-
 @include('clients.partials.add_direction_modal')
 @include('clients.partials.add_comment_modal')
 
