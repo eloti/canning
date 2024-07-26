@@ -16,14 +16,14 @@ $clientId = $client->id;
     <div class="bg-white rounded-lg w-full max-w-3xl">
 
         <!-- Modal Header -->
-        <div class="flex justify-between items-center p-4 border-b border-gray-300">
+        <div class="flex justify-between items-center p-2 border-b border-gray-300">
             <h4 class="text-lg font-semibold">Agregar Dirección: {{$client->legal_name}}</h4>
       
             <button id="closeModalButton2" class="text-gray-500 hover:text-gray-800">&times;</button>
         </div>
 
         <!-- Modal Form -->
-        <form method="POST" action="{{ route('addresses.store') }}" autocomplete="off"  class="p-4 space-y-6">
+        <form method="POST" action="{{ route('addresses.store') }}" autocomplete="off"  class="p-2 space-y-6">
             {{ csrf_field() }}
             @if ($errors->any())
                 <span class="invalid-feedback col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8" role="alert">

@@ -3,13 +3,13 @@
     <div class="bg-white rounded-lg w-full max-w-3xl">
 
         <!-- Modal Header -->
-        <div class="flex justify-between items-center p-4 border-b border-gray-300">
+        <div class="flex justify-between items-center p-2 border-b border-gray-300">
             <h4 class="text-lg font-semibold">Agregar Contacto: {{$client->legal_name}}</h4>
             <button id="closeModalButton" class="text-gray-500 hover:text-gray-800">&times;</button>
         </div>
 
         <!-- Modal Form -->
-        <form method="POST" id="contactModalForm" action="{{ route('contacts.store') }}" autocomplete="off" class="p-4 space-y-6">
+        <form method="POST" id="contactModalForm" action="{{ route('contacts.store') }}" autocomplete="off" class="p-2 space-y-6">
             @csrf
             <section>
                 <div class="grid grid-cols-1 gap-4">
