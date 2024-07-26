@@ -7,35 +7,36 @@ use Carbon\Carbon;
 
 class Comment extends Model
 {
-  // Table name
+    // Table name
+    protected $table = 'comments';
 
-  protected $fillable = ['user_id', 'client_id'];
+    // Fillable attributes
+    protected $fillable = ['user_id', 'client_id', 'comment'];
 
-  protected $table = 'comments';
-  // Primary Key
-  public $primaryKey = 'id';
+    // Primary Key
+    public $primaryKey = 'id';
 
-  // Relationships
-  // Each comment has only one client
-  public function client()
-  {
-    return $this->belongsTo('App\Client');
-  }
-  // Each commento belongs to one user
-  public function user()
-  {
-    return $this->belongsTo('App\Models\User');
-  }
+    // Relationships
+    // Each comment belongs to one client
+    public function client()
+    {
+        return $this->belongsTo('App\Client');
+    }
 
-  //Time functions
-  public function created_at()
-  {
-    $date = new Carbon($this->created_at);
-    return $date->format('d-m-Y');
-  }
-  public function updated_at()
-  {
-    $date = new Carbon($this->updated_at);
-    return $date->format('d-m-Y H:i');
-  }
+    // Each comment belongs to one user
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
+    // Time functions
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->format('d-m-Y');
+    }
+
+    public function getUpdatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->format('d-m-Y H:i');
+    }
 }

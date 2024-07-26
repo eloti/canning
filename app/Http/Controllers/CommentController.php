@@ -43,14 +43,15 @@ class CommentController extends Controller
     {
       //validate the Data
       $this->validate($request, array(
-        'comment' => 'required'
+        'comment' => 'required',
+        'user_id' => 'required'
       ));
 
       //store in the Database
       $comment = new Comment;
       $comment->client_id = $request->client_id;
       $comment->comment = $request->comment;
-      $comment->user_id = auth()->user()->id;
+      $comment->user_id = $request->user_id;
 
       $comment->save();
 
