@@ -289,7 +289,7 @@
                            
                         </a>
                     </td>
-                    <td class="py-2 px-4 text-sm text-gray-600">{{ $oneComment->created_at->format('d-m-Y') }}</td>
+                
                     <td class="py-2 px-4 text-sm text-gray-600">{{ $oneComment->comment }}</td>
                     <td class="py-2 px-4 text-sm text-gray-600">
                         <a href="{{ route('comments.edit', $oneComment->id) }}" class="text-rental hover:underline mr-2">Editar</a>
