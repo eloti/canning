@@ -286,7 +286,7 @@
                 <tr class="text-center border-b border-gray-200 hover:bg-gray-50">
                     <td class="py-2 px-4 text-sm text-gray-600">
                         <a href="{{ route('comments.show', $oneComment->id) }}" class="text-blue-500 hover:underline">
-                            {{ $oneComment->user->name }}
+                           
                         </a>
                     </td>
                     <td class="py-2 px-4 text-sm text-gray-600">{{ $oneComment->created_at->format('d-m-Y') }}</td>
