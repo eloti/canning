@@ -26,8 +26,8 @@
                     <input type="hidden" name="what_blade" value="{{$origin->what_blade}}">
                 @endif
 
-                <input type="hidden" name="client_id" value="{{$client->id}}">
-                <input type="hidden" name="user_id" value="{{$user->id}}"> <!-- Hidden User ID -->
+                <input type="text" name="client_id" value="{{$client->id}}" class="hidden">
+                <input type="text" name="user_id" value="{{$user->id}}" class="hidden"> <!-- Hidden User ID -->
 
                 @if(isset($origin->unit_id))
                     <input type="hidden" name="unit_id" value="{{$origin->unit_id}}">

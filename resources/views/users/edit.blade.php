@@ -19,7 +19,7 @@
                             <div class="sm:col-span-3">
                                 <label for="firstname" class="block text-sm font-medium leading-6 text-gray-900">Nombre</label>
                                 <div class="mt-2">
-                                    <input type="text" name="firstname" id="firstname" autocomplete="given-name" value="{{ $user->firstname }}" class="input-selection block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rental sm:text-md sm:leading-6 px-3" >
+                                    <input type="text" name="firstname" id="firstname" autocomplete="given-name"  class="input-selection block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rental sm:text-md sm:leading-6 px-3" >
                                     @error('firstname')
                                         <span class="text-sm text-red-600">{{ $message }}</span>
                                     @enderror
@@ -28,7 +28,7 @@
                             <div class="sm:col-span-3">
                                 <label for="lastname" class="block text-sm font-medium leading-6 text-gray-900">Apellido</label>
                                 <div class="mt-2">
-                                    <input type="text" name="lastname" id="lastname" value="{{ $user->lastname }}" autocomplete="family-name" class="input-selection block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rental sm:text-md sm:leading-6 px-3" >
+                                    <input type="text" name="lastname" id="lastname" autocomplete="family-name" class="input-selection block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rental sm:text-md sm:leading-6 px-3" >
                                     @error('lastname')
                                         <span class="text-sm text-red-600">{{ $message }}</span>
                                     @enderror
