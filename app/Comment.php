@@ -8,6 +8,9 @@ use Carbon\Carbon;
 class Comment extends Model
 {
   // Table name
+
+  protected $fillable = ['user_id', 'client_id'];
+
   protected $table = 'comments';
   // Primary Key
   public $primaryKey = 'id';

@@ -213,7 +213,7 @@ class AddressController extends Controller
             return redirect()->route('clients.show', ['client' => $request->client_id])->with([
                 'success' => 'Dirección Agregada correctamente.',
                 'addressAdded' => true,
-                'hasBillingAddress' => $hasBillingAddress
+                //hasBillingAddress' => $hasBillingAddress
                 
             ]);
         }

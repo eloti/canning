@@ -515,6 +515,16 @@ function toggleModalComment() {
     }
 
     document.querySelector("#closeModalButton3").onclick = function() {
+      const modal = document.getElementById('commentModal');
+        modal.classList.toggle('hidden');
+}
+
+document.querySelector("#cancelModalButton3").onclick = function() {
+      const modal = document.getElementById('commentModal');
+        modal.classList.toggle('hidden');
+}
+
+document.querySelector("#cancelModalButton2").onclick = function() {
       const modal = document.getElementById('directionModal');
         modal.classList.toggle('hidden');
 }
