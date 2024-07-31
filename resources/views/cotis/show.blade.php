@@ -71,7 +71,7 @@
 
           <div class="row eagle-row-clean col-12">
             <label for="client" class="mac-label col-4">Cliente:</label>        
-            <input class="col-8 form-control mac-form-control" value="{{$coti->client->legal_name}}" readonly>             
+            <input class="col-8 form-control mac-form-control" value="{{$coti->client->commercial_name}}" readonly>             
           </div>     
 
           <div class="row eagle-row-clean col-12">
