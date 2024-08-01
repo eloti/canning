@@ -53,10 +53,9 @@
     {{ session('success') }}
 </div>
 @endif
-<div class="container eagle-container">
-    <div id="tab-datos" class="inset-0 flex justify-center items-center">
-        <!-- Modal Dialog -->
-        <div class="bg-white rounded-lg w-full max-w-3xl">
+<div id="tab-datos" class="tab-content  {{ session('commentAdded') || session('contactAdded') || session('addressAdded') ? '' : 'active' }}">
+    <div id="datos" class="mt-8 px-8 m-auto">
+        <div class="bg-white rounded-lg w-full max-w-3xl m-auto">
             <!-- Modal Header -->
             <div class="flex justify-between items-center p-4 border-b border-gray-300">
                 <h4 class="text-lg font-semibold">Detalles del Cliente: {{ $client->legal_name }}</h4>
@@ -109,13 +108,15 @@
                 </div>
                 <div class="flex justify-between items-center mt-4">
                     <a href="/clients/{{$client->id}}/edit" class="bg-rental text-white font-bold py-2 px-4 rounded hover:bg-rentallight">Editar</a>
-                  
+                   
                 </div>
             </div>
         </div>
+     
+     
     </div>
-</div>
-
+  </div>
+  
 
 
 <div id="tab-contactos" class="tab-content @if (session('contactAdded'))  active @endif">

@@ -131,7 +131,7 @@
                     <a type="button" class="py-2 px-4 bg-gray-600 text-white font-semibold rounded-lg shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2" href="{{ url()->previous() }}">Cancelar</a>
                 </div>
 
-                <hr class="my-6">
+                <hr class="my-2">
 
                 <div class="eagle-button-container col-12"><b>* Campos Obligatorios</b></div>
             </section>
