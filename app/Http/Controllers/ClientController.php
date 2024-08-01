@@ -131,16 +131,16 @@ class ClientController extends Controller
         $vatArray['Monotributista'] = 'Monotributista';
         $vatArray['Consumidor Final'] = 'Consumidor Final';
 
-        $payment_termsArray[''] = 'Seleccione Condición';
-        $payment_termsArray['Contado'] = 'Contado';
-        $payment_termsArray['15 días FF'] = '15 días FF';
-        $payment_termsArray['30 días FF'] = '30 días FF';
-        $payment_termsArray['45 días FF'] = '45 días FF';
-        $payment_termsArray['60 días FF'] = '60 días FF';
-        $payment_termsArray['75 días FF'] = '75 días FF';
-        $payment_termsArray['90 días FF'] = '90 días FF';
-        $payment_termsArray['105 días FF'] = '105 días FF';
-        $payment_termsArray['120 días FF'] = '120 días FF';
+        //$payment_termsArray[''] = 'Seleccione Condición';
+        //$payment_termsArray['Contado'] = 'Contado';
+        //$payment_termsArray['15 días FF'] = '15 días FF';
+        //$payment_termsArray['30 días FF'] = '30 días FF';
+        //$payment_termsArray['45 días FF'] = '45 días FF';
+        //$payment_termsArray['60 días FF'] = '60 días FF';
+        //$payment_termsArray['75 días FF'] = '75 días FF';
+        //$payment_termsArray['90 días FF'] = '90 días FF';
+        //$payment_termsArray['105 días FF'] = '105 días FF';
+        //$payment_termsArray['120 días FF'] = '120 días FF';
 
         $cuit_typeArray[''] = 'Seleccione Tipo';
         $cuit_typeArray['1'] = 'CUIT';
@@ -149,6 +149,24 @@ class ClientController extends Controller
 
 
         return view ('clients.addClient', compact('vatArray', 'payment_termsArray', 'cuit_typeArray', 'origin'));
+    }
+
+    public function createFromCoti($blade) {
+
+        $origin = $blade;
+
+        $vatArray[''] = 'Seleccione Condición';
+        $vatArray['Responsable Inscripto'] = 'Responsable Inscripto';
+        $vatArray['Exento'] = 'Exento';
+        $vatArray['Monotributista'] = 'Monotributista';
+        $vatArray['Consumidor Final'] = 'Consumidor Final';
+
+        $cuit_typeArray[''] = 'Seleccione Tipo';
+        $cuit_typeArray['1'] = 'CUIT';
+        $cuit_typeArray['2'] = 'CUIL';
+        $cuit_typeArray['3'] = 'RUT';
+
+        return view ('clients.addClient', compact('vatArray', 'cuit_typeArray', 'origin'));
     }
 
     public function createFromRental($what_blade, $what_unit)
@@ -192,21 +210,9 @@ class ClientController extends Controller
     public function store(Request $request)
     {
       //validate the Data
-      //dd($request);
-    $this->validate($request, array(
-        'rubro' => 'nullable|in:Banco/Financiera,Electricidad, Gas y Agua,Comercio Mayorista,Minorista/Supermercado,Minería,Pesca,Agricultura y Ganadería,Hotelería y Restaurantes,Otras Manufacturas,Alimenticia,Automotriz,Siderurgia,Construcción,Oil & Gas,Telecomunicaciones,Transporte Público,Alquiler de Maquinaria,Logística,Salud,Administración Pública,Centro Comercial,Otros Servicios,Ingeniería/Instalaciones,Entretenimiento/Espectáculos,Consorcio',
-      'commercial_name' => 'required',
-       'legal_name' => 'nullable',
-      'cuit_num' => 'nullable|unique:App\Client,cuit_num',
-
-      'vat_status' => 'nullable',
-      'sales_tax_rate' => 'nullable|numeric',
-      'payment_terms' => 'nullable',
-      //'country_id' => 'required',
-      'cuit_type' => 'nullable',
-    ));
+      //dd($request);   
    
-    $clean_cuit = str_replace('-', '', $request->cuit_num);
+        $clean_cuit = str_replace('-', '', $request->cuit_num);
         //return $clean_cuit;
 
         //store in the Database
@@ -225,36 +231,15 @@ class ClientController extends Controller
 
     //redirect
         //return $request;
-        if ($request->what_blade !== null) {
+        if ($request->origin !== null) {
         // redirigir a RentalsController o UnitController
 
-            $newClient = Client::select('id')
-                                    ->where('cuit_num', '=', $clean_cuit)
-                                    ->first();
+            $clie = $client->id;
+            //return $clie;
          
-            if ($request->what_blade === "create_from_model") {                
-                return redirect('/rentals/create_from_model_with_clientData/'.$newClient->id.'/null/null/'.$request->what_unit);
-
-            } elseif ($request->what_blade === "create_r2r") {                
-                return redirect('/rentToRent/create_with_clientData/'.$newClient->id.'/null/null');
-
-            } elseif ($request->what_blade === "edit_from_model") {                
-                return redirect('/rentals/edit_from_model_with_clientData/'.$newClient->id.'/null/null/'.$request->what_unit);
-
-            } elseif ($request->what_blade === "create_from_unit_sell") {
-                return redirect()->action('UnitController@sell', $clean_cuit);
-
-            } elseif ($request->what_blade === "create_from_r2r") {                
-                return redirect()->action('RentToRentController@create_r2r', $newClient);
-
-            } elseif ($request->what_blade === "create_quote") {                
-                return redirect('quotes/create_with_clientData/'.$newClient->id.'/null/null');            
-
-            } elseif ($request->what_blade === "similar_quote_vta") {                
-                return redirect('/quotes/similarQuoteVta/'.$newClient->id.'/null/null/'.$request->what_quote);
-
-            } elseif ($request->what_blade === "similar_quote_alq") {                
-                return redirect('/quotes/similarQuoteAlq/'.$newClient->id.'/null/null/'.$request->what_quote);
+            if ($request->origin === "createFromCoti") {  
+                //return $clie;              
+                return redirect()->action('App\Http\Controllers\CotiController@create', [$clie]);
             }
 
         } else {

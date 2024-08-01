@@ -51,6 +51,8 @@ Route::post('/clients/{id}/edit', [\App\Http\Controllers\ClientController::class
 // Rutas para el controlador de clientes
 Route::resource('clients', ClientController::class);
 
+Route::get('/clients/createFromCoti/{what_blade}', 'App\Http\Controllers\ClientController@createFromCoti')->name('clients.createFromCoti');
+
 
 // COMMENTS ----------------------------------
 Route::get('/comments/{id}', [CommentController::class, 'show'])->name('comments.show');
@@ -92,7 +94,7 @@ Route::resource('comments', CommentController::class);
 
 // COTIS -----------------------------------------------------------------------------------------
 
-Route::get('/cotis/create', 'App\Http\Controllers\CotiController@create')->name('cotis.create');
+Route::get('/cotis/create/{clie?}', 'App\Http\Controllers\CotiController@create')->name('cotis.create');
 Route::post('/cotis/store', 'App\Http\Controllers\CotiController@store')->name('cotis.store');
 Route::get('/cotis/show/{id}', 'App\Http\Controllers\CotiController@show');
 Route::get('/cotis/downloadPDF/{id}', 'App\Http\Controllers\CotiController@downloadPDF')->name('cotis.downloadPDF');
@@ -103,3 +105,12 @@ Route::put('/cotis/rejection_update/{id}', 'App\Http\Controllers\CotiController@
 Route::put('/cotis/acceptance_update/{id}', 'App\Http\Controllers\CotiController@acceptance_update');
 Route::get('/openCotis', 'App\Http\Controllers\CotiController@open_index')->name('cotis.open_index');
 Route::get('/closedCotis', 'App\Http\Controllers\CotiController@closed_index')->name('cotis.closed_index');
+
+// DROPDOWN ROUTES ------------------------------------------------------------------------------------------
+
+Route::get('/rentals/contacts', 'App\Http\Controllers\DropdownController@getContacts');
+Route::get('/rentals/addresses', 'App\Http\Controllers\DropdownController@getAddresses');
+
+Route::get('/rentals/create_from_model/contacts', 'App\Http\Controllers\DropdownController@getContacts');
+Route::get('/rentals/create_from_model/addresses', 'App\Http\Controllers\DropdownController@getAddresses');
+

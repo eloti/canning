@@ -50,20 +50,33 @@
             </span>
                     
           </div-->
+          
 
           <div class="row eagle-row-clean col-12">
             <label for="client" class="mac-label col-4">Cliente:</label>        
             <select id="client" name="client_id" class="col-8 form-control mac-form-control">
-              @foreach($clients->get() as $index => $client)            
-                <option value="{{ $index }}" {{ old('client_id') == $index ? 'selected' : '' }}>
-                  {{ $client }}
-                </option>
-              @endforeach
+              @if(isset($clie))
+                @foreach($clients->get() as $index => $client)            
+                  <option value="{{ $index }}" {{ $clie == $index ? 'selected' : '' }}>
+                    {{ $client }}
+                  </option>
+                @endforeach
+              @else
+                @foreach($clients->get() as $index => $client)            
+                  <option value="{{ $index }}" {{ old('client_id') == $index ? 'selected' : '' }}>
+                    {{ $client }}
+                  </option>
+                @endforeach
+              @endif
             </select>
             
             <span class="col-12 invalid-feedback d-none text-center" role="alert" style="padding: 0">
               <strong>Debe seleccionar un cliente.</strong>
             </span>
+
+            <div class="eagle-button-container col-12">
+              <a type="button" class="btn eagle-button col-5" style="padding: 0; font-size: 0.75rem" href="{{ route('clients.createFromCoti', ['what_blade'=>'createFromCoti']) }}">Cliente Nuevo</a>
+            </div>
                     
           </div>            
 

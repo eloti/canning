@@ -166,13 +166,22 @@ class CotiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create($clie = null)
+    {   
+        //return $clie;
+
         $myTime = Carbon::now();
         $ftdMyTime = $myTime->toDateString();
         //return $ftdMyTime;
-        return view('cotis.create')
-                    ->with('ftdMyTime', $ftdMyTime);
+        if ($clie) {
+            //return $clie;
+            return view('cotis.create')
+                        ->with('ftdMyTime', $ftdMyTime)
+                        ->with('clie', $clie);
+        } else {    
+            return view('cotis.create')
+                        ->with('ftdMyTime', $ftdMyTime);
+        }
     }
 
     /**

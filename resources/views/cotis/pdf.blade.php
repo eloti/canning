@@ -185,7 +185,7 @@
     </div>
 
     <div style="position: absolute; top: 164px; width: 100%; box-sizing: border-box;">        
-      <div style="font-size: 12px; width: 100%; left: 0px; max-height: 30px"><b>Razón Social: </b>{{$coti->client->legal_name}}</div>      
+      <div style="font-size: 12px; width: 100%; left: 0px; max-height: 30px"><b>Razón Social: </b>{{$coti->client->legal_name ? $coti->client->legal_name : $coti->client->commercial_name}}</div>      
     </div>      
 
     <div style="position: absolute; top: 178px; width: 100%; box-sizing: border-box;">        
