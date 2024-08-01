@@ -16,14 +16,14 @@ $clientId = $client->id;
     <div class="bg-white rounded-lg w-full max-w-3xl">
 
         <!-- Modal Header -->
-        <div class="flex justify-between items-center p-2 border-b border-gray-300">
+        <div class="flex justify-between items-center p-1 border-b border-gray-300">
             <h4 class="text-lg font-semibold">Agregar Dirección: {{$client->legal_name}}</h4>
       
             <button id="closeModalButton2" class="text-gray-500 hover:text-gray-800">&times;</button>
         </div>
 
         <!-- Modal Form -->
-        <form method="POST" action="{{ route('addresses.store') }}" autocomplete="off"  class="p-2 space-y-6">
+        <form method="POST" action="{{ route('addresses.store') }}" autocomplete="off"  class="p-1 space-y-6">
             {{ csrf_field() }}
             @if ($errors->any())
                 <span class="invalid-feedback col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8" role="alert">
@@ -37,7 +37,7 @@ $clientId = $client->id;
                     <!-- Nombre y Apellido -->
                     <div class="col-span-1">
                         <label for="line1" class="block text-md font-medium text-gray-700">Línea 1*:</label>
-                        <input id="line1" type="text" name="line1" class="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3 {{ $errors->has('line1') ? 'border-red-500' : '' }}" value="{{ old('line1') }}" required>
+                        <input id="line1" type="text" name="line1" class="mt-1 block w-full border border-gray-300 rounded-md py-1 px-3 {{ $errors->has('line1') ? 'border-red-500' : '' }}" value="{{ old('line1') }}" required>
                         @if ($errors->has('line1'))
                             <span class="invalid-feedback col-8 col-xs-8 col-sm-8 col-md-8 col-lg-8" role="alert">
                                 <strong>Debe ingresar Línea 1</strong>
@@ -48,13 +48,13 @@ $clientId = $client->id;
                     <!-- Puesto -->
                     <div class="col-span-1">
                         <label for="line2" class="block text-md font-medium text-gray-700">Línea 2:</label>
-                        <input id="line2" type="text" name="line2" class="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3" value="{{ old('line2') }}">
+                        <input id="line2" type="text" name="line2" class="mt-1 block w-full border border-gray-300 rounded-md py-1 px-3" value="{{ old('line2') }}">
                     </div>
         
                     <!-- E-mail -->
                     <div class="col-span-1">
                         <label for="province" class="block text-md font-medium text-gray-700">Provincia*</label>
-                        <select id="province" name="province_id" class="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3" required>
+                        <select id="province" name="province_id" class="mt-1 block w-full border border-gray-300 rounded-md  px-3" required>
                             @foreach($provincesService->get() as $provinceId => $provinceName)
                                 <option value="{{ $provinceId }}">{{ $provinceName }}</option>
                             @endforeach
@@ -64,7 +64,7 @@ $clientId = $client->id;
                     <!-- Celular -->
                     <div class="col-span-1">
                         <label for="county" class="block text-md font-medium text-gray-700">Partido</label>
-                        <select id="county" name="county_id" class="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3">
+                        <select id="county" name="county_id" class="mt-1 block w-full border border-gray-300 rounded-md  px-3">
                             <option value="">Seleccione Partido</option>
                             @foreach($counties->get() as $countie)
                                 <option value="{{ $countie->id }}" data-province="{{ $countie->province_id }}">{{ $countie->value }}</option>
@@ -75,7 +75,7 @@ $clientId = $client->id;
                     <!-- Teléfono fijo -->
                     <div class="col-span-1">
                         <label for="city" class="block text-md font-medium text-gray-700">Localidad/Ciudad: </label>
-                        <select id="city" name="city_id" class="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3">
+                        <select id="city" name="city_id" class="mt-1 block w-full border border-gray-300 rounded-md  px-3">
                             <option value="">Seleccione Localidad/Ciudad</option>
                             @foreach($cities->get() as $city)
                                 <option value="{{ $city->id }}" data-county="{{ $city->county_id }}">{{ $city->value }}</option>
@@ -87,7 +87,7 @@ $clientId = $client->id;
                     <div class="col-span-1">
                         <label for="zip_code" class="block text-md font-medium text-gray-700">Código Postal:
                         </label>
-                        <input id="zip_code" type="number" name="zip_code" class="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3">
+                        <input id="zip_code" type="number" name="zip_code" class="mt-1 block w-full border border-gray-300 rounded-md py-1 px-3">
                     </div>
       
                    

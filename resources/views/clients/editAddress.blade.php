@@ -19,12 +19,9 @@
         </ul>
     </div>
     @endif
-    <div class="bg-white shadow sm:rounded-lg w-full max-w-3xl m-auto">
+    <div class="bg-white  sm:rounded-lg w-full max-w-3xl m-auto">
         <!-- Header del Modal -->
-        <div class="flex justify-between items-center p-4 border-b border-gray-300">
-            <h4 class="text-lg font-semibold">Editar Dirección: {{$address->client->legal_name}}</h4>
-            <button id="closeModalButton2" class="text-gray-500 hover:text-gray-800">&times;</button>
-        </div>
+      
 
         <!-- Formulario del Modal -->
         <form method="POST" action="{{ route('addresses.update', $address->id) }}" novalidate class="p-4 space-y-6">

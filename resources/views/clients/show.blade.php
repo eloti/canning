@@ -53,77 +53,69 @@
     {{ session('success') }}
 </div>
 @endif
-<div id="tab-datos" class="tab-content  {{ session('commentAdded') || session('contactAdded') || session('addressAdded') ? '' : 'active' }}">
-    <div id="datos" class="mt-8 px-8 m-auto">
-      <div class="grid grid-cols-2 gap-4">
-          <div>
-              <label class=" text-xl font-medium text-gray-700">
-                  Número de Cliente:
-              </label>
-              <input class="mt-1 mb-2 w-full sm:text-lg rounded-md" value="{{$client->id}}" readonly>
-          </div>
-          <div>
-              <label class=" text-xl font-medium text-gray-700">
-                  Razón Social:
-              </label>
-              <input class="mt-1 mb-2 w-full sm:text-lg rounded-md" value="{{$client->legal_name}}" readonly>            
-          </div>
-          <div>
-              <label class=" text-xl font-medium text-gray-700">
-                  Nombre comercial:
-              </label>
-              <input class="mt-1 mb-2 w-full sm:text-lg rounded-md" value="{{$client->commercial_name}}" readonly>         
-          </div>
-          <div>
-              <label class="block text-xl font-medium text-gray-700">
-                  Tipo ID Fiscal:
-              </label>
-              @if($client->cuit_type === 1)
-                  <input class="mt-1 mb-2 w-full sm:text-lg rounded-md" value="CUIT" readonly>
-              @elseif($client->cuit_type === 2)
-                  <input class="mt-1 mb-2 w-full sm:text-lg rounded-md" value="CUIL" readonly>
-              @elseif($client->cuit_type === 3)
-                  <input class="mt-1 mb-2 w-full sm:text-lg rounded-md" value="RUT" readonly>
-              @endif
-          </div>
-          <div>
-              <label class="block text-xl font-medium text-gray-700">
-                  CUIT/RUT:
-              </label>
-              <input id="cuit_num" name="cuit_num" class="mt-1 mb-2 w-full sm:text-lg rounded-md" value="{{$client->cuit_num}}" readonly>
-          </div>
-          <div>
-              <label class="block text-xl font-medium text-gray-700">
-                  Rubro:
-              </label>
-              <input class="mt-1 mb-2 w-full sm:text-lg rounded-md" value="{{$client->rubro}}" readonly>
-          </div>
-          <div>
-              <label class="block text-xl font-medium text-gray-700">
-                  Condición frente al IVA:
-              </label>
-              <input class="mt-1 mb-2 w-full sm:text-lg rounded-md" value="{{$client->vat_status}}" readonly> 
-          </div>
-          <div>
-              <label class="block text-xl font-medium text-gray-700">
-                  Alícuota IIBB:
-              </label>
-              <input class="mt-1 mb-2 w-full sm:text-lg rounded-md" value="{{$client->sales_tax_rate}}" readonly>
-          </div>
-          <div>
-              <label class="block text-xl font-medium text-gray-700">
-                  Condición de venta:
-              </label>
-              <input class="mt-1 mb-2 w-full sm:text-lg rounded-md" value="{{$client->payment_terms}}" readonly>
-          </div>
-      </div>
-     
-      <div class="flex mt-10">
-          <a type="button" href="/clients/{{$client->id}}/edit" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-rental hover:bg-rentallight focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Editar</a>
-      </div>
+<div class="container eagle-container">
+    <div id="tab-datos" class="inset-0 flex justify-center items-center">
+        <!-- Modal Dialog -->
+        <div class="bg-white rounded-lg w-full max-w-3xl">
+            <!-- Modal Header -->
+            <div class="flex justify-between items-center p-4 border-b border-gray-300">
+                <h4 class="text-lg font-semibold">Detalles del Cliente: {{ $client->legal_name }}</h4>
+                <button id="closeModalButton" class="text-gray-500 hover:text-gray-800">&times;</button>
+            </div>
+            <!-- Modal Form -->
+            <div class="p-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="flex flex-col space-y-2">
+                        <label for="client_id" class="font-medium">Número de Cliente:</label>
+                        <input type="text" id="client_id" value="{{ $client->id }}" readonly class="form-input w-full border border-gray-300 rounded p-1">
+                    </div>
+                    <div class="flex flex-col space-y-2">
+                        <label for="legal_name" class="font-medium">Razón Social:</label>
+                        <input type="text" id="legal_name" value="{{ $client->legal_name }}" readonly class="form-input w-full border border-gray-300 rounded p-1">
+                    </div>
+                    <div class="flex flex-col space-y-2">
+                        <label for="commercial_name" class="font-medium">Nombre Comercial:</label>
+                        <input type="text" id="commercial_name" value="{{ $client->commercial_name }}" readonly class="form-input w-full border border-gray-300 rounded p-1">
+                    </div>
+                    <div class="flex flex-col space-y-2">
+                        <label for="cuit_type" class="font-medium">Tipo ID Fiscal:</label>
+                        <input type="text" id="cuit_type" value="{{ $client->cuit_type === 1 ? 'CUIT' : ($client->cuit_type === 2 ? 'CUIL' : 'RUT') }}" readonly class="form-input w-full border border-gray-300 rounded p-1">
+                    </div>
+                    <div class="flex flex-col space-y-2">
+                        <label for="cuit_num" class="font-medium">CUIT/RUT:</label>
+                        <input type="text" id="cuit_num" value="{{ $client->cuit_num }}" readonly class="form-input w-full border border-gray-300 rounded p-1">
+                    </div>
+                    <div class="flex flex-col space-y-2">
+                        <label for="rubro" class="font-medium">Rubro:</label>
+                        <select id="rubro" class="form-select w-full border border-gray-300 rounded p-1" disabled>
+                            <option value="">Seleccione un rubro</option>
+                            @foreach(['Banco/Financiera', 'Electricidad, Gas y Agua', 'Comercio Mayorista', 'Minorista/Supermercado', 'Minería', 'Pesca', 'Agricultura y Ganadería', 'Hotelería y Restaurantes', 'Otras Manufacturas', 'Alimenticia', 'Automotriz', 'Siderurgia', 'Construcción', 'Oil & Gas', 'Telecomunicaciones', 'Transporte Público', 'Alquiler de Maquinaria', 'Logística', 'Salud', 'Administración Pública', 'Centro Comercial', 'Otros Servicios', 'Ingeniería/Instalaciones', 'Entretenimiento/Espectáculos', 'Consorcio'] as $option)
+                                <option value="{{ $option }}" {{ $client->rubro == $option ? 'selected' : '' }}>{{ $option }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="flex flex-col space-y-2">
+                        <label for="vat_status" class="font-medium">Condición frente al IVA:</label>
+                        <input type="text" id="vat_status" value="{{ $client->vat_status }}" readonly class="form-input w-full border border-gray-300 rounded p-1">
+                    </div>
+                    <div class="flex flex-col space-y-2">
+                        <label for="sales_tax_rate" class="font-medium">Alícuota IIBB:</label>
+                        <input type="text" id="sales_tax_rate" value="{{ $client->sales_tax_rate }}" readonly class="form-input w-full border border-gray-300 rounded p-1">
+                    </div>
+                    <div class="flex flex-col space-y-2">
+                        <label for="payment_terms" class="font-medium">Condición de Venta:</label>
+                        <input type="text" id="payment_terms" value="{{ $client->payment_terms }}" readonly class="form-input w-full border border-gray-300 rounded p-1">
+                    </div>
+                </div>
+                <div class="flex justify-between items-center mt-4">
+                    <a href="/clients/{{$client->id}}/edit" class="bg-rental text-white font-bold py-2 px-4 rounded hover:bg-rentallight">Editar</a>
+                  
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-  
+</div>
+
 
 
 <div id="tab-contactos" class="tab-content @if (session('contactAdded'))  active @endif">

@@ -24,18 +24,18 @@
                     <div class="grid grid-cols-2 gap-4">
                         <div class="flex flex-col space-y-2">
                             <label for="legal_name" class="font-medium">Razón Social:</label>
-                            <input type="text" id="legal_name" name="legal_name" placeholder="{{ $client->legal_name }}" value="{{ $client->legal_name }}" class="form-input w-full border border-gray-300 rounded p-2{{ $errors->has('legal_name') ? ' border-red-500' : '' }}">
+                            <input type="text" id="legal_name" name="legal_name" placeholder="{{ $client->legal_name }}" value="{{ $client->legal_name }}" class="form-input w-full border border-gray-300 rounded p-1{{ $errors->has('legal_name') ? ' border-red-500' : '' }}">
                             @if ($errors->has('legal_name'))
                                 <span class="text-red-500 text-sm">Debe especificar la razón social del cliente.</span>
                             @endif
                         </div>
                         <div class="flex flex-col space-y-2">
                             <label for="commercial_name" class="font-medium">Nombre Comercial:</label>
-                            <input type="text" id="commercial_name" name="commercial_name" placeholder="{{ $client->commercial_name }}" value="{{ $client->commercial_name }}" class="form-input w-full border border-gray-300 rounded p-2">
+                            <input type="text" id="commercial_name" name="commercial_name" placeholder="{{ $client->commercial_name }}" value="{{ $client->commercial_name }}" class="form-input w-full border border-gray-300 rounded p-1">
                         </div>
                         <div class="flex flex-col space-y-2">
                             <label for="cuit_type" class="font-medium">Tipo de ID Fiscal:</label>
-                            <select id="cuit_type" name="cuit_type" class="form-select w-full border border-gray-300 rounded p-2{{ $errors->has('cuit_type') ? ' border-red-500' : '' }}">
+                            <select id="cuit_type" name="cuit_type" class="form-select w-full border border-gray-300 rounded p-1{{ $errors->has('cuit_type') ? ' border-red-500' : '' }}">
                                 @foreach($cuit_typeArray as $index => $onecuit_typeArray)
                                     <option value="{{ $index }}" {{ $client->cuit_type == $index ? 'selected' : '' }}>{{ $onecuit_typeArray }}</option>
                                 @endforeach
@@ -46,7 +46,7 @@
                         </div>
                         <div class="flex flex-col space-y-2">
                             <label for="cuit_num" class="font-medium">CUIT/RUT:</label>
-                            <input type="text" id="cuit_num" name="cuit_num" placeholder="{{ $client->cuit_num }}" value="{{ $client->cuit_num }}" class="form-input w-full border border-gray-300 rounded p-2{{ $errors->has('cuit_num') ? ' border-red-500' : '' }}">
+                            <input type="text" id="cuit_num" name="cuit_num" placeholder="{{ $client->cuit_num }}" value="{{ $client->cuit_num }}" class="form-input w-full border border-gray-300 rounded p-1{{ $errors->has('cuit_num') ? ' border-red-500' : '' }}">
                             @if ($errors->has('cuit_num'))
                                 <span class="text-red-500 text-sm">Debe especificar el CUIT del cliente y no debe estar repetido.</span>
                             @endif
@@ -54,7 +54,7 @@
                     </div>
                     <div class="flex flex-col space-y-2">
                         <label for="rubro">Rubro</label>
-                        <select name="rubro" id="rubro" class="form-control w-full border border-gray-300 rounded p-2">
+                        <select name="rubro" id="rubro" class="form-control w-full border border-gray-300 rounded p-1">
                             <option value="">Seleccione un rubro</option>
                             <option value="Banco/Financiera" {{ $client->rubro == 'Banco/Financiera' ? 'selected' : '' }}>Banco/Financiera</option>
                             <option value="Electricidad, Gas y Agua" {{ $client->rubro == 'Electricidad, Gas y Agua' ? 'selected' : '' }}>Electricidad, Gas y Agua</option>
@@ -85,7 +85,7 @@
                     </div>
                     <div class="flex flex-col space-y-2">
                         <label for="vat_status" class="font-medium">Condición frente al IVA:</label>
-                        <select id="vat_status" name="vat_status" class="form-select w-full border border-gray-300 rounded p-2{{ $errors->has('vat_status') ? ' border-red-500' : '' }}">
+                        <select id="vat_status" name="vat_status" class="form-select w-full border border-gray-300 rounded p-1{{ $errors->has('vat_status') ? ' border-red-500' : '' }}">
                             @foreach($vatArray as $index => $oneVatArray)
                                 <option value="{{ $index }}" {{ $client->vat_status == $index ? 'selected' : '' }}>{{ $oneVatArray }}</option>
                             @endforeach
@@ -96,14 +96,14 @@
                     </div>
                     <div class="flex flex-col space-y-2">
                         <label for="sales_tax_rate" class="font-medium">Perc. IIBB [%]:</label>
-                        <input type="text" id="sales_tax_rate" name="sales_tax_rate" placeholder="{{ $client->sales_tax_rate }}" value="{{ $client->sales_tax_rate }}" class="form-input w-full border border-gray-300 rounded p-2{{ $errors->has('sales_tax_rate') ? ' border-red-500' : '' }}">
+                        <input type="text" id="sales_tax_rate" name="sales_tax_rate" placeholder="{{ $client->sales_tax_rate }}" value="{{ $client->sales_tax_rate }}" class="form-input w-full border border-gray-300 rounded p-1{{ $errors->has('sales_tax_rate') ? ' border-red-500' : '' }}">
                         @if ($errors->has('sales_tax_rate'))
                             <span class="text-red-500 text-sm">Debe especificar alícuota de IIBB.</span>
                         @endif
                     </div>
                     <div class="flex flex-col space-y-2">
                         <label for="payment_terms" class="font-medium">Condición de Venta:</label>
-                        <select id="payment_terms" name="payment_terms" class="form-select w-full border border-gray-300 rounded p-2{{ $errors->has('payment_terms') ? ' border-red-500' : '' }}">
+                        <select id="payment_terms" name="payment_terms" class="form-select w-full border border-gray-300 rounded p-1{{ $errors->has('payment_terms') ? ' border-red-500' : '' }}">
                             @foreach($payment_termsArray as $index => $onePayment_termsArray)
                                 <option value="{{ $index }}" {{ $client->payment_terms == $index ? 'selected' : '' }}>{{ $onePayment_termsArray }}</option>
                             @endforeach
