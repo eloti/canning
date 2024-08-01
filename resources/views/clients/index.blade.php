@@ -84,13 +84,13 @@
     <div class="bg-white rounded-lg w-full max-w-3xl">
   
         <!-- Modal Header -->
-        <div class="flex justify-between items-center p-2 border-b border-gray-300">
+        <div class="flex justify-between items-center p-1 border-b border-gray-300">
             <h4 class="text-lg font-semibold">Agregar Cliente</h4>
             <button id="closeModalButton" class="text-gray-500 hover:text-gray-800">&times;</button>
         </div>
   
         <!-- Modal Form -->
-        <form method="POST" action="{{ route('clients.store') }}" autocomplete="off" class="p-2">
+        <form method="POST" action="{{ route('clients.store') }}" autocomplete="off" class="p-1">
             {{ csrf_field() }}
             
             <div class="space-y-4">
@@ -109,7 +109,7 @@
                 </div>
                 <div class="flex flex-col space-y-2">
                   <label for="cuit_type" class="font-medium">Tipo de ID Fiscal:</label>
-                  <select id="cuit_type" name="cuit_type" class="mt-0 form-select w-full border border-gray-300 rounded p-1{{ $errors->has('cuit_type') ? ' border-red-500' : '' }}">
+                  <select id="cuit_type" name="cuit_type" class="mt-0 form-select w-full border border-gray-300 rounded {{ $errors->has('cuit_type') ? ' border-red-500' : '' }}">
                       @foreach($cuit_typeArray as $index => $onecuit_typeArray)
                           <option value="{{ $index }}" {{ old('vat_status') == $onecuit_typeArray ? 'selected' : '' }}>{{ $onecuit_typeArray }}</option>
                       @endforeach
@@ -160,7 +160,7 @@
               </div>
                 <div class="flex flex-col space-y-2">
                     <label for="vat_status" class="font-medium">Condición frente al IVA:</label>
-                    <select id="vat_status" name="vat_status" class="form-select w-full border border-gray-300 rounded p-1 mt-0 {{ $errors->has('vat_status') ? ' border-red-500' : '' }}">
+                    <select id="vat_status" name="vat_status" class="form-select w-full border border-gray-300 rounded  mt-0 {{ $errors->has('vat_status') ? ' border-red-500' : '' }}">
                         @foreach($vatArray as $index => $oneVatArray)
                         <option value="{{ $index }}" {{ old('vat_status') == $oneVatArray ? 'selected' : '' }}>{{ $oneVatArray }}</option>
                         @endforeach
