@@ -14,8 +14,8 @@
 }
 
 .mac-button-container {
-	padding: 0 0.3rem;
-	margin: 1rem 0 1rem 0;
+	padding: 0 0.2rem;
+	margin: 0.1rem 0 0.1rem 0;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -88,6 +88,15 @@
 	justify-content: flex-start;
 	font-weight: bold;
 }
+.mac-label-right {
+	padding: 0 4px 0 0;
+	margin: 0;
+	font-size: 0.7rem;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	font-weight: bold;
+}
 .mac-label-center {
 	padding: 0 4px 0 0;
 	margin: 0;
@@ -111,6 +120,20 @@
   justify-content: flex-end;
   border-radius: 0.25rem;
   color: rgb(95, 96, 98);
+}
+.mac-form-control-readonly {
+	font-size: 0.7rem;	
+	padding: 0 0.25rem;
+	margin: 3px 0;
+	height: 1.5rem;
+	max-height: 1.5rem;
+ 	border: solid 1px rgb(186, 202, 211);
+  background-color: #e9ecef;
+  display: flex; 
+  align-items: center;
+  justify-content: flex-end;
+  border-radius: 0.25rem;
+  color: black;
 }
 .mac-form-control-no-height {
 	font-size: 0.7rem;	
@@ -137,6 +160,32 @@
 	text-align: right;
   border-radius: 0.25rem;
   color: rgb(95, 96, 98);
+}
+
+.mac-form-control-center {
+	font-size: 0.7rem;	
+	padding: 0 0.25rem;
+	margin: 3px 0;
+	height: 1.5rem;
+	max-height: 1.5rem;
+ 	border: solid 1px rgb(186, 202, 211);
+	background-color: white;
+	display: flex; 
+	justify-content: center;
+	text-align: right;
+  border-radius: 0.25rem;
+  color: rgb(95, 96, 98);
+}
+
+.rental-price {
+	text-align: right;
+	font-size: 0.7rem;
+	padding: 6px 4px;
+}
+
+.discount {
+	text-align: center;
+	font-size: 0.7rem;
 }
 
 .mac-hr {
@@ -183,5 +232,14 @@
 .right-of-sidebar-container {
 	padding: 0 0 0 .25rem;
 	margin: 0;
+}
+
+.textarea-desc {
+	max-height: none;
+	height: 110px;
+	min-width: 70px;
+	resize: none;
+	white-space: pre-wrap;
+	//*overflow-y: hidden;*//
 }
 

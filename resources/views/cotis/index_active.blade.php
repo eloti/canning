@@ -12,12 +12,12 @@
 
   <div class="jumbotron eagle-jumbotron-2">
     <div class="row eagle-row" style="margin: 0; padding: 0 1rem 0 1rem">
-      <h1 class="col-8 eagle-h2" style="display: flex; align-items: center; padding: 0">Cotizaciones Abiertas</h1>
-      <div class="eagle-button-container col-2">
-        <a class="col-8 btn eagle-button" href="{{ route('cotis.create') }}">Crear Cotización</a>
+      <h1 class="col-10 eagle-h2" style="display: flex; align-items: center; padding: 0">Cotizaciones Abiertas</h1>
+      <div class="mac-button-container col-1">
+        <a class="col-12 btn eagle-button" href="{{ route('cotis.create') }}">Crear Cotización</a>
       </div>
-      <div class="eagle-button-container col-2">
-        <a class="col-8 btn eagle-button" href="{{ url()->previous() }}">Volver</a>
+      <div class="mac-button-container col-1">
+        <a class="col-12 btn eagle-button" href="{{ url()->previous() }}">Volver</a>
       </div>
     </div>
   </div>

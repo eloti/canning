@@ -114,3 +114,21 @@ Route::get('/rentals/addresses', 'App\Http\Controllers\DropdownController@getAdd
 Route::get('/rentals/create_from_model/contacts', 'App\Http\Controllers\DropdownController@getContacts');
 Route::get('/rentals/create_from_model/addresses', 'App\Http\Controllers\DropdownController@getAddresses');
 
+Route::get('/rentals/unit_models', 'App\Http\Controllers\DropdownController@getUnit_Models');
+
+Route::get('/rentals/prices', 'App\Http\Controllers\DropdownController@getPrices');
+
+Route::get('/rentals/availableUnits', 'App\Http\Controllers\DropdownController@availableUnits');
+
+
+// RENTALS ---------------------------------------------------------------------------------------
+
+Route::get('/rentals/create', 'App\Http\Controllers\RentalController@create')->name('rentals.create');
+Route::get('/rentals/active_index', 'App\Http\Controllers\RentalController@active_indexc')->name('rentals.active_index');
+Route::get('/rentals/closed_index', 'App\Http\Controllers\RentalController@closed_index')->name('rentals.closed_index');
+Route::post('/rentals/store', 'App\Http\Controllers\RentalController@store')->name('rentals.store');
+Route::get('/rental/{rental}', 'App\Http\Controllers\RentalController@show')->name('rentals.show');
+Route::get('/rentals/active', 'App\Http\Controllers\RentalController@active_index')->name('rentals.active_index');
+Route::get('/rentals/inactive', 'App\Http\Controllers\RentalController@inactive_index')->name('rentals.inactive_index');
+Route::get('/rentals/edit/{id}', 'App\Http\Controllers\RentalController@edit')->name('rentals.edit');
+Route::put('/rentals/update/{id}', 'App\Http\Controllers\RentalController@update');
