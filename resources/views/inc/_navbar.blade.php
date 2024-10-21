@@ -35,15 +35,24 @@
                     <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                     <a href="{{ route('home') }}" class=" {{ request()->routeIs('home') ? ' text-white' : '' }} rounded-md  px-3 py-2 text-md  text-gray-300 font-semibold hover:text-white">Inicio</a>
                     <a href="{{ route('clients.index') }}" class=" {{ request()->routeIs('clients.index') ? ' text-white' : '' }} rounded-md px-3 py-2 text-sm  text-gray-300 font-semibold hover:text-white">Clientes</a>
-                    <a class="nav-link dropdown-toggle" style="padding: 0 0.75rem" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cotizaciones</a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" style="padding: 0.25rem 2rem 0.25rem 0.5rem" href="{{ route('cotis.create') }}">Crear Cotización</a></li>
-                            <li><a class="dropdown-item" style="padding: 0.25rem 2rem 0.25rem 0.5rem" href="{{ route('cotis.open_index') }}">Cotizaciones Abiertas</a></li>
-                            <li><a class="dropdown-item" style="padding: 0.25rem 2rem 0.25rem 0.5rem" href="{{ route('cotis.closed_index') }}">Cotizaciones Cerradas</a></li>
-                        </ul>                    
-                    
-                        <!-- <a href="#" class="rounded-md px-3 py-2 text-sm  text-gray-300 font-semibold hover:text-white">Projects</a>
-                        <a href="#" class="rounded-md px-3 py-2 text-sm  text-gray-300 font-semibold hover:text-white">Calendar</a>-->
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" style="padding: 0 0.75rem" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cotizaciones</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" style="padding: 0.25rem 2rem 0.25rem 0.5rem" href="{{ route('cotis.create') }}">Crear Cotización</a></li>
+                                <li><a class="dropdown-item" style="padding: 0.25rem 2rem 0.25rem 0.5rem" href="{{ route('cotis.open_index') }}">Cotizaciones Abiertas</a></li>
+                                <li><a class="dropdown-item" style="padding: 0.25rem 2rem 0.25rem 0.5rem" href="{{ route('cotis.closed_index') }}">Cotizaciones Cerradas</a></li>
+                            </ul>
+                    </li>            
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" style="padding: 0 0.75rem" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Alquileres</a>
+                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                                <li><a class="dropdown-item" style="padding: 0.25rem 2rem 0.25rem 0.5rem" href="{{ route('rentals.create') }}">Alquiler Nuevo</a></li>
+                                <li><a class="dropdown-item" style="padding: 0.25rem 2rem 0.25rem 0.5rem" href="{{ route('rentals.active_index') }}">Alquileres Vigentes</a></li>
+                                <li><a class="dropdown-item" style="padding: 0.25rem 2rem 0.25rem 0.5rem" href="{{ route('rentals.inactive_index') }}">Alquileres Finalizados</a></li>
+                            </ul>
+                    </li>
 
                 @if (Auth::user()->clearance === 1)
                    

@@ -19,36 +19,34 @@
 <div class="container eagle-container">
 
   <div class="jumbotron eagle-jumbotron-2">
-    <div class="row eagle-row" style="margin: 0; padding: 0">
-
+    <div class="row eagle-row" style="margin: 0; padding: 0 1rem 0 1rem">
       <h1 class="col-3 eagle-h2" style="display: flex; align-items: center; padding: 0">Cotización Nº{{$coti->id}}</h1>
-
       <h1 class="col-3 eagle-h2" style="display: flex; align-items: center; padding: 0">Status: {{$status}}</h1>      
 
       @if($status === "Vigente")
-        <div class="eagle-button-container col-1">
-          <a class="col-8 btn eagle-button" style="color: white;" data-toggle="modal" data-target="#modalAccept">Aceptar</a>
+        <div class="mac-button-container col-1">
+          <a class="col-12 btn eagle-button" style="color: white;" data-toggle="modal" data-target="#modalAccept">Aceptar</a>
         </div>
-        <div class="eagle-button-container col-1">
-          <a class="col-8 btn eagle-button" style="color: white;" data-toggle="modal" data-target="#modalReject">Rechazar</a>
+        <div class="mac-button-container col-1">
+          <a class="col-12 btn eagle-button" style="color: white;" data-toggle="modal" data-target="#modalReject">Rechazar</a>
         </div>
-        <div class="eagle-button-container col-1">
-          <a class="col-8 btn eagle-button" href="{{action('App\Http\Controllers\CotiController@edit', $coti->id)}}">Editar</a>
+        <div class="mac-button-container col-1">
+          <a class="col-12 btn eagle-button" href="{{action('App\Http\Controllers\CotiController@edit', $coti->id)}}">Editar</a>
         </div>
       @else
-        <div class="eagle-button-container col-3">
+        <div class="mac-button-container col-3">
         </div>
       @endif
 
-      <div class="eagle-button-container col-1">
+      <div class="mac-button-container col-1">
         </div>
 
-      <div class="eagle-button-container col-1">
-        <a class="col-8 btn eagle-button" href="{{action('App\Http\Controllers\CotiController@downloadPDF', $coti->id)}}">PDF</a>
+      <div class="mac-button-container col-1">
+        <a class="col-12 btn eagle-button" href="{{action('App\Http\Controllers\CotiController@downloadPDF', $coti->id)}}">PDF</a>
       </div>
 
-      <div class="eagle-button-container col-1">
-        <a class="col-8 btn eagle-button" href="{{ url()->previous() }}">Volver</a>
+      <div class="mac-button-container col-1">
+        <a class="col-12 btn eagle-button" href="{{ url()->previous() }}">Volver</a>
       </div>
     </div>
   </div>

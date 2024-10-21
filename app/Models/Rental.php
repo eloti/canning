@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
-
 
 class Rental extends Model
 {
@@ -16,7 +16,7 @@ class Rental extends Model
   // Each rental belongs to only one user (el vendedor)
   public function user()
   {
-    return $this->belongsTo('App\User');
+    return $this->belongsTo('App\Models\User');
   }
   // Each rental belongs to only one client
   public function client()
@@ -26,48 +26,39 @@ class Rental extends Model
   // Each rental belongs to only one contact
   public function contact()
   {
-    return $this->belongsTo('App\Contact');
+    return $this->belongsTo('App\Models\Contact');
   }
   // Each rental belongs to only one address
   public function address()
   {
     return $this->belongsTo('App\Address');
   }
-  // Each rental belongs to only one unit
-  public function unit()
+ // Each rental belongs to only one unitModel
+  public function unitModel()
   {
-    return $this->belongsTo('App\Unit');
+    return $this->belongsTo('App\Models\UnitModel');
   }
-  // Each rental belongs to only one machineModel
-  public function machineModel()
-  {
-    return $this->belongsTo('App\MachineModel');
-  }
-  // Each rental belongs to only on branch
-  public function branch()
-  {
-    return $this->belongsTo('App\Branch');
-  }
+  
   // Each rental has one credit note
-  public function creditNote()
-  {
-    return $this->hasOne('App\CreditNote');
-  }
+  //public function creditNote()
+  //{
+    //return $this->hasOne('App\CreditNote');
+  //}
   // Each rental has one Doc
-  public function doc()
-  {
-    return $this->hasOne('App\Doc');
-  }
+  //public function doc()
+  //{
+    //return $this->hasOne('App\Doc');
+  //}
   // Each rental has one remito
-  public function remito()
-  {
-    return $this->hasOne('App\Remito'); //antes tenía hasOne o belnogsTo?
-  }
+  //public function remito()
+  //{
+    //return $this->hasOne('App\Remito'); //antes tenía hasOne o belnogsTo?
+  //}
   // Each rental has one remitodev
-  public function remitodev()
-  {
-    return $this->hasOne('App\Remitodev');
-  }
+  //public function remitodev()
+  //{
+    //return $this->hasOne('App\Remitodev');
+  //}
 
   //Time functions
   public function start_date()
@@ -96,3 +87,4 @@ class Rental extends Model
     return $date->format('Ymd');
   }
 }
+
