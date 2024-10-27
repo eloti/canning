@@ -81,7 +81,7 @@
 <!-- Modal Background -->
 <div id="modalAddClient" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
     <!-- Modal Dialog -->
-    <div class="bg-white rounded-lg w-full max-w-3xl">
+    <div class="bg-white rounded-lg w-full max-w-3xl p-2">
   
         <!-- Modal Header -->
         <div class="flex justify-between items-center p-1 border-b border-gray-300">
@@ -109,7 +109,7 @@
                 </div>
                 <div class="flex flex-col space-y-2">
                   <label for="cuit_type" class="font-medium">Tipo de ID Fiscal:</label>
-                  <select id="cuit_type" name="cuit_type" class="mt-0 form-select w-full border border-gray-300 rounded {{ $errors->has('cuit_type') ? ' border-red-500' : '' }}">
+                  <select id="cuit_type" name="cuit_type" class="form-select w-full border border-gray-300 rounded  mt-0  {{ $errors->has('cuit_type') ? ' border-red-500' : '' }}">
                       @foreach($cuit_typeArray as $index => $onecuit_typeArray)
                           <option value="{{ $index }}" {{ old('vat_status') == $onecuit_typeArray ? 'selected' : '' }}>{{ $onecuit_typeArray }}</option>
                       @endforeach
@@ -127,9 +127,12 @@
                 </div>
                </div>
                
+
+               <div class="grid grid-cols-2 gap-4">
+
                <div class="flex flex-col space-y-2">
                   <label for="rubro">Rubro</label>
-                  <select name="rubro" id="rubro" class="mt-0 form-control">
+                  <select name="rubro" id="rubro" class="form-select w-full border border-gray-300 rounded  mt-0 ">
                       <option value="">Seleccione un rubro</option>
                       <option value="Banco/Financiera">Banco/Financiera</option>
                       <option value="Electricidad, Gas y Agua">Electricidad, Gas y Agua</option>
@@ -180,7 +183,7 @@
   
                 <div class="flex flex-col space-y-2">
                     <label for="payment_terms" class="font-medium">Condición de Venta:</label>
-                    <select id="payment_terms" name="payment_terms" class="mt-0 form-select w-full border border-gray-300 rounded p-1{{ $errors->has('payment_terms') ? ' border-red-500' : '' }}">
+                    <select id="payment_terms" name="payment_terms" class="form-select w-full border border-gray-300 rounded  mt-0 {{ $errors->has('payment_terms') ? ' border-red-500' : '' }}">
                         @foreach($payment_termsArray as $index => $onePayment_termsArray)
                         <option value="{{ $index }}" {{ old('payment_terms') == $onePayment_termsArray ? 'selected' : '' }}>{{ $onePayment_termsArray }}</option>
                         @endforeach
@@ -190,7 +193,7 @@
                     @endif
                 </div>
             </div>
-  
+            </div>
             <div class="flex justify-between items-center mt-4">
                 <span class="text-sm font-medium">* Campos Obligatorios</span>
                 <div class="space-x-2">

@@ -59,7 +59,6 @@
             <!-- Modal Header -->
             <div class="flex justify-between items-center p-4 border-b border-gray-300">
                 <h4 class="text-lg font-semibold">Detalles del Cliente: {{ $client->legal_name }}</h4>
-                <button id="closeModalButton" class="text-gray-500 hover:text-gray-800">&times;</button>
             </div>
             <!-- Modal Form -->
             <div class="p-4">

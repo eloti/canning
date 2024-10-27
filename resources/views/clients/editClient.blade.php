@@ -123,6 +123,9 @@
         </div>
     </div>
 </div>
-
-
+<script>
+    document.getElementById('cancelModalButton').addEventListener('click', function() {
+        window.location.href = "{{ url('/clients/' . $client->id) }}"; // Redirect to the client's view page
+    });
+</script>
 @endsection

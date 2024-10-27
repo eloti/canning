@@ -408,41 +408,34 @@
   $('#start_date').on('change', calcEndDate);
   $('#days').on('change', calcEndDate);
 //------------------------------------------------------------------------------
-  function calcTotals() {
+function calcTotals() {
+    var rental_offered_price = parseFloat($('#rental_offered_price').val()) || 0;
+    var discount_offered_price = parseFloat($('#discount_offered_price').val()) || 0;
+    var transport_offered_price = parseFloat($('#transport_offered_price').val()) || 0;
+    var discount_transport_price = parseFloat($('#discount_transport_price').val()) || 0;
+    var other_price = parseFloat($('#other_price').val()) || 0;
 
-    var rental_offered_price = 0;
-    var discount_offered_price = 0;
-    var transport_offered_price = 0;
-    var discount_transport_price = 0;
-    var other_price = 0;
-
-    var rental_offered_price = $('#rental_offered_price').val();
-    var discount_offered_price = $('#discount_offered_price').val();
+    // Calculate net rental price
     var net_rental_price = rental_offered_price * ((100 - discount_offered_price) / 100);
-    $('#net_rental_price').val(net_rental_price);
+    $('#net_rental_price').val(net_rental_price.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
 
-    var transport_offered_price = $('#transport_offered_price').val();
-    var discount_transport_price = $('#discount_transport_price').val();
+    // Calculate net transport price
     var net_transport_price = transport_offered_price * ((100 - discount_transport_price) / 100);
-    $('#net_transport_price').val(net_transport_price);
+    $('#net_transport_price').val(net_transport_price.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
 
-    var other_price = $('#other_price').val();
+    // Calculate gross offered price
+    var gross_offered_price = rental_offered_price + transport_offered_price + other_price;
+    $('#gross_offered_price').val(gross_offered_price.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
 
-    var gross_offered_price = parseFloat(rental_offered_price) + parseFloat(transport_offered_price) + parseFloat(other_price);
-    $('#gross_offered_price').val(gross_offered_price);
+    // Calculate net discount
+    var net_discount = (net_rental_price - rental_offered_price) + (net_transport_price - transport_offered_price);
+    $('#net_discount').val(net_discount.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
 
-    var net_discount = (parseFloat(net_rental_price) - parseFloat(rental_offered_price)) + (parseFloat(net_transport_price) - parseFloat(transport_offered_price));
-    $('#net_discount').val(net_discount);    
+    // Calculate net offered price
+    var net_offered_price = gross_offered_price + net_discount;
+    $('#net_offered_price').val(net_offered_price.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+}
 
-    var net_offered_price = parseFloat(gross_offered_price) + parseFloat(net_discount);
-    $('#net_offered_price').val(net_offered_price);
-
-    //var prices = document.querySelectorAll(".price")
-    //prices.forEach(function(price){
-      //price.value = Number(price.value).toLocaleString("es-ES",{ maximumFractionDigits: 0, minimumFractionDigits: 0})
-      //price.value = Number(price.value).toFixed(0);
-    //});
-  };
   //calcTotals();
   $('#rental_offered_price').on('change', calcTotals);
   $('#discount_offered_price').on('change', calcTotals);
